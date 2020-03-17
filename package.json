@@ -3,7 +3,9 @@
   "scripts": {
     "validate-nu": "java -jar node_modules/vnu-jar/build/dist/vnu.jar --skip-non-html ./src",
     "validate-sonar": "./node_modules/sonar-scanner/bin/sonar-scanner",
-    "validate": "npm run validate-sonar && npm run validate-nu"
+    "validate-sonar-win": ".\\node_modules\\sonar-scanner\\bin\\sonar-scanner",
+    "validate": "npm run validate-sonar && npm run validate-nu",
+    "validate-win": "npm run validate-sonar-win && npm run validate-nu"
   },
   "dependencies": {
     "sonar-scanner": "^3.1.0",
