@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Aclonica';
+}
+
+input[type='button'] {
+    margin-top: 30px;
+    font-size: x-large;
+    background-color: gray;
+    color: white;
+    padding: 16px 32px;
+    border-radius: 16px;
+    width: 30%;
+    display: inline-block;
+}
+
+input[type='button']:hover {
+    background-color: #45a049;
+}
+
+.medaille {
+    background-image: url("../../images/medaille.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+}
+
