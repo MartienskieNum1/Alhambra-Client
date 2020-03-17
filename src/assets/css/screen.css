@@ -28,3 +28,15 @@ h2 {
     align-self: center;
     padding-left: 7px;
 }
+
+#Your_money{
+    grid-column-start: 4;
+    grid-column-end: span 3;
+    grid-row-start: 4;
+    color: aqua;
+}
+
+#money li{
+    display: inline;
+    padding-right: 10px;
+}
