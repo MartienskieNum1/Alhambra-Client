@@ -55,7 +55,16 @@ h2 {
     margin-right: auto;
 }
 
-#reserve li {
+#reserve li{
     display: inline-block;
     padding-right: 10px;
+}
+
+#Your_ALhambra{
+    grid-template-rows:repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    align-content: center;
+    grid-area: 1 / 4 / span 3 / span 3;
+    color: chartreuse;
+    display: grid;
 }
