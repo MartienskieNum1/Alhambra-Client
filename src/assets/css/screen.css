@@ -1,0 +1,29 @@
+body{
+    text-align: center;
+    position: fixed;
+    top: 40%;
+    left: 60%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+
+header{
+    font-weight: bold;
+    font-family: 'Aclonica';
+    text-align: center;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+
+header h1{
+    font-size: 2rem;
+    margin-bottom: 0.5em;
+}
+
+header h2{
+    font-size: 3rem;
+}
+
