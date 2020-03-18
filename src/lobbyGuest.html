@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Guest Lobby</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
+    <link rel="stylesheet" href="assets/css/lobby.css">
     <!-- Insert beautiful custom styles here :-) -->
 </head>
 <body>
@@ -13,7 +14,7 @@
 <main>
     <h1>Lobby</h1>
 
-    <ul>
+    <ul class="players">
         <li>Player1</li>
         <li>Player2</li>
         <li>Player3</li>
@@ -22,10 +23,14 @@
         <li>Player6</li>
     </ul>
 
-    <h2>Game ID</h2>
-    <ul>
-        <li class="gameID">A1B2C3</li>
-    </ul>
+    <a class="ready">Ready</a>
+
+    <div class="gameInfo">
+        <h2>Game ID</h2>
+        <ul>
+            <li class="gameID">A1B2C3</li>
+        </ul>
+    </div>
 </main>
 
 
