@@ -5,14 +5,14 @@
     <title>Join Game</title>
     <link rel="stylesheet" type="text/css" href="assets/css/reset.css" />
     <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
-    <link rel="stylesheet" href="assets/css/styleGame.css">
+    <link rel="stylesheet" href="assets/css/screen.css">
 </head>
-<body>
+<body id="Game">
 
 <button class="back" type="button">Back</button>
 
 <div class="container">
-    <header>
+    <header id="Welcome" class="Font">
         <h2>Welcome to</h2>
         <h1>Alhambra</h1>
         <p>Web Edition</p>
@@ -22,9 +22,9 @@
     <main>
 
         <form action="#">
-            <label for="username">Username:</label><br>
+            <label class="Font" for="username">Username:</label><br>
             <input type="text" id="username" name="username"><br>
-            <label for="game-id">Game ID:</label><br>
+            <label class="Font" for="game-id">Game ID:</label><br>
             <input type="text" id="game-id" name="game-id"><br><br>
             <input type="submit" value="Join">
         </form>
