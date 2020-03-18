@@ -1,7 +1,8 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 h1 {
@@ -9,30 +10,13 @@ h1 {
     margin-top: 20px;
     text-align: center;
     margin-bottom: 30px;
-    font-family: 'Aclonica';
+    font-family: 'Aclonica', sans-serif;
 }
 
-input[type='button'] {
-    margin-top: 30px;
-    font-size: x-large;
-    background-color: gray;
-    color: white;
-    padding: 16px 32px;
-    border-radius: 16px;
-    width: 30%;
-    display: inline-block;
-}
-
-input[type='button']:hover {
-    background-color: #45a049;
-}
-
-.medaille {
-    background-image: url("../../images/medaille.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
+img {
+    display: block;
     height: 200px;
     width: 200px;
+    margin: auto;
 }
 
