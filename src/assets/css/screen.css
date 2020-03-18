@@ -1,0 +1,54 @@
+body{
+    text-align: center;
+    position: fixed;
+    top: 40%;
+    left: 54.5%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+
+header{
+    font-weight: bold;
+    font-family: 'Aclonica';
+    text-align: center;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+}
+
+header h1{
+    font-size: 2rem;
+    margin-bottom: 0.5em;
+}
+
+header h2{
+    font-size: 3rem;
+    margin-bottom: 0.3em;
+}
+
+main{
+    line-height: 400%;
+    margin-top: 3rem;
+}
+
+button{
+    width: 100%;
+    padding: 8px;
+    font-size: 20px;
+    border-radius: 11px;
+    cursor: pointer;
+    background-color: gainsboro;
+    box-shadow: 0 7px #999;
+}
+
+button:hover{
+    background-color: lightgray;
+}
+
+button:active{
+    background-color: lightgray;
+    box-shadow: 0 4px #666;
+    transform: translateY(4px);
+}
