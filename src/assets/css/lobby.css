@@ -14,11 +14,11 @@ main {
     width: 50%;
     margin: auto;
     text-align: center;
-    height: 750px;
 }
 
 main h1 {
     font-size: 3em;
+    margin-bottom: 70px;
 }
 
 main .players {
@@ -26,8 +26,8 @@ main .players {
     flex-wrap: wrap;
     min-height: 400px;
     align-content: space-between;
-    justify-content: space-between;
-    margin-bottom: 30px;
+    justify-content: space-around;
+    margin-bottom: 50px;
 }
 
 main .players li {
@@ -40,12 +40,12 @@ main .players li {
     min-width: 400px;
 }
 
-main a {
+main .ready {
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 0 auto;
+    margin: 0 auto 50px auto;
     font-size: 2em;
     border: 1px solid black;
     width: 400px;
@@ -53,7 +53,7 @@ main a {
     text-decoration: underline;
 }
 
-main a:hover {
+main .ready:hover {
     color: grey;
     border: 1px solid grey;
 }
