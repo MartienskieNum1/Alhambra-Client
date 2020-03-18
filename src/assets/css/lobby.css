@@ -1,0 +1,78 @@
+body {
+    font-family: Impact, sans-serif;
+}
+
+button {
+    margin: 10px;
+    font-size: 1.3em;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 3em;
+    margin-bottom: 70px;
+}
+
+main .players {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 400px;
+    align-content: space-between;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
+main .players li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    border: 1px solid black;
+    min-height: 100px;
+    min-width: 400px;
+}
+
+main .ready {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 50px auto;
+    font-size: 2em;
+    border: 1px solid black;
+    width: 400px;
+    height: 100px;
+    text-decoration: underline;
+}
+
+main .ready:hover {
+    color: grey;
+    border: 1px solid grey;
+}
+
+main .gameInfo {
+    font-size: 1.5em;
+}
+
+main .gameInfo ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+main .gameInfo li {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+main .gameInfo .gameID {
+    display: inline-block;
+    letter-spacing: 4px;
+}
