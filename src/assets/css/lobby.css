@@ -18,7 +18,7 @@ main {
 
 main h1 {
     font-size: 3em;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
 }
 
 main .players {
@@ -27,7 +27,6 @@ main .players {
     min-height: 400px;
     align-content: space-between;
     justify-content: space-around;
-    margin-bottom: 50px;
 }
 
 main .players li {
@@ -38,41 +37,45 @@ main .players li {
     border: 1px solid black;
     min-height: 100px;
     min-width: 400px;
+    margin-bottom: 25px;
 }
 
 main .ready {
-    cursor: pointer;
+    font-family: Impact, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 50px auto;
+    margin: 0 auto 0 auto;
     font-size: 2em;
-    border: 1px solid black;
     width: 400px;
     height: 100px;
-    text-decoration: underline;
+    font-weight: bold;
+    padding: 14px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
 }
 
 main .ready:hover {
-    color: grey;
-    border: 1px solid grey;
+    background-color: lightgray;
 }
 
 main .gameInfo {
     font-size: 1.5em;
+    margin-bottom: 30px;
 }
 
-main .gameInfo ul {
-    display: flex;
-    justify-content: space-around;
-}
 
 main .gameInfo li {
     border: 1px solid black;
     padding: 5px;
+    margin: 10px auto 10px auto;
+    width: 400px;
 }
 
-main .gameInfo .gameID {
-    display: inline-block;
+main .gameID {
     letter-spacing: 4px;
+    width: 150px;
+    border: 1px solid black;
+    margin: 10px auto 10px auto;
 }
