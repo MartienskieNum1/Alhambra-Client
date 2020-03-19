@@ -134,6 +134,11 @@
     box-shadow: 0 7px #999;
 }
 
+#Lobby .button{
+    background-color: gainsboro;
+    box-shadow: 0 7px #999;
+}
+
 #Lobby main {
     display: flex;
     flex-direction: column;
