@@ -160,7 +160,6 @@
 #Lobby main .players {
     display: flex;
     flex-wrap: wrap;
-    min-height: 400px;
     align-content: space-between;
     justify-content: space-around;
 }
