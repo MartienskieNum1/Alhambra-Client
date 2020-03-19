@@ -18,6 +18,7 @@ let createGame = (username) => {
 };
 
 let joinGame = (username, gameId) => {
+    username = username.toLowerCase();
     fetchFromServer(`${config.root}games/${gameId}/players`, 'POST', {playerName: `${username}`}).then(
         function (response) {
             console.log(response);
