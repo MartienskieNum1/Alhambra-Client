@@ -14,16 +14,6 @@
     margin-bottom: 0.3em;
 }
 
-.back{
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 24px;
-    word-spacing: 10px;
-    margin: 30px;
-    background-color: gainsboro;
-    box-shadow: 0 5px #999;
-}
-
 #Game input[type=submit] {
     padding: 14px 20px;
     margin: 8px 0;
@@ -78,6 +68,7 @@
 }
 
 #Lobby main {
+    padding-bottom: 50px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -110,24 +101,14 @@
     margin-bottom: 25px;
 }
 
-#Lobby main .ready {
-    font-family: sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 0 auto;
-    font-size: 2em;
-    width: 400px;
-    height: 100px;
-    font-weight: bold;
-    padding: 14px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-}
-
 #Lobby main .ready:hover {
     background-color: lightgray;
+}
+
+#Lobby .ready:active{
+    background-color: lightgray;
+    box-shadow: 0 4px #666;
+    transform: translateY(4px);
 }
 
 #Lobby main .gameInfo {
@@ -144,8 +125,13 @@
 }
 
 #Lobby main .gameID {
+    background-color: ivory;
     letter-spacing: 4px;
     width: 150px;
     border: 1px solid black;
     margin: 10px auto 10px auto;
+}
+
+#Lobby .players li{
+    background-color: ivory;
 }
