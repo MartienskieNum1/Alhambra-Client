@@ -3,5 +3,5 @@
 
 const config = {
     root: "http://172.21.22.52:48201/alhambra-api/",
-    groupnumber: "00"
+    groupnumber: "27"
 };
