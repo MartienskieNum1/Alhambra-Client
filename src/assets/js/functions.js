@@ -35,14 +35,11 @@ let setUpLobby = () => {
     gameIdElement.innerHTML = gameId;
 
     playerList.innerHTML = "";
-    fetchFromServer(`${config.root}games?details=true&prefix=group${config.groupnumber}`, 'GET').then(
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
-            response.forEach(game => {
-                if (game.id === gameId) {
-                    for (let player of game.players) {
-                        playerList.innerHTML += `<li>${player}</li>`;
-                    }
-                }
-            });
+            console.log(response);
+            for (let player of response.players) {
+                playerList.innerHTML += `<li>${player}</li>`;
+            }
         });
 };
