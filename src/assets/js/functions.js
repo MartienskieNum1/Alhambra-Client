@@ -4,7 +4,7 @@ let goToPageInSecond = (page) => {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(window.location.href = page);
-        }, 500);
+        }, 1000);
     });
 };
 
@@ -22,12 +22,27 @@ let joinGame = (username, gameId) => {
         function (response) {
             console.log(response);
             localStorage.setItem('playerToken', `${response}`);
+            localStorage.setItem('username', username);
+            localStorage.setItem('gameId', gameId);
         });
 };
 
-let showAllGames = () => {
+let setUpLobby = () => {
+    let gameId = localStorage.getItem('gameId');
+    let playerList = document.querySelector('.players');
+    let gameIdElement = document.querySelector('.gameID');
+
+    gameIdElement.innerHTML = gameId;
+
+    playerList.innerHTML = "";
     fetchFromServer(`${config.root}games?details=true&prefix=group${config.groupnumber}`, 'GET').then(
         function (response) {
-            console.log(response);
+            response.forEach(game => {
+                if (game.id === gameId) {
+                    for (let player of game.players) {
+                        playerList.innerHTML += `<li>${player}</li>`;
+                    }
+                }
+            });
         });
 };
