@@ -2,24 +2,32 @@
 
 let backButton = document.querySelector('.back');
 let usernameInput = document.querySelector('input[id="username"]');
-let gameIDInput = document.querySelector('select');
+let gameIdInput = document.querySelector('select');
 let joinButton = document.querySelector('input[type="submit"]');
 
 let init = () => {
     backButton.addEventListener('click', function () {
-        window.history.back()
+        window.location.href = '../src/index.html';
     });
 
     fetchFromServer(`${config.root}games?details=false&prefix=group${config.groupnumber}`,'GET').then(function(response){
         console.log(response);
-        gameIDInput.innerHTML = '';
+        gameIdInput.innerHTML = '';
         response.forEach(game => {
-            gameIDInput.innerHTML += `<option>${game}</option>`;
+            gameIdInput.innerHTML += `<option>${game}</option>`;
         });
     });
 
 
-    joinButton.addEventListener('click', joinGame);
+    joinButton.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        let gameId = gameIdInput.value;
+        let username = usernameInput.value;
+
+        joinGame(username, gameId);
+        goToPageInSecond('../src/lobbyGuest.html');
+    });
 };
 
 document.addEventListener("DOMContentLoaded", init);
