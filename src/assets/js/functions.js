@@ -43,3 +43,26 @@ let setUpLobby = () => {
             }
         });
 };
+
+let readyUp = () => {
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+
+    if (!localStorage.getItem('ready')) {
+        fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'PUT').then(
+            function (response) {
+                localStorage.setItem('ready', `${response}`);
+                readyButton.innerHTML = 'Not ready';
+            }
+        );
+    }
+
+    if (localStorage.getItem('ready')) {
+        fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'DELETE').then(
+            function (response) {
+                localStorage.removeItem('ready');
+                readyButton.innerHTML = 'Ready';
+            }
+        );
+    }
+};
