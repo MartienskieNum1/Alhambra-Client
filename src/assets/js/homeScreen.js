@@ -5,11 +5,11 @@ let createButton = document.querySelector('.create');
 
 let navigate = () => {
     joinButton.addEventListener("click", function() {
-        window.location.pathname = 'webclient/src/joinGame.html'
+        window.location.href = '../src/joinGame.html'
     });
 
     createButton.addEventListener('click', function () {
-        window.location.pathname = 'webclient/src/createGame.html'
+        window.location.href = '../src/createGame.html'
     });
 };
 
