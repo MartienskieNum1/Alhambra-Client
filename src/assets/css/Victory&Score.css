@@ -1,0 +1,67 @@
+/*VICTORY CSS*/
+
+#Victory .container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#Victory h1 {
+    font-size: 4rem;
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Aclonica', sans-serif;
+}
+
+#Victory img {
+    display: block;
+    height: 200px;
+    width: 200px;
+    margin: auto;
+}
+
+/*SCOREBOARD CSS*/
+
+#Score .containergrid {
+    display: grid;
+    grid-template-rows: auto ;
+    grid-template-columns: 300px 300px;
+}
+
+#Score .containerflex {
+    display: flex;
+    justify-content: center;
+}
+
+#Score h1 {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+#Score p {
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 40px;
+}
+
+#Score button {
+    margin: 20px auto 20px auto;
+    font-size: x-large;
+    color: black;
+    padding: 16px 32px;
+    border-radius: 16px;
+    width: 30%;
+    display: block;
+    border: none;
+    background-color: gainsboro;
+    box-shadow: 0 7px #999;
+}
+
+#Score button:hover {
+    background-color: lightgray;
+}
