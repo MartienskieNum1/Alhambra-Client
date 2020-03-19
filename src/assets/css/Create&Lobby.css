@@ -40,10 +40,10 @@
 }
 
 #Game select {
-    width: 70px;
+    width: 200px;
     padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
+    margin: 8px auto;
+    display: block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;

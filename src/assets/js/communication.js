@@ -10,6 +10,8 @@ function fetchFromServer(url, httpVerb, requestBody){
     // Don't forget to add data to the body when needed
     options.body = JSON.stringify(requestBody);
 
+    options.headers["Authorization"] = "Bearer " + localStorage.getItem('playerToken');
+
     return fetch(url, options)
         .then((response) => {
         if (!response.ok) {
