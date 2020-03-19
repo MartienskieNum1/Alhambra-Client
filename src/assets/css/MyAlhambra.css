@@ -43,6 +43,7 @@
     grid-column-start: 4;
     grid-column-end: span 3;
     grid-row-start: 4;
+    grid-row-end: span 2;
 }
 
 #Alhambra #money li{
@@ -52,29 +53,30 @@
 
 #Alhambra #Your_reserve{
     display: flex;
+    flex-direction: column;
     align-content: center;
-    background-size: 100px 100px;
-    background-repeat: repeat;
-    background-image: url("../../images/desert brick.png");
-    border: 5px solid darkgoldenrod;
-    border-radius: 15px;
     grid-column-start: 1;
     grid-column-end: span 2;
-    grid-row-start: 4;
-    color: chocolate;
+    grid-row-start: 5;
     grid-template-columns: 0.2fr 2fr 0.2fr;
 }
 
 #Alhambra #ReserveTitle{
     grid-column-start: 1;
-    grid-row-start: 3;
+    grid-row-start: 5;
     border-bottom: darkgoldenrod solid;
 }
 
 #Alhambra #reserve {
+    height: 100%;
+    background-image: url("../../images/desert brick.png");
+    background-size: 100px 100px;
+    background-repeat: repeat;
+    border: 5px solid darkgoldenrod;
+    border-radius: 15px;
     margin-left: auto;
     margin-right: auto;
-    width: available;
+    width: 100%;
 }
 
 #Alhambra #reserve li{
