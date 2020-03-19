@@ -1,13 +1,15 @@
 /*GENERAL BOARD CSS*/
-
+#Board html{
+    height: 100%;
+}
 #Board .grid-container {
     display: grid;
-    grid-template-columns: 40% 20% 40%;
-    grid-template-rows: 25% 25% 25% 25%;
-
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: repeat(4,1fr);
 }
 
-#Board .buildings { grid-row-start: 1 ;
+#Board .buildings {
+    grid-row-start: 1 ;
     grid-row-end: 2;
     grid-column-start:1 ;
     grid-column-end:2;
@@ -16,20 +18,32 @@
     justify-content: space-evenly;
 }
 
-#Board .buildings img{
-    border: black;
+#Board img{
+    border: darkgoldenrod solid;
     border-width: 2px;
     border-style: groove;
     margin: 5px 5px 5px 5px;
 }
 
-#Board .yourMoney { grid-row-start: 2 ;
+#Board .yourMoney {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    grid-row-start: 2 ;
     grid-row-end: 4;
     grid-column-start:3 ;
     grid-column-end:4;
 }
-
-#Board .money { grid-row-start: 3;
+#Board img{
+    height: 100px;
+    width: 100px;
+}
+#Board .money {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    grid-row-start: 3;
     grid-row-end: 5;
     grid-column-start:1 ;
     grid-column-end:2; }
