@@ -51,6 +51,7 @@ let readyUp = () => {
     if (!localStorage.getItem('ready')) {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'PUT').then(
             function (response) {
+                console.log(response);
                 localStorage.setItem('ready', `${response}`);
                 readyButton.innerHTML = 'Not ready';
             }
@@ -60,6 +61,7 @@ let readyUp = () => {
     if (localStorage.getItem('ready')) {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'DELETE').then(
             function (response) {
+                console.log(response);
                 localStorage.removeItem('ready');
                 readyButton.innerHTML = 'Ready';
             }
