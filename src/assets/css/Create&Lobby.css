@@ -1,0 +1,151 @@
+/*CREATE/JOIN GAME CSS*/
+
+#Game #Welcome {
+    margin-bottom: 100px;
+}
+
+#Game #Welcome  h2{
+    font-size: 2rem;
+    margin-bottom: 0.5em;
+}
+
+#Game #Welcome  h1{
+    font-size: 3rem;
+    margin-bottom: 0.3em;
+}
+
+.back{
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    word-spacing: 10px;
+    margin: 30px;
+    background-color: gainsboro;
+    box-shadow: 0 5px #999;
+}
+
+#Game input[type=submit] {
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 300px;
+    background-color: gainsboro;
+    box-shadow: 0 7px #999;
+}
+
+#Game input[type=submit]:hover {
+    background-color: lightgray;
+}
+
+#Game input[type=text]{
+    width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#Game select {
+    width: 70px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/*LOBBY CSS*/
+
+#Lobby body {
+    font-family: sans-serif;
+}
+
+#Lobby button {
+    margin: 10px;
+    font-size: 1.3em;
+    background-color: gainsboro;
+    box-shadow: 0 7px #999;
+}
+
+#Lobby .button{
+    background-color: gainsboro;
+    box-shadow: 0 7px #999;
+}
+
+#Lobby main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+#Lobby main h1 {
+    font-size: 3em;
+    margin-bottom: 30px;
+}
+
+#Lobby main .players {
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 400px;
+    align-content: space-between;
+    justify-content: space-around;
+}
+
+#Lobby main .players li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    border: 1px solid black;
+    min-height: 100px;
+    min-width: 400px;
+    margin-bottom: 25px;
+}
+
+#Lobby main .ready {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0 auto;
+    font-size: 2em;
+    width: 400px;
+    height: 100px;
+    font-weight: bold;
+    padding: 14px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+#Lobby main .ready:hover {
+    background-color: lightgray;
+}
+
+#Lobby main .gameInfo {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+
+#Lobby main .gameInfo li {
+    border: 1px solid black;
+    padding: 5px;
+    margin: 10px auto 10px auto;
+    width: 400px;
+}
+
+#Lobby main .gameID {
+    letter-spacing: 4px;
+    width: 150px;
+    border: 1px solid black;
+    margin: 10px auto 10px auto;
+}
