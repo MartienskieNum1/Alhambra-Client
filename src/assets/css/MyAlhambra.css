@@ -1,0 +1,94 @@
+/*MY ALHAMBRA CSS*/
+
+#Alhambra html{
+    height: 100%;
+    font-family: 'Aclonica', sans-serif;
+}
+
+#Alhambra body {
+    min-height: 100%;
+    max-height: min-content;
+}
+
+#Alhambra main{
+    display: grid;
+    grid-template-rows: 25% 25% 25% 25%;
+    grid-template-columns: 0.05fr 1fr 1fr 1fr 1fr 1fr 0.05fr;
+    grid-area: 2 / 1 / span 5 / span 6;
+    min-height: 100%;
+}
+
+#Alhambra header{
+    display: flex inline;
+}
+
+#Alhambra h1 {
+    font-size: 50px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#Alhambra .back {
+    align-self: center;
+    padding-left: 7px;
+}
+
+#Alhambra #Your_money{
+    grid-column-start: 4;
+    grid-column-end: span 3;
+    grid-row-start: 4;
+    color: aqua;
+}
+
+#Alhambra #money li{
+    display: inline;
+    padding-right: 10px;
+}
+
+#Alhambra #Your_reserve{
+    display: flex;
+    align-content: center;
+    background-size: 100px 100px;
+    background-repeat: repeat;
+    background-image: url("../../images/desert brick.png");
+    border: 5px solid darkgoldenrod;
+    border-radius: 15px;
+    grid-column-start: 1;
+    grid-column-end: span 2;
+    grid-row-start: 4;
+    color: chocolate;
+    grid-template-columns: 0.2fr 2fr 0.2fr;
+}
+
+#Alhambra #ReserveTitle{
+    grid-column-start: 1;
+    grid-row-start: 3;
+}
+
+#Alhambra #reserve {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Alhambra #reserve li{
+    display: inline-block;
+    padding-right: 10px;
+}
+
+#Alhambra #Your_ALhambra{
+    background-size: 100px 100px;
+    background-repeat: repeat;
+    background-image: url('../../images/sand.jpg');
+    border: 5px solid darkgoldenrod;
+    border-radius: 15px;
+    grid-template-rows:repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-area: 1 / 4 / span 3 / span 3;
+    color: tan;
+    display: grid;
+}
+
+#Alhambra #City {
+    grid-column-start: 3;
+    grid-row-start: 3;
+}
