@@ -1,3 +1,13 @@
+body {
+    background-color: tan;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 300px;
+    grid-template-columns: auto auto;
+}
+
 h1 {
     font-size: 4rem;
     margin-top: 20px;
@@ -6,7 +16,13 @@ h1 {
     font-family: 'Aclonica', sans-serif;
 }
 
+h2 {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 1.62rem;
+}
+
 .back {
     align-self: center;
     padding-left: 7px;
 }
+
