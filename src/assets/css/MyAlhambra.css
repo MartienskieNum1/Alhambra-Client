@@ -34,6 +34,7 @@
     padding-right: 10px;
 }
 
+
 #Alhambra .back {
     align-self: center;
     padding-left: 7px;
@@ -50,6 +51,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+#Alhambra #Your_reserve img{
+    height: 60%;
+    width: 80%;
 }
 
 #Alhambra #Your_reserve{
