@@ -79,8 +79,12 @@ html{
     border-radius: 15px;
     cursor: pointer;
     font-size: 24px;
-    word-spacing: 5px;
+    word-spacing: 2px;
     margin: 30px;
     background-color: gainsboro;
     box-shadow: 0 5px #999;
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
 }
