@@ -1,13 +1,8 @@
 "use strict";
+
 let bankMoney = document.querySelector('.money');
 let playerMoney = document.querySelector('.yourMoney')
 
-document.addEventListener("DOMContentLoaded", init);
-
-function init(){
-    getStartGameInfo();
-
-}
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
