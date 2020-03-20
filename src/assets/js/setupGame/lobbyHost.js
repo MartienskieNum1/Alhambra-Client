@@ -12,11 +12,15 @@ let init = () => {
         readyButton.innerHTML = 'Not ready'
     } else {
         readyButton.innerHTML = 'Ready'
+
     }
+
+    setInterval(function(){ allPlayersReady()},3000);
 
     setUpLobby();
 
     readyButton.addEventListener('click', readyUp);
+
 };
 
 document.addEventListener("DOMContentLoaded", init);
