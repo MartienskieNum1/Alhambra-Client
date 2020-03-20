@@ -1,7 +1,7 @@
 "use strict";
 
 let bankMoney = document.querySelector('.money');
-let playerMoney = document.querySelector('.yourMoney');
+let playerMoney = document.querySelector('.yourMoney')
 
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
@@ -9,6 +9,15 @@ function getStartGameInfo(){
         function (response) {
             console.log(response);
             giveBankMoney(response);
+            givePlayerMoney(response);
+        });
+}
+
+function getAlhambraInfo(){
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function (response) {
+            console.log(response);
             givePlayerMoney(response);
         });
 }
