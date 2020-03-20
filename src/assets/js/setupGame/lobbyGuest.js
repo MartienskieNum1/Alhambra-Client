@@ -14,8 +14,10 @@ let init = () => {
         readyButton.innerHTML = 'Ready'
     }
 
-    setUpLobby();
 
+    setInterval(function(){ allPlayersReady()},3000);
+    setUpLobby();
+    setInterval(function(){ setUpLobby()},3000);
     readyButton.addEventListener('click', readyUp);
 };
 
