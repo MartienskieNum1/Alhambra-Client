@@ -1,33 +1,12 @@
 "use strict";
 
-let playerMoney = document.querySelector('.yourMoney');
+let goBack = document.querySelector('.back');
 
 function init(){
-    getStartGameInfo();
-
-}
-
-function getStartGameInfo(){
-    let gameId = localStorage.getItem('gameId');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
-        function (response) {
-            console.log(response);
-            givePlayerMoney(response);
-        });
-}
-
-function givePlayerMoney(response) {
-    let username = localStorage.getItem('username');
-    playerMoney.innerHTML = "";
-
-    for (let i = 0; i < response.players.length; i ++) {
-        if(response.players[i].name === username){
-            for (let j = 0; response.players[i].coins.length; j ++){
-                console.log(username);
-                playerMoney.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
-            }
-        }
-    }
+    goBack.addEventListener('click', function () {
+        window.location.href = "../src/general_board.html";
+    });
+    getAlhambraInfo();
 }
 
 document.addEventListener("DOMContentLoaded", init);
