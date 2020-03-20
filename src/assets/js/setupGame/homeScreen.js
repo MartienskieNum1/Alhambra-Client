@@ -14,3 +14,7 @@ let navigate = () => {
 };
 
 document.addEventListener("DOMContentLoaded", navigate);
+
+function showRules() {
+    window.location.href = '../src/rules.html'
+}
