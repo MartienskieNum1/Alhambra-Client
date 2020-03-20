@@ -34,6 +34,7 @@
     padding-right: 10px;
 }
 
+
 #Alhambra .back {
     align-self: center;
     padding-left: 7px;
@@ -49,6 +50,11 @@
 #Alhambra #money li{
     display: inline;
     padding-right: 10px;
+}
+
+#Alhambra #Your_reserve img{
+    height: 60%;
+    width: 80%;
 }
 
 #Alhambra #Your_reserve{
