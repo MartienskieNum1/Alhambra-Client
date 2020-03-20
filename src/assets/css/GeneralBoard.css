@@ -55,19 +55,19 @@
     grid-column-end:2;
 }
 
-#Board .arcades {
+#Board .yellow {
     background-image: url("../../images/gold ingot.png");
 }
 
-#Board .chambers {
+#Board .green {
     background-image: url("../../images/emerald ingot.png");
 }
 
-#Board .fountain {
+#Board .blue {
     background-image: url("../../images/lapis ingot.png");
 }
 
-#Board .garden {
+#Board .orange {
     background-image: url("../../images/Copper ingot.webp");
 }
 
@@ -78,7 +78,7 @@
 }
 
 #Board div{
-    font-size: 100px;
+    font-size: 20px;
     margin: 5px 5px 5px 5px;
     align-content: center;
     display: flex;
