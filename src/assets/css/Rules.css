@@ -1,0 +1,50 @@
+html {
+    background-color: tan;
+}
+
+#rules p, li {
+    font-size: 1.2rem;
+}
+
+#rules .container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto auto;
+}
+
+#rules h1 {
+    font-size: 5rem;
+    margin-top: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Aclonica', sans-serif;
+}
+
+#rules h2 {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 2.3rem;
+}
+
+#rules h3 {
+    font-family: 'Aclonica', sans-serif;
+    padding-top: 20px;
+    font-size: 1.5rem;
+}
+
+#rules h4 {
+    font-family: 'Aclonica', sans-serif;
+    font-size: 1.3rem;
+}
+
+#rules .back {
+    align-self: center;
+    padding-left: 7px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    word-spacing: 10px;
+    margin: 30px;
+    background-color: gainsboro;
+    box-shadow: 0 5px #999;
+}
+
