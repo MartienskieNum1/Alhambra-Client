@@ -10,4 +10,9 @@ function init(){
     getStartGameInfo();
 
 }
+
+function showRules() {
+    window.location.href = '../src/rules.html'
+}
+
 document.addEventListener("DOMContentLoaded", init);
