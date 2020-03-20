@@ -1,23 +1,19 @@
 "use strict";
 
-let bankMoney = document.querySelector('.money');
 let playerMoney = document.querySelector('.yourMoney');
+
+function init(){
+    getStartGameInfo();
+
+}
 
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
             console.log(response);
-            giveBankMoney(response);
             givePlayerMoney(response);
         });
-}
-
-function giveBankMoney(response) {
-    bankMoney.innerHTML = "";
-    for (let i = 0; i < response.bank.length; i ++) {
-        bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
-    }
 }
 
 function givePlayerMoney(response) {
@@ -33,3 +29,5 @@ function givePlayerMoney(response) {
         }
     }
 }
+
+document.addEventListener("DOMContentLoaded", init);
