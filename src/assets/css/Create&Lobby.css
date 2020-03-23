@@ -51,20 +51,19 @@
 
 /*LOBBY CSS*/
 
-#Lobby body {
-    font-family: sans-serif;
-}
-
-#Lobby button {
-    margin: 10px;
-    font-size: 1.3em;
-    background-color: gainsboro;
-    box-shadow: 0 7px #999;
-}
-
 #Lobby .button{
     background-color: gainsboro;
     box-shadow: 0 7px #999;
+}
+
+#Lobby .button:hover {
+    background-color: lightgray;
+}
+
+#Lobby .button:active{
+    background-color: lightgray;
+    box-shadow: 0 4px #666;
+    transform: translateY(4px);
 }
 
 #Lobby main {
@@ -97,18 +96,9 @@
     font-size: 2em;
     border: 1px solid black;
     min-height: 100px;
-    min-width: 400px;
+    min-width: 300px;
     margin-bottom: 25px;
-}
-
-#Lobby main .ready:hover {
-    background-color: lightgray;
-}
-
-#Lobby .ready:active{
-    background-color: lightgray;
-    box-shadow: 0 4px #666;
-    transform: translateY(4px);
+    background-color: ivory;
 }
 
 #Lobby main .gameInfo {
@@ -124,14 +114,14 @@
     width: 400px;
 }
 
-#Lobby main .gameID {
+#Lobby main .gameInfo ul {
+    margin: 10px;
+}
+
+#Lobby main .gameInfo p {
     background-color: ivory;
     letter-spacing: 4px;
     width: 150px;
     border: 1px solid black;
     margin: 10px auto 10px auto;
-}
-
-#Lobby .players li{
-    background-color: ivory;
 }
