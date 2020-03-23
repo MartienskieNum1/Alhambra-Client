@@ -35,14 +35,13 @@ let setUpLobby = () => {
 
     gameIdElement.innerHTML = gameId;
 
-    playerList.innerHTML = "";
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
-            console.log(response);
+            playerList.innerHTML = "";
             for (let player of response.players) {
                 playerList.innerHTML += `<li>${player}</li>`;
             }
-        });
+        })
 };
 
 let readyUp = () => {
@@ -52,7 +51,6 @@ let readyUp = () => {
     if (!localStorage.getItem('ready')) {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'PUT').then(
             function (response) {
-                console.log(response);
                 localStorage.setItem('ready', `${response}`);
                 readyButton.innerHTML = 'Not ready';
             }
@@ -62,10 +60,29 @@ let readyUp = () => {
     if (localStorage.getItem('ready')) {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'DELETE').then(
             function (response) {
-                console.log(response);
                 localStorage.removeItem('ready');
                 readyButton.innerHTML = 'Ready';
             }
         );
     }
 };
+
+function checkAllPlayersReady(){
+    let amountReady = document.querySelector('.amount-ready');
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function (response) {
+            console.log(response);
+            amountReady.innerHTML = `${response.readyCount}`;
+            if(response.started === true){
+                localStorage.removeItem('ready');
+                gameStart()
+            }
+        });
+}
+
+function gameStart() {
+
+    goToPageInSecond('../src/general_board.html')
+
+}
