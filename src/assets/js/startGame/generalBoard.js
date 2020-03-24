@@ -7,6 +7,7 @@ function init(){
         window.location.href = "../src/MyAlhambraindex.html";
     });
     getStartGameInfo();
+
 }
 
 function showRules() {

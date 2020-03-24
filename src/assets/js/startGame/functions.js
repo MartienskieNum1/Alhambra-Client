@@ -11,9 +11,10 @@ function getStartGameInfo(){
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
             console.log(response);
+            populateBuildingMarket(response);
             giveBankMoney(response);
             givePlayerMoney(response);
-            populateBuildingMarket(response);
+
         });
 }
 
@@ -50,7 +51,7 @@ function givePlayerMoney(response) {
 function populateBuildingMarket(response) {
     buildingMarket.innerHTML = "";
 
-    buildingMarket.innerHTML = `<p class="${response.market.blue.type}"><img src="../../media/blue.png" alt="blue">
+    buildingMarket.innerHTML +=`<p class="${response.market.blue.type}"><img src="../../media/blue.png" alt="blue">
     ${response.market.blue.cost}</p>`;
 
     buildingMarket.innerHTML += `<p class="${response.market.green.type}"><img src="../../media/green.png" alt="green">
