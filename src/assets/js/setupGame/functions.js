@@ -28,6 +28,17 @@ let joinGame = (username, gameId) => {
         });
 };
 
+let leaveGame = () => {
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}`, 'DELETE').then(
+        function () {
+            window.location.href = '../src/index.html';
+            window.alert('You left the game!');
+        }
+    )
+};
+
 let setUpLobby = () => {
     let gameId = localStorage.getItem('gameId');
     let playerList = document.querySelector('.players');

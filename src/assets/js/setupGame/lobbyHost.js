@@ -1,12 +1,10 @@
 "use strict";
 
-let backButton = document.querySelector('.back');
 let readyButton = document.querySelector('.ready');
+let leaveButton = document.querySelector('.leave');
 
 let init = () => {
-    backButton.addEventListener('click', function () {
-        window.location.href = '../src/createGame.html';
-    });
+    leaveButton.addEventListener('click', leaveGame);
 
     if (localStorage.getItem('ready')) {
         readyButton.innerHTML = 'Not ready'
