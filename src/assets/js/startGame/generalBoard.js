@@ -6,7 +6,6 @@ function init(){
     goToAlhambra.addEventListener('click', function () {
         window.location.href = "../src/MyAlhambraindex.html";
     });
-
     getStartGameInfo();
 
 }
