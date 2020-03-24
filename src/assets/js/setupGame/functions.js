@@ -33,6 +33,7 @@ let leaveGame = () => {
     let username = localStorage.getItem('username');
     fetchFromServer(`${config.root}games/${gameId}/players/${username}`, 'DELETE').then(
         function () {
+            localStorage.clear();
             window.location.href = '../src/index.html';
             window.alert('You left the game!');
         }
