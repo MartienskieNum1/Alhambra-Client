@@ -10,6 +10,8 @@
 }
 
 #Board .currentPlayer{
+    background-image: url("../../images/desert brick.png");
+    background-repeat: repeat;
     padding-left: 15px;
     padding-right: 15px;
     border: green 8px solid;
@@ -24,12 +26,18 @@
 }
 
 #Board .title{
+    padding-top: 13px;
+    padding-left: 30px;
+    background-image: url("../../images/desert brick.png");
+    background-repeat: repeat;
+    background-size: 100px;
     display: flex;
     font-size: 50px;
     margin-right: auto;
     margin-left: auto;
     justify-content: center;
-    border-bottom: darkgoldenrod 5px solid;
+    border-bottom: #666666 5px solid;
+    border-right: #666666 3px solid;
     border-radius: 5px;
 }
 
