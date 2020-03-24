@@ -51,20 +51,55 @@
     justify-content: space-evenly;
 }
 
-#Board img {
-    border: 2px darkgoldenrod groove;
-    margin: 5px 5px 5px 5px;
-    height: 100px;
-    width: 100px;
+#Board .buildings p {
+    background-position: center;
+}
+
+#Board .garden{
+    background-image: url("../../images/garden-mc.png");
+    background-size: 75px;
+}
+
+#Board .tower{
+    background-image: url("../../images/tower-mc.png");
+    background-size: 100px;
+}
+
+#Board .pavilion {
+    background-image: url("../../images/pavilion-mc.png");
+    background-size: 100px;
+}
+
+#Board .chambers {
+    background-image: url("../../images/chambers-mc.png");
+    background-size: 100px;
+}
+
+#Board .arcades {
+    background-image: url("../../images/arcades-mc.png");
+    background-size: 100px;
+}
+
+#Board .seraglio {
+    background-image: url("../../images/seraglio-mc.png");
+    background-size: 100px;
 }
 
 #Board p {
+    position: relative;
     border: 2px darkgoldenrod groove;
     width: 100px;
     height: 100px;
     font-size: 1em;
     background-repeat: no-repeat;
     background-size: 100px;
+}
+
+#Board img {
+    position: absolute;
+    top: -11px;
+    right: -35px;
+    height: 60px;
 }
 
 #Board .yourMoney {
