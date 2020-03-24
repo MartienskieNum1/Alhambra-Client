@@ -51,13 +51,12 @@ function givePlayerMoney(response) {
 
 function populateBuildingMarket(response) {
 
-    // marketBuildings.forEach(building => {
-    //     for (let [key, value] of Object.entries(response.market)) {
-    //
-    //         if (building.getAttribute('data-color') === key) {
-    //             building.setAttribute('data-type', value.type);
-    //             building.innerHTML = `${value.cost}`;
-    //         }
-    //     }
-    // });
+    marketBuildings.forEach(building => {
+        for (let [key, value] of Object.entries(response.market)) {
+            if (building.getAttribute('data-color') === key) {
+                building.className = `${value.type}`;
+                building.innerHTML += value.cost;
+            }
+        }
+    });
 }
