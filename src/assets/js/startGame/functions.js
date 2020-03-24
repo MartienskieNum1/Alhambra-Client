@@ -49,4 +49,9 @@ function givePlayerMoney(response) {
 function showActivePlayer(response) {
     let currentPlayer = response.currentPlayer.valueOf();
     activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
+    let username = localStorage.getItem('username');
+
+    if (currentPlayer === username){
+        activePlayer.innerHTML = `Currently at play:<br>YOU`;
+    }
 }
