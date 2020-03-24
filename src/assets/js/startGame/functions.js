@@ -2,7 +2,7 @@
 
 let bankMoney = document.querySelector('.money');
 let playerMoney = document.querySelector('.yourMoney');
-let buildingMarket = document.querySelector('.buildings');
+let marketBuildings = document.querySelectorAll('.buildings p');
 
 
 
@@ -41,7 +41,7 @@ function givePlayerMoney(response) {
 
     for (let i = 0; i < response.players.length; i ++) {
         if(response.players[i].name === username){
-            for (let j = 0; response.players[i].coins.length; j ++){
+            for (let j = 0; j < response.players[i].coins.length; j ++){
                 console.log(username);
                 playerMoney.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
             }
@@ -50,20 +50,14 @@ function givePlayerMoney(response) {
 }
 
 function populateBuildingMarket(response) {
-    buildingMarket.innerHTML = "";
 
-    buildingMarket.innerHTML +=`<p class="${response.market.blue.type}"><img src="assets/media/blue.png" alt="blue">
-    ${response.market.blue.cost}</p>`;
-
-    buildingMarket.innerHTML += `<p class="${response.market.green.type}"><img src="assets/media/green.png" alt="green">
-    ${response.market.green.cost}</p>`;
-
-    buildingMarket.innerHTML += `<p class="${response.market.orange.type}"><img src="assets/media/orange.png" alt="orange">
-    ${response.market.orange.cost}</p>`;
-
-    buildingMarket.innerHTML += `<p class="${response.market.yellow.type}"><img src="assets/media/yellow.png" alt="yellow">
-    ${response.market.yellow.cost}</p>`;
-
-    console.log(response.market.yellow.type);
-    console.log("test");
+    // marketBuildings.forEach(building => {
+    //     for (let [key, value] of Object.entries(response.market)) {
+    //
+    //         if (building.getAttribute('data-color') === key) {
+    //             building.setAttribute('data-type', value.type);
+    //             building.innerHTML = `${value.cost}`;
+    //         }
+    //     }
+    // });
 }
