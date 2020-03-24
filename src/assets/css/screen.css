@@ -3,7 +3,7 @@ body{
     background-color: tan;
 }
 
-.back, .navigate{
+.back, .navigate, .leave{
     border-radius: 15px;
     cursor: pointer;
     font-size: 24px;
