@@ -17,10 +17,9 @@ function takeMoney(e) {
         }
     ];
     console.log(body);
-    fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', `${body}`)
-        .then(function (response) {
-            giveBankMoney(response);
-            givePlayerMoney(response);
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
+        .then(function () {
+            getStartGameInfo();
         })
 }
 
@@ -32,8 +31,8 @@ function getStartGameInfo(){
             populateBuildingMarket(response);
             giveBankMoney(response);
             givePlayerMoney(response);
-            showActivePlayer(response);
-            setInterval(function (){showActivePlayer(response)}, 2000);
+            showActivePlayer();
+            setInterval(function (){showActivePlayer()}, 3000);
         });
 }
 
@@ -41,7 +40,6 @@ function getAlhambraInfo(){
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
-            console.log(response);
             givePlayerMoney(response);
         });
 }
@@ -71,23 +69,29 @@ function givePlayerMoney(response) {
     }
 }
 
-function showActivePlayer(response) {
-    let currentPlayer = response.currentPlayer.valueOf();
-    activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
-    let username = localStorage.getItem('username');
+function showActivePlayer() {
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function(response) {
+            let currentPlayer = response.currentPlayer.valueOf();
+            activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
+            let username = localStorage.getItem('username');
 
-    if (currentPlayer === username){
-        activePlayer.innerHTML = `Currently at play:<br>YOU`;
-    }
+            if (currentPlayer === username){
+                activePlayer.innerHTML = `Currently at play:<br>YOU`;
+            }
+        }
+    );
 }
 
 function populateBuildingMarket(response) {
 
     marketBuildings.forEach(building => {
         for (let [key, value] of Object.entries(response.market)) {
-            if (building.getAttribute('data-color') === key) {
+            let color = building.getAttribute('data-color');
+            if (color === key) {
                 building.className = `${value.type}`;
-                building.innerHTML += value.cost;
+                building.innerHTML = `${value.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
             }
         }
     });
