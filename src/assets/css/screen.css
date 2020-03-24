@@ -1,5 +1,5 @@
 /*GENERAL*/
-html{
+body{
     background-color: tan;
 }
 
@@ -14,6 +14,10 @@ html{
 }
 
 /*INDEX CSS*/
+#index{
+    background-image: url("../../images/desert background.png");
+    background-size: 125% ;
+}
 
 .Font{
     font-family: 'Aclonica', sans-serif;
@@ -78,7 +82,6 @@ html{
 .showGameRules{
     border-radius: 15px;
     cursor: pointer;
-    font-size: 24px;
     word-spacing: 2px;
     margin: 30px;
     background-color: gainsboro;
