@@ -38,6 +38,7 @@ function givePlayerMoney(response) {
     let username = localStorage.getItem('username');
     playerMoney.innerHTML = "";
 
+
     for (let i = 0; i < response.players.length; i ++) {
         if(response.players[i].name === username){
             for (let j = 0; response.players[i].coins.length; j ++){
@@ -51,16 +52,16 @@ function givePlayerMoney(response) {
 function populateBuildingMarket(response) {
     buildingMarket.innerHTML = "";
 
-    buildingMarket.innerHTML +=`<p class="${response.market.blue.type}"><img src="../../media/blue.png" alt="blue">
+    buildingMarket.innerHTML +=`<p class="${response.market.blue.type}"><img src="assets/media/blue.png" alt="blue">
     ${response.market.blue.cost}</p>`;
 
-    buildingMarket.innerHTML += `<p class="${response.market.green.type}"><img src="../../media/green.png" alt="green">
+    buildingMarket.innerHTML += `<p class="${response.market.green.type}"><img src="assets/media/green.png" alt="green">
     ${response.market.green.cost}</p>`;
 
-    buildingMarket.innerHTML += `<p class="${response.market.orange.type}"><img src="../../media/orange.png" alt="orange">
+    buildingMarket.innerHTML += `<p class="${response.market.orange.type}"><img src="assets/media/orange.png" alt="orange">
     ${response.market.orange.cost}</p>`;
 
-    buildingMarket.innerHTML += `<p class="${response.market.yellow.type}"><img src="../../media/orange.png" alt="yellow">
+    buildingMarket.innerHTML += `<p class="${response.market.yellow.type}"><img src="assets/media/yellow.png" alt="yellow">
     ${response.market.yellow.cost}</p>`;
 
     console.log(response.market.yellow.type);
