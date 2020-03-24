@@ -1,7 +1,26 @@
 "use strict";
 
 let bankMoney = document.querySelector('.money');
-let playerMoney = document.querySelector('.yourMoney')
+let playerMoney = document.querySelector('.yourMoney');
+
+function takeMoney(e) {
+    let currency = e.target.className;
+    let amount = parseInt(e.target.innerHTML);
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    let body = [
+        {
+            "currency": currency,
+            "amount": amount
+        }
+    ];
+    console.log(body);
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', `${body}`)
+        .then(function (response) {
+            giveBankMoney(response);
+            givePlayerMoney(response);
+        })
+}
 
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
@@ -27,6 +46,11 @@ function giveBankMoney(response) {
     for (let i = 0; i < response.bank.length; i ++) {
         bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
     }
+
+    let allBankMoney = document.querySelectorAll('.money p');
+    allBankMoney.forEach(money => {
+        money.addEventListener('click', takeMoney);
+    });
 }
 
 function givePlayerMoney(response) {
@@ -36,7 +60,6 @@ function givePlayerMoney(response) {
     for (let i = 0; i < response.players.length; i ++) {
         if(response.players[i].name === username){
             for (let j = 0; response.players[i].coins.length; j ++){
-                console.log(username);
                 playerMoney.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
             }
         }
