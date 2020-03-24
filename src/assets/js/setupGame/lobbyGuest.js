@@ -14,10 +14,11 @@ let init = () => {
         readyButton.innerHTML = 'Ready'
     }
 
-
-    setInterval(function(e){ e.preventDefault(); allPlayersReady()},3000);
+    checkAllPlayersReady();
+    setInterval(function(){checkAllPlayersReady()},2000);
     setUpLobby();
-    setInterval(function(e){ e.preventDefault(); setUpLobby()},3000);
+    setInterval(function(){setUpLobby()},2000);
+
     readyButton.addEventListener('click', readyUp);
 };
 
