@@ -55,6 +55,7 @@
     grid-column-end:2;
 }
 
+
 #Board .yellow {
     background-image: url("../../images/gold ingot.png");
 }
@@ -69,6 +70,46 @@
 
 #Board .orange {
     background-image: url("../../images/Copper ingot.webp");
+}
+
+#Board .pavilion{
+    background-image: url("../../images/Pavillion.png");
+}
+
+#Board .seraglio{
+    background-image: url("../../images/Seraglio.png");
+}
+
+#Board .arcades{
+    background-image: url("../../images/Arcades.png");
+}
+
+#Board .chambers{
+    background-image: url("../../images/Chambers.png");
+}
+
+#Board .garden{
+    background-image: url("../../images/Garden.png");
+}
+
+#Board .tower{
+    background-image: url("../../images/Tower.png");
+}
+
+#Board .blueBuilding{
+    background-image: url("../media/blue.png");
+}
+
+#Board .greenBuilding{
+    background-image: url("../media/green.png");
+}
+
+#Board .orangeBuilding{
+    background-image: url("../media/orange.png");
+}
+
+#Board .yellowBuilding{
+    background-image: url("../media/yellow.png");
 }
 
 #Board .yourAlhambra { grid-row-start: 4 ;

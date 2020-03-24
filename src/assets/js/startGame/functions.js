@@ -1,7 +1,10 @@
 "use strict";
 
 let bankMoney = document.querySelector('.money');
-let playerMoney = document.querySelector('.yourMoney')
+let playerMoney = document.querySelector('.yourMoney');
+let buildingMarket = document.querySelector('.buildings');
+
+
 
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
@@ -10,6 +13,7 @@ function getStartGameInfo(){
             console.log(response);
             giveBankMoney(response);
             givePlayerMoney(response);
+            populateBuildingMarket(response);
         });
 }
 
@@ -41,4 +45,23 @@ function givePlayerMoney(response) {
             }
         }
     }
+}
+
+function populateBuildingMarket(response) {
+    buildingMarket.innerHTML = "";
+
+    buildingMarket.innerHTML = `<p class="${response.market.blue.type}"><img src="../../media/blue.png" alt="blue">
+    ${response.market.blue.cost}</p>`;
+
+    buildingMarket.innerHTML += `<p class="${response.market.green.type}"><img src="../../media/green.png" alt="green">
+    ${response.market.green.cost}</p>`;
+
+    buildingMarket.innerHTML += `<p class="${response.market.orange.type}"><img src="../../media/orange.png" alt="orange">
+    ${response.market.orange.cost}</p>`;
+
+    buildingMarket.innerHTML += `<p class="${response.market.yellow.type}"><img src="../../media/orange.png" alt="yellow">
+    ${response.market.yellow.cost}</p>`;
+
+    console.log(response.market.yellow.type);
+    console.log("test");
 }
