@@ -4,7 +4,7 @@ let goToAlhambra = document.querySelector('.navigate');
 
 function init(){
     goToAlhambra.addEventListener('click', function () {
-        window.location.href = "../../../myAlhambraIndex.html";
+        window.location.href = "../src/myAlhambraIndex.html";
     });
     getStartGameInfo();
 
