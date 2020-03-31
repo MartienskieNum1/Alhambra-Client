@@ -17,7 +17,6 @@ function init(){
 document.addEventListener("DOMContentLoaded", init);
 
 let bankMoney = document.querySelector('.money');
-let playerMoney = document.querySelector('.yourMoney');
 let marketBuildings = document.querySelectorAll('.buildings p');
 let activePlayer = document.querySelector('.currentPlayer');
 
