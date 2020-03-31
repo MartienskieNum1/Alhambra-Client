@@ -19,5 +19,13 @@ let init = () => {
     });
 
 };
-
 document.addEventListener("DOMContentLoaded", init);
+
+let createGame = (username) => {
+    let gameId = null;
+    fetchFromServer(`${config.root}games`, 'POST', {"prefix": "group27"}).then(
+        function (response) {
+            gameId = response;
+            joinGame(username, gameId);
+        });
+};

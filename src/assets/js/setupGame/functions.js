@@ -8,15 +8,6 @@ let goToPageInSecond = (page) => {
     });
 };
 
-let createGame = (username) => {
-    let gameId = null;
-    fetchFromServer(`${config.root}games`, 'POST', {"prefix": "group27"}).then(
-        function (response) {
-            gameId = response;
-            joinGame(username, gameId);
-        });
-};
-
 let joinGame = (username, gameId) => {
     username = username.toLowerCase();
     fetchFromServer(`${config.root}games/${gameId}/players`, 'POST', {playerName: `${username}`}).then(
@@ -71,7 +62,7 @@ let readyUp = () => {
 
     if (localStorage.getItem('ready')) {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'DELETE').then(
-            function (response) {
+            function () {
                 localStorage.removeItem('ready');
                 readyButton.innerHTML = 'Ready';
             }
