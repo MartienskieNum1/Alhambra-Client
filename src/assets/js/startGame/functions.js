@@ -5,6 +5,23 @@ let playerMoney = document.querySelector('.yourMoney');
 let marketBuildings = document.querySelectorAll('.buildings p');
 let activePlayer = document.querySelector('.currentPlayer');
 
+function takeMoney(e) {
+    let currency = e.target.className;
+    let amount = parseInt(e.target.innerHTML);
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    let body = [
+        {
+            "currency": currency,
+            "amount": amount
+        }
+    ];
+    console.log(body);
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
+        .then(function () {
+            getStartGameInfo();
+        })
+}
 
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
@@ -12,10 +29,11 @@ function getStartGameInfo(){
         function (response) {
             console.log(response);
             populateBuildingMarket(response);
-            giveBankMoney(response);
+            giveBankMoney();
             givePlayerMoney(response);
-            showActivePlayer(response);
-            setInterval(function (){showActivePlayer(response)}, 2000);
+            showActivePlayer();
+            setInterval(showActivePlayer, 3000);
+            setInterval(giveBankMoney, 3000)
         });
 }
 
@@ -23,16 +41,24 @@ function getAlhambraInfo(){
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
-            console.log(response);
             givePlayerMoney(response);
         });
 }
 
-function giveBankMoney(response) {
-    bankMoney.innerHTML = "";
-    for (let i = 0; i < response.bank.length; i ++) {
-        bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
-    }
+function giveBankMoney() {
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function(response) {
+            bankMoney.innerHTML = "";
+            for (let i = 0; i < response.bank.length; i ++) {
+                bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
+            }
+
+            let allBankMoney = document.querySelectorAll('.money p');
+            allBankMoney.forEach(money => {
+                money.addEventListener('click', takeMoney);
+            });
+        });
 }
 
 function givePlayerMoney(response) {
@@ -42,30 +68,35 @@ function givePlayerMoney(response) {
     for (let i = 0; i < response.players.length; i ++) {
         if(response.players[i].name === username){
             for (let j = 0; j < response.players[i].coins.length; j ++){
-                console.log(username);
                 playerMoney.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
             }
         }
     }
 }
 
-function showActivePlayer(response) {
-    let currentPlayer = response.currentPlayer.valueOf();
-    activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
-    let username = localStorage.getItem('username');
+function showActivePlayer() {
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function(response) {
+            let currentPlayer = response.currentPlayer.valueOf();
+            activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
+            let username = localStorage.getItem('username');
 
-    if (currentPlayer === username){
-        activePlayer.innerHTML = `Currently at play:<br>YOU`;
-    }
+            if (currentPlayer === username){
+                activePlayer.innerHTML = `Currently at play:<br>YOU`;
+            }
+        }
+    );
 }
 
 function populateBuildingMarket(response) {
 
     marketBuildings.forEach(building => {
         for (let [key, value] of Object.entries(response.market)) {
-            if (building.getAttribute('data-color') === key) {
+            let color = building.getAttribute('data-color');
+            if (color === key) {
                 building.className = `${value.type}`;
-                building.innerHTML += value.cost;
+                building.innerHTML = `${value.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
             }
         }
     });
