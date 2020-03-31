@@ -3,7 +3,7 @@
 let joinButton = document.querySelector('.join');
 let createButton = document.querySelector('.create');
 
-let navigate = () => {
+let init = () => {
     joinButton.addEventListener("click", function() {
         window.location.href = '../src/joinGame.html'
     });
@@ -13,7 +13,7 @@ let navigate = () => {
     });
 };
 
-document.addEventListener("DOMContentLoaded", navigate);
+document.addEventListener("DOMContentLoaded", init);
 
 function showRules() {
     window.location.href = '../src/rules.html'

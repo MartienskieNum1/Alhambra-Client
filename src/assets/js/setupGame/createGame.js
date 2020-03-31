@@ -15,9 +15,17 @@ let init = () => {
         let username = usernameInput.value;
 
         createGame(username);
-        goToPageInSecond('../src/lobbyHost.html');
+        goToPageInSecond('../src/lobby.html');
     });
 
 };
-
 document.addEventListener("DOMContentLoaded", init);
+
+let createGame = (username) => {
+    let gameId = null;
+    fetchFromServer(`${config.root}games`, 'POST', {"prefix": "group27"}).then(
+        function (response) {
+            gameId = response;
+            joinGame(username, gameId);
+        });
+};

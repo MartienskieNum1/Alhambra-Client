@@ -26,7 +26,7 @@ let init = () => {
         let username = usernameInput.value;
 
         joinGame(username, gameId);
-        goToPageInSecond('../src/lobbyGuest.html');
+        goToPageInSecond('../src/lobby.html');
     });
 };
 
