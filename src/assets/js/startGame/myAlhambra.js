@@ -17,7 +17,6 @@ function displayTotalValue() {
     let moneys = document.querySelectorAll(".yourMoney p");
 
     moneys.forEach(money => {
-        console.log(money.textContent);
         total += parseInt(money.textContent);
     });
 

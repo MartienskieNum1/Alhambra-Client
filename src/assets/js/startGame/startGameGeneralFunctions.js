@@ -1,5 +1,7 @@
 "use strict";
 
+let playerMoney = document.querySelector('.yourMoney');
+
 function givePlayerMoney(response) {
     let username = localStorage.getItem('username');
     playerMoney.innerHTML = "";
