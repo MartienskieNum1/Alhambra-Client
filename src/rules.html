@@ -10,19 +10,21 @@
 </head>
 <body id="rules">
 <header>
-    <h1>Rules</h1>
-    <button class="back">Back</button>
+    <div class="flex">
+        <h1>Game rules</h1>
+        <button class="back">Back</button>
+
+    </div>
 </header>
 <main>
-    <div class="container">
     <aside>
         <h2>Object of the game</h2>
         <p>Players who have the <strong>most building tiles</strong> of each kind
             in their Alhambra in the scoring rounds are awarded points, the exact amount depending on the type of
             buildings.
             Players also receive points for <strong>the longest part of wall they have built around their
-            Alhambra.</strong></p>
-        <p>The winner is the player with the most points at the end.</p>
+            Alhambra.</strong>
+        The winner is the player with the most points at the end.</p>
     </aside>
 
     <aside>
@@ -41,8 +43,8 @@
 
     <aside>
         <h2>How to play</h2>
-        <p>Play proceed in a clockwise direction, beginning with the starting player.</p>
-        <p>The player whose turn it must do one of three things:</p>
+        <p>Play proceed in a clockwise direction, beginning with the starting player.
+        The player whose turn it must do one of three things:</p>
         <ol>
             <li>Take some money</li>
             <li>Buy and position a building tile</li>
@@ -54,15 +56,15 @@
         <p>A player can take <strong>any of the money cards</strong> from the several money cards if they do not add up to more than 5.</p>
 
         <h3>Buy and position a building tile</h3>
-        <h4>**Buying the tiles</h4>
+        <h4>Buying the tiles</h4>
         <p>A player can buy a building tile from the market.
             He must pay at least the price shown on the tile and use the currency
-        displayed next to the tile in the building market. <strong>No change is given!!</strong></p>
-        <p>If you can pay the exact amount it is still your turn and you can decide once more which of the 3 options you would like to take.</p>
-        <p>While it's your turn no new tiles are placed on the market.</p>
-        <h4>**Positioning the tiles</h4>
+        displayed next to the tile in the building market. <strong>No change is given!!</strong>
+        If you can pay the exact amount it is still your turn and you can decide once more which of the 3 options you would like to take.
+        While it's your turn no new tiles are placed on the market.</p>
+        <h4>Positioning the tiles</h4>
         <p>You can place your building into the reserve board or add it to your Alhambra.</p>
-        <h4>**Rules for building your Alhambra</h4>
+        <h4>Rules for building your Alhambra</h4>
         <p>You must build your Alhambra according to the following rules:</p>
         <ul>
             <li>All building tiles must be the same way around as your starting file.</li>
@@ -78,17 +80,22 @@
         </ul>
     </aside>
 
-    <aside>
-        <h2>Scoring</h2>
-        <p>There are 3 scoring rounds during the game.
-            The first two take place when the scoring cards are drawn from the pile
-            of money cards. The final scoring round takes place at the end of the game.</p>
-        <p>In the first round, points are awarded to whoever has the most of each kind of buildings.</p>
-        <p>In the second round, points are awarded to whoever has the most of each kind of buildings and to the second person.</p>
-        <p>In the third round, points are awarded to whoever has the most of each kind of buildings and to the second and third person.</p>
-        <p>Buildings in your reserve board doesn't count.</p>
-        <p>You get points for how long your wall is.</p>
-    </aside>
+        <aside class="scoring">
+            <h2>Scoring</h2>
+            <div class="score">
+                <p>There are 3 scoring rounds during the game.
+                    The first two take place when the scoring cards are drawn from the pile
+                    of money cards. The final scoring round takes place at the end of the game.
+                    In the first round, points are awarded to whoever has the most of each kind of buildings.
+                    In the second round, points are awarded to whoever has the most of each kind of buildings and to the
+                    second person.
+                    In the third round, points are awarded to whoever has the most of each kind of buildings and to the
+                    second and third person.
+                    Buildings in your reserve board doesn't count.
+                    You get points for how long your wall is.</p>
+                <img src="images/scoreBord.jfif" alt="scorebord">
+            </div>
+        </aside>
 
     <aside>
         <h2>End of the game</h2>
@@ -97,7 +104,7 @@
             in their game.</p>
     </aside>
 
-    </div>
+
 </main>
 <script src="assets/js/setupGame/closeGameRulesPage.js"></script>
 </body>
