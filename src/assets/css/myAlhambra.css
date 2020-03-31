@@ -1,16 +1,16 @@
 /*MY ALHAMBRA CSS*/
 
-#Alhambra html{
+#alhambra html{
     height: 100%;
     font-family: 'Aclonica', sans-serif;
 }
 
-#Alhambra body {
+#alhambra body {
     min-height: 100%;
     max-height: min-content;
 }
 
-#Alhambra main{
+#alhambra main{
     display: grid;
     grid-template-rows: repeat(5, 20%);
     grid-template-columns: repeat(6, 1fr);
@@ -18,47 +18,47 @@
     min-height: 100%;
 }
 
-#Alhambra header{
+#alhambra header{
     display: flex inline;
 }
 
-#Alhambra header h1{
+#alhambra header h1{
     position: absolute;
     top: 5%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#Alhambra h1 {
+#alhambra h1 {
     font-size: 50px;
     padding-right: 10px;
 }
 
 
-#Alhambra .back {
+#alhambra .back {
     align-self: center;
     padding-left: 7px;
 }
 
-#Alhambra #Your_money{
+#alhambra #yourMoney{
     grid-column-start: 4;
     grid-column-end: span 3;
     grid-row-start: 4;
     grid-row-end: span 2;
 }
 
-#Alhambra .yourMoney{
+#alhambra .yourMoney{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 }
 
-#Alhambra #Your_reserve img{
+#alhambra #yourReserve img{
     height: 60%;
     width: 80%;
 }
 
-#Alhambra #Your_reserve{
+#alhambra #yourReserve{
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -68,13 +68,13 @@
     grid-template-columns: 0.2fr 2fr 0.2fr;
 }
 
-#Alhambra #ReserveTitle{
+#alhambra #reserveTitle{
     grid-column-start: 1;
     grid-row-start: 5;
     border-bottom: darkgoldenrod solid;
 }
 
-#Alhambra #reserve {
+#alhambra #reserve {
     height: 100%;
     background-image: url("../../images/desert brick.png");
     background-size: 100px 100px;
@@ -86,11 +86,11 @@
     width: 100%;
 }
 
-#Alhambra #reserve li{
+#alhambra #reserve li{
     display: inline-block;
 }
 
-#Alhambra #Your_ALhambra{
+#alhambra #yourAlhambra{
     background-size: 100px 100px;
     background-repeat: repeat;
     background-image: url('../../images/sand.jpg');
@@ -103,28 +103,28 @@
     display: grid;
 }
 
-#Alhambra #City {
+#alhambra #city {
     grid-column-start: 3;
     grid-row-start: 3;
 }
 
-#Alhambra .yellow {
+#alhambra .yellow {
     background-image: url("../../images/gold ingot.png");
 }
 
-#Alhambra .green {
+#alhambra .green {
     background-image: url("../../images/emerald ingot.png");
 }
 
-#Alhambra .blue {
+#alhambra .blue {
     background-image: url("../../images/lapis ingot.png");
 }
 
-#Alhambra .orange {
+#alhambra .orange {
     background-image: url("../../images/Copper ingot.webp");
 }
 
-#Alhambra p {
+#alhambra p {
     border: 2px darkgoldenrod groove;
     width: 100px;
     height: 100px;

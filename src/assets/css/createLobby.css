@@ -1,20 +1,20 @@
 /*CREATE/JOIN GAME CSS*/
 
-#Game #Welcome {
+#game #welcome {
     margin-bottom: 100px;
 }
 
-#Game #Welcome  h2{
+#game #welcome  h2{
     font-size: 2rem;
     margin-bottom: 0.5em;
 }
 
-#Game #Welcome  h1{
+#game #welcome  h1{
     font-size: 3rem;
     margin-bottom: 0.3em;
 }
 
-#Game input[type=submit] {
+#game input[type=submit] {
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -25,11 +25,11 @@
     box-shadow: 0 7px #999;
 }
 
-#Game input[type=submit]:hover {
+#game input[type=submit]:hover {
     background-color: lightgray;
 }
 
-#Game input[type=text]{
+#game input[type=text]{
     width: 300px;
     padding: 12px 20px;
     margin: 8px 0;
@@ -39,7 +39,7 @@
     box-sizing: border-box;
 }
 
-#Game select {
+#game select {
     width: 200px;
     padding: 12px 20px;
     margin: 8px auto;
@@ -51,22 +51,22 @@
 
 /*LOBBY CSS*/
 
-#Lobby .button{
+#lobby .button{
     background-color: gainsboro;
     box-shadow: 0 7px #999;
 }
 
-#Lobby .button:hover {
+#lobby .button:hover {
     background-color: lightgray;
 }
 
-#Lobby .button:active{
+#lobby .button:active{
     background-color: lightgray;
     box-shadow: 0 4px #666;
     transform: translateY(4px);
 }
 
-#Lobby main {
+#lobby main {
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
@@ -76,12 +76,12 @@
     text-align: center;
 }
 
-#Lobby main h1 {
+#lobby main h1 {
     font-size: 3em;
     margin-bottom: 30px;
 }
 
-#Lobby main .players {
+#lobby main .players {
     display: flex;
     flex-wrap: wrap;
     min-height: 400px;
@@ -89,7 +89,7 @@
     justify-content: space-around;
 }
 
-#Lobby main .players li {
+#lobby main .players li {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -101,24 +101,24 @@
     background-color: ivory;
 }
 
-#Lobby main .gameInfo {
+#lobby main .gameInfo {
     font-size: 1.5em;
     margin-bottom: 30px;
 }
 
 
-#Lobby main .gameInfo li {
+#lobby main .gameInfo li {
     border: 1px solid black;
     padding: 5px;
     margin: 10px auto 10px auto;
     width: 400px;
 }
 
-#Lobby main .gameInfo ul {
+#lobby main .gameInfo ul {
     margin: 10px;
 }
 
-#Lobby main .gameInfo p {
+#lobby main .gameInfo p {
     background-color: ivory;
     letter-spacing: 4px;
     width: 150px;
