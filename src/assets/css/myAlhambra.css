@@ -41,6 +41,8 @@
 }
 
 #alhambra #yourMoney{
+    display: flex;
+    flex-wrap: wrap;
     grid-column-start: 4;
     grid-column-end: span 3;
     grid-row-start: 4;
@@ -50,6 +52,7 @@
 #alhambra .yourMoney{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 

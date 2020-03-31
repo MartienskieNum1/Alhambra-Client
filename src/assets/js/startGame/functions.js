@@ -33,15 +33,7 @@ function getStartGameInfo(){
             givePlayerMoney(response);
             showActivePlayer();
             setInterval(showActivePlayer, 3000);
-            setInterval(giveBankMoney, 3000)
-        });
-}
-
-function getAlhambraInfo(){
-    let gameId = localStorage.getItem('gameId');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
-        function (response) {
-            givePlayerMoney(response);
+            setInterval(giveBankMoney, 3000);
         });
 }
 
