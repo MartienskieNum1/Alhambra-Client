@@ -1,13 +1,13 @@
 /*VICTORY CSS*/
 
-#Victory .container {
+#victory .container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-#Victory h1 {
+#victory h1 {
     font-size: 4rem;
     margin-top: 20px;
     text-align: center;
@@ -15,7 +15,7 @@
     font-family: 'Aclonica', sans-serif;
 }
 
-#Victory img {
+#victory img {
     display: block;
     height: 200px;
     width: 200px;
@@ -24,18 +24,18 @@
 
 /*SCOREBOARD CSS*/
 
-#Score .containergrid {
+#score .containergrid {
     display: grid;
     grid-template-rows: auto ;
     grid-template-columns: 300px 300px;
 }
 
-#Score .containerflex {
+#score .containerflex {
     display: flex;
     justify-content: center;
 }
 
-#Score h1 {
+#score h1 {
     font-family: 'Aclonica', sans-serif;
     font-size: 4.5rem;
     text-align: center;
@@ -43,13 +43,13 @@
     margin-top: 30px;
 }
 
-#Score p {
+#score p {
     text-align: center;
     font-size: 3rem;
     margin-top: 40px;
 }
 
-#Score button {
+#score button {
     margin: 20px auto 20px auto;
     font-size: x-large;
     color: black;
@@ -62,6 +62,6 @@
     box-shadow: 0 7px #999;
 }
 
-#Score button:hover {
+#score button:hover {
     background-color: lightgray;
 }

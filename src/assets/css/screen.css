@@ -19,11 +19,11 @@ body{
     background-size: 125% ;
 }
 
-.Font{
+.font{
     font-family: 'Aclonica', sans-serif;
 }
 
-.Building {
+.building {
     max-height: 150px;
     max-width: 150px;
 }

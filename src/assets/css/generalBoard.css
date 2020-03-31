@@ -1,15 +1,15 @@
 /*GENERAL BOARD CSS*/
-#Board html{
+#board html{
     height: 100%;
     background-image: url("../../images/desert background.png");
 }
-#Board .grid-container {
+#board .grid-container {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: repeat(5,1fr);
 }
 
-#Board .currentPlayer{
+#board .currentPlayer{
     background-image: url("../../images/desert brick.png");
     background-repeat: repeat;
     padding-left: 15px;
@@ -25,7 +25,7 @@
     line-height: 50px;
 }
 
-#Board .title{
+#board .title{
     padding-top: 13px;
     padding-left: 30px;
     background-image: url("../../images/desert brick.png");
@@ -41,7 +41,7 @@
     border-radius: 5px;
 }
 
-#Board .buildings {
+#board .buildings {
     grid-row-start: 2 ;
     grid-row-end: 3;
     grid-column-start:1 ;
@@ -51,41 +51,41 @@
     justify-content: space-evenly;
 }
 
-#Board .buildings p {
+#board .buildings p {
     background-position: center;
 }
 
-#Board .garden{
+#board .garden{
     background-image: url("../../images/garden-mc.png");
     background-size: 75px;
 }
 
-#Board .tower{
+#board .tower{
     background-image: url("../../images/tower-mc.png");
     background-size: 100px;
 }
 
-#Board .pavilion {
+#board .pavilion {
     background-image: url("../../images/pavilion-mc.png");
     background-size: 100px;
 }
 
-#Board .chambers {
+#board .chambers {
     background-image: url("../../images/chambers-mc.png");
     background-size: 100px;
 }
 
-#Board .arcades {
+#board .arcades {
     background-image: url("../../images/arcades-mc.png");
     background-size: 100px;
 }
 
-#Board .seraglio {
+#board .seraglio {
     background-image: url("../../images/seraglio-mc.png");
     background-size: 100px;
 }
 
-#Board p {
+#board p {
     position: relative;
     border: 2px darkgoldenrod groove;
     width: 100px;
@@ -95,14 +95,14 @@
     background-size: 100px;
 }
 
-#Board img {
+#board img {
     position: absolute;
     top: -11px;
     right: -35px;
     height: 60px;
 }
 
-#Board .yourMoney {
+#board .yourMoney {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -114,7 +114,7 @@
     grid-column-end:4;
 }
 
-#Board .money {
+#board .money {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -124,29 +124,29 @@
     grid-column-end:2;
 }
 
-#Board .yellow {
+#board .yellow {
     background-image: url("../../images/gold ingot.png");
 }
 
-#Board .green {
+#board .green {
     background-image: url("../../images/emerald ingot.png");
 }
 
-#Board .blue {
+#board .blue {
     background-image: url("../../images/lapis ingot.png");
 }
 
-#Board .orange {
+#board .orange {
     background-image: url("../../images/Copper ingot.webp");
 }
 
-#Board .yourAlhambra { grid-row-start: 4 ;
+#board .yourAlhambra { grid-row-start: 4 ;
     grid-row-end: 5;
     grid-column-start:3 ;
     grid-column-end:4;
 }
 
-#Board div{
+#board div{
     font-size: 20px;
     margin: 5px 5px 5px 5px;
     align-content: center;
