@@ -29,10 +29,11 @@ function getStartGameInfo(){
         function (response) {
             console.log(response);
             populateBuildingMarket(response);
-            giveBankMoney(response);
+            giveBankMoney();
             givePlayerMoney(response);
             showActivePlayer();
-            setInterval(function (){showActivePlayer()}, 3000);
+            setInterval(showActivePlayer, 3000);
+            setInterval(giveBankMoney, 3000)
         });
 }
 
@@ -44,16 +45,20 @@ function getAlhambraInfo(){
         });
 }
 
-function giveBankMoney(response) {
-    bankMoney.innerHTML = "";
-    for (let i = 0; i < response.bank.length; i ++) {
-        bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
-    }
+function giveBankMoney() {
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function(response) {
+            bankMoney.innerHTML = "";
+            for (let i = 0; i < response.bank.length; i ++) {
+                bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
+            }
 
-    let allBankMoney = document.querySelectorAll('.money p');
-    allBankMoney.forEach(money => {
-        money.addEventListener('click', takeMoney);
-    });
+            let allBankMoney = document.querySelectorAll('.money p');
+            allBankMoney.forEach(money => {
+                money.addEventListener('click', takeMoney);
+            });
+        });
 }
 
 function givePlayerMoney(response) {
