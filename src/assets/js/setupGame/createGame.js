@@ -15,7 +15,7 @@ let init = () => {
         let username = usernameInput.value;
 
         createGame(username);
-        goToPageInSecond('../src/lobbyHost.html');
+        goToPageInSecond('../src/lobby.html');
     });
 
 };
