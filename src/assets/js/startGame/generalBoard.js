@@ -52,14 +52,22 @@ function giveBankMoney() {
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function(response) {
+            let currentPlayer = response.currentPlayer.valueOf();
             bankMoney.innerHTML = "";
             for (let i = 0; i < response.bank.length; i ++) {
                 bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
             }
 
             let allBankMoney = document.querySelectorAll('.money p');
+            let username = localStorage.getItem('username');
             allBankMoney.forEach(money => {
-                money.addEventListener('click', takeMoney);
+                money.addEventListener('click', function(e){
+                    if (username === currentPlayer) {
+                        takeMoney(e);
+                    }else {
+                        alert("It's not your turn!");
+                    }
+                });
             });
         });
 }
