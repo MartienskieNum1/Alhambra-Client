@@ -8,5 +8,12 @@ function init(){
     });
     getAlhambraInfo();
 }
-
 document.addEventListener("DOMContentLoaded", init);
+
+function getAlhambraInfo(){
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function (response) {
+            givePlayerMoney(response);
+        });
+}
