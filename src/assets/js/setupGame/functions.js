@@ -80,7 +80,7 @@ let readyUp = () => {
 };
 
 function checkAllPlayersReady(){
-    let amountReady = document.querySelector('.amount-ready');
+    let amountReady = document.querySelector('.amountReady');
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
@@ -95,6 +95,6 @@ function checkAllPlayersReady(){
 
 function gameStart() {
 
-    goToPageInSecond('../src/general_board.html')
+    goToPageInSecond('../src/generalBoard.html')
 
 }
