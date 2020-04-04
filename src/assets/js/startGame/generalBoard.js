@@ -35,13 +35,19 @@ function getStartGameInfo(){
 }
 
 function populateBuildingMarket(response) {
-
     marketBuildings.forEach(building => {
-        for (let [key, value] of Object.entries(response.market)) {
+        for (let [key1, value1] of Object.entries(response.market)) {
             let color = building.getAttribute('data-color');
-            if (color === key) {
-                building.className = `${value.type}`;
-                building.innerHTML = `${value.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
+            if (color === key1) {
+                building.className = `${value1.type}`;
+
+                for (let [key2, value2] of Object.entries(value1.walls)) {
+                    if (value2) {
+                        building.classList.add(key2);
+                    }
+                }
+
+                building.innerHTML = `${value1.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
             }
         }
     });
