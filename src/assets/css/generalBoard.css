@@ -187,14 +187,18 @@
     background-image: url("../../images/Copper ingot.webp");
 }
 
-/*general*/
+/*your alhambra*/
 #board .yourAlhambra {
-    grid-row-start: 4 ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-row-start: 4;
     grid-row-end: 5;
-    grid-column-start:3 ;
-    grid-column-end:4;
+    grid-column-start: 3;
+    grid-column-end: 4;
 }
 
+/*general*/
 #board p {
     background-position: center;
     padding: 5px;
