@@ -41,6 +41,7 @@
     border-radius: 5px;
 }
 
+/*market*/
 #board .buildings {
     grid-row-start: 2 ;
     grid-row-end: 3;
@@ -49,10 +50,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-}
-
-#board .buildings p {
-    background-position: center;
 }
 
 #board .garden{
@@ -85,14 +82,20 @@
     background-size: 100px;
 }
 
-#board p {
-    position: relative;
-    border: 2px darkgoldenrod groove;
-    width: 100px;
-    height: 100px;
-    font-size: 1em;
-    background-repeat: no-repeat;
-    background-size: 100px;
+#board .north {
+    border-top: 4px ridge gold;
+}
+
+#board .east {
+    border-right: 4px groove gold;
+}
+
+#board .south {
+    border-bottom: 4px groove gold;
+}
+
+#board .west {
+    border-left: 4px ridge gold;
 }
 
 #board img {
@@ -102,6 +105,7 @@
     height: 60px;
 }
 
+/*money*/
 #board .yourMoney {
     display: flex;
     flex-direction: row;
@@ -114,6 +118,10 @@
     grid-column-end:4;
 }
 
+#board .yourMoney p {
+    border: 2px darkgoldenrod groove;
+}
+
 #board .money {
     display: flex;
     flex-direction: row;
@@ -122,6 +130,10 @@
     grid-row-end: 5;
     grid-column-start:1 ;
     grid-column-end:2;
+}
+
+#board .money p {
+    border: 2px darkgoldenrod groove;
 }
 
 #board .yellow {
@@ -140,10 +152,23 @@
     background-image: url("../../images/Copper ingot.webp");
 }
 
-#board .yourAlhambra { grid-row-start: 4 ;
+/*general*/
+#board .yourAlhambra {
+    grid-row-start: 4 ;
     grid-row-end: 5;
     grid-column-start:3 ;
     grid-column-end:4;
+}
+
+#board p {
+    background-position: center;
+    position: relative;
+    padding: 5px;
+    width: 100px;
+    height: 100px;
+    font-size: 1em;
+    background-repeat: no-repeat;
+    background-size: 100px;
 }
 
 #board div{
