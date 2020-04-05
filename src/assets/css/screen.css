@@ -3,6 +3,10 @@ body{
     background-color: tan;
 }
 
+.hidden {
+    display: none;
+}
+
 .back, .navigate, .leave{
     border-radius: 15px;
     cursor: pointer;

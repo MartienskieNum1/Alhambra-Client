@@ -2,6 +2,10 @@
 
 let goToAlhambra = document.querySelector('.navigate');
 let goToGameRules = document.querySelector('.showGameRules');
+let marketBuildings = document.querySelectorAll('.buildings p');
+let popupToBuy = document.querySelector('.popupToBuy');
+let popupToPlace = document.querySelector('.popupToPlace');
+let closeElement = document.querySelector('.close');
 
 function init(){
     goToAlhambra.addEventListener('click', function() {
@@ -12,13 +16,92 @@ function init(){
         window.location.href = '../src/rules.html';
     });
 
+    marketBuildings.forEach(building => {
+        building.addEventListener('click', (e) => {showPopupToBuy(e)})
+    });
+
+    closeElement.addEventListener('click', hidePopupToBuy);
+
     getStartGameInfo();
+    setInterval(getStartGameInfo, 3000);
 }
 document.addEventListener("DOMContentLoaded", init);
 
 let bankMoney = document.querySelector('.money');
-let marketBuildings = document.querySelectorAll('.buildings p');
 let activePlayer = document.querySelector('.currentPlayer');
+
+function showPopupToBuy(e) {
+    console.log(e.target);
+    let yourMoneys = document.querySelectorAll('.yourMoney p');
+    let moneyForm = document.querySelector('.popupToBuy form');
+
+    moneyForm.innerHTML = "";
+    yourMoneys.forEach(money => {
+        if (money.className === e.target.getAttribute('data-color')) {
+            moneyForm.innerHTML += `
+            <label>
+                <input type="checkbox" data-color="${money.className}" data-value="${money.innerHTML}"/>
+            ${money.className} (${money.innerHTML})</label>`;
+        }
+    });
+    moneyForm.innerHTML += '<input type="submit" value="Buy"/>';
+
+    popupToBuy.classList.remove('hidden');
+
+    let buyButton = document.querySelector('.popupToBuy input[type="submit"]');
+    buyButton.addEventListener('click', (e2) => {e2.preventDefault(); buyBuilding(e)})
+}
+
+function showPopupToPlace() {
+    let inReserveButton = document.querySelector('.popupToPlace .inReserve');
+    let inAlhambra = document.querySelector('.popupToPlace .inAlhambra');
+    inReserveButton.addEventListener('click', placeInReserve);
+    inAlhambra.addEventListener('click', placeInAlhambra);
+
+    popupToPlace.classList.remove('hidden');
+}
+
+function hidePopupToBuy() {
+    popupToBuy.classList.add('hidden');
+}
+
+function hidePopupToPlace() {
+    popupToPlace.classList.add('hidden');
+}
+
+function buyBuilding(e) {
+    let username = localStorage.getItem('username');
+    let gameId = localStorage.getItem('gameId');
+    let checkboxes = document.querySelectorAll('.popup input[type="checkbox"]');
+    let body = {
+        "currency": e.target.getAttribute('data-color'),
+        "coins" : []
+    };
+
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            body.coins.push({
+                "currency": checkbox.getAttribute('data-color'),
+                "amount": checkbox.getAttribute('data-value')
+            })
+        }
+    });
+
+    console.log(body);
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
+        .then(getStartGameInfo);
+
+    hidePopupToBuy();
+    showPopupToPlace();
+}
+
+function placeInReserve() {
+
+}
+
+function placeInAlhambra() {
+
+}
 
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
@@ -26,70 +109,64 @@ function getStartGameInfo(){
         function (response) {
             console.log(response);
             populateBuildingMarket(response);
-            giveBankMoney();
+            giveBankMoney(response);
             givePlayerMoney(response);
-            showActivePlayer();
-            setInterval(showActivePlayer, 3000);
-            setInterval(giveBankMoney, 3000)
+            showActivePlayer(response);
         });
 }
 
 function populateBuildingMarket(response) {
     marketBuildings.forEach(building => {
+        let color = building.getAttribute('data-color');
         for (let [key1, value1] of Object.entries(response.market)) {
-            let color = building.getAttribute('data-color');
             if (color === key1) {
-                building.className = `${value1.type}`;
+                if (value1 === null) {
+                    building.className = "";
+                    building.innerHTML = `Taken <img src="assets/media/${color}.png" alt="${color}"/>`;
+                } else {
+                    building.className = `${value1.type}`;
 
-                for (let [key2, value2] of Object.entries(value1.walls)) {
-                    if (value2) {
-                        building.classList.add(key2);
+                    for (let [key2, value2] of Object.entries(value1.walls)) {
+                        if (value2) {
+                            building.classList.add(key2);
+                        }
                     }
-                }
 
-                building.innerHTML = `${value1.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
+                    building.innerHTML = `${value1.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
+                }
             }
         }
     });
 }
 
-function giveBankMoney() {
-    let gameId = localStorage.getItem('gameId');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
-        function(response) {
-            let currentPlayer = response.currentPlayer.valueOf();
-            bankMoney.innerHTML = "";
-            for (let i = 0; i < response.bank.length; i ++) {
-                bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
-            }
+function giveBankMoney(response) {
+    let currentPlayer = response.currentPlayer.valueOf();
+    bankMoney.innerHTML = "";
+    for (let i = 0; i < response.bank.length; i ++) {
+        bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
+    }
 
-            let allBankMoney = document.querySelectorAll('.money p');
-            let username = localStorage.getItem('username');
-            allBankMoney.forEach(money => {
-                money.addEventListener('click', function(e){
-                    if (username === currentPlayer) {
-                        takeMoney(e);
-                    }else {
-                        alert("It's not your turn!");
-                    }
-                });
-            });
+    let allBankMoney = document.querySelectorAll('.money p');
+    let username = localStorage.getItem('username');
+    allBankMoney.forEach(money => {
+        money.addEventListener('click', function(e){
+            if (username === currentPlayer) {
+                takeMoney(e);
+            }else {
+                alert("It's not your turn!");
+            }
         });
+    })
 }
 
-function showActivePlayer() {
-    let gameId = localStorage.getItem('gameId');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
-        function(response) {
-            let currentPlayer = response.currentPlayer.valueOf();
-            activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
-            let username = localStorage.getItem('username');
+function showActivePlayer(response) {
+    let currentPlayer = response.currentPlayer.valueOf();
+    activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
+    let username = localStorage.getItem('username');
 
-            if (currentPlayer === username){
-                activePlayer.innerHTML = `Currently at play:<br>YOU`;
-            }
-        }
-    );
+    if (currentPlayer === username){
+        activePlayer.innerHTML = `Currently at play:<br>YOU`;
+    }
 }
 
 function takeMoney(e) {

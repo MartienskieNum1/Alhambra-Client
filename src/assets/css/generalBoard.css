@@ -3,10 +3,34 @@
     height: 100%;
     background-image: url("../../images/desert background.png");
 }
+
 #board .grid-container {
     display: grid;
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-rows: repeat(5,1fr);
+}
+
+#board .popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid gold;
+}
+
+#board .close{
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: max-content;
+    margin-left: auto;
+    border: 1px solid black;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+#board .popup label {
+    display: block;
 }
 
 #board .currentPlayer{
@@ -26,16 +50,17 @@
 }
 
 #board .title{
+    height: 50%;
+    display: flex;
+    align-items: center;
     padding-top: 13px;
     padding-left: 30px;
     background-image: url("../../images/desert brick.png");
     background-repeat: repeat;
     background-size: 100px;
-    display: flex;
-    font-size: 50px;
+    font-size: 2em;
     margin-right: auto;
     margin-left: auto;
-    justify-content: center;
     border-bottom: #666666 5px solid;
     border-right: #666666 3px solid;
     border-radius: 5px;
@@ -50,6 +75,12 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+}
+
+#board .buildings p {
+    position: relative;
+    width: 100px;
+    height: 100px;
 }
 
 #board .garden{
@@ -120,6 +151,8 @@
 
 #board .yourMoney p {
     border: 2px darkgoldenrod groove;
+    width: 100px;
+    height: 100px;
 }
 
 #board .money {
@@ -134,6 +167,8 @@
 
 #board .money p {
     border: 2px darkgoldenrod groove;
+    width: 100px;
+    height: 100px;
 }
 
 #board .yellow {
@@ -162,19 +197,12 @@
 
 #board p {
     background-position: center;
-    position: relative;
     padding: 5px;
-    width: 100px;
-    height: 100px;
-    font-size: 1em;
+    font-size: 1.3em;
     background-repeat: no-repeat;
     background-size: 100px;
 }
 
 #board div{
-    font-size: 20px;
-    margin: 5px 5px 5px 5px;
-    align-content: center;
-    display: flex;
-    justify-content: center;
+    margin: 5px;
 }
