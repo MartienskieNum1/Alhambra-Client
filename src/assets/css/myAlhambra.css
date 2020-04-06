@@ -91,6 +91,13 @@
 
 #alhambra #reserve li{
     display: inline-block;
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 5px;
+    margin: 5px;
+    font-size: 1.3em;
 }
 
 #alhambra #yourAlhambra{
