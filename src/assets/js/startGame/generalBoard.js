@@ -73,19 +73,29 @@ function buyBuilding(e) {
     let username = localStorage.getItem('username');
     let gameId = localStorage.getItem('gameId');
     let checkboxes = document.querySelectorAll('.popup input[type="checkbox"]');
+
     let body = {
         "currency": e.target.getAttribute('data-color'),
         "coins" : []
     };
 
+    let totalAmount = 0;
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
+            totalAmount += parseInt(checkbox.getAttribute('data-value'));
+        }
+    });
+
+    if (totalAmount >= e.target.getAttribute(totalAmount)) {
+        checkboxes.forEach(checkbox => {
             body.coins.push({
                 "currency": checkbox.getAttribute('data-color'),
                 "amount": checkbox.getAttribute('data-value')
             })
-        }
-    });
+        });
+    } else {
+        alert('You don\'t have enough money');
+    }
 
     console.log(body);
     fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
@@ -152,8 +162,8 @@ function populateBuildingMarket(response) {
                             building.classList.add(key2);
                         }
                     }
-
-                    building.innerHTML = `${value1.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
+                    building.innerHTML = `${value1.cost}<img src="assets/media/${color}.png" alt="${color}"/>`;
+                    building.setAttribute('data-value', value1.cost);
                 }
             }
         }
