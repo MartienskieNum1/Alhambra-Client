@@ -18,9 +18,14 @@
     border: 3px solid gold;
     margin: 70px auto;
     padding: 20px;
-    background: #fff;
+    background: ivory;
     border-radius: 5px;
     width: 30%;
+}
+
+#board .popup .flex-container{
+    display: flex;
+    justify-content: space-between;
 }
 
 #board .popup input[type=submit], .inAlhambra, .inReserve{
@@ -31,7 +36,8 @@
     cursor: pointer;
     background-color: gainsboro;
     box-shadow: 0 7px #999;
-    margin-left: 40%;
+    display: flex;
+    margin: 0 auto;
 }
 
 #board .popup input[type=submit]:hover{
