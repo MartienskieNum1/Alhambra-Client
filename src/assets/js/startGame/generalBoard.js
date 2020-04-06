@@ -107,7 +107,7 @@ function buyBuilding(e) {
 
 }
 
-function placeInReserve() {
+function useBuildingInHand(location){
     let gameId = localStorage.getItem('gameId');
     let username = localStorage.getItem('username');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
@@ -120,7 +120,7 @@ function placeInReserve() {
             }
             let body = {
                 "building": building,
-                "location": null
+                "location": location
             };
             fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
                 function () {
@@ -129,11 +129,20 @@ function placeInReserve() {
                 }
             )
         });
+}
+
+function placeInReserve() {
+    useBuildingInHand(null);
+
     hidePopupToPlace();
 }
 
 function placeInAlhambra() {
+    //eerst locatie fixe
 
+
+    useBuildingInHand(//die locatie
+    );
 }
 
 function getStartGameInfo(){
