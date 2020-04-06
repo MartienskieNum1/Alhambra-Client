@@ -117,6 +117,7 @@ function placeInReserve() {
                 }
             )
         });
+    hidePopupToPlace();
 }
 
 function placeInAlhambra() {
