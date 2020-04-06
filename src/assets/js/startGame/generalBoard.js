@@ -73,6 +73,7 @@ function buyBuilding(e) {
     let username = localStorage.getItem('username');
     let gameId = localStorage.getItem('gameId');
     let checkboxes = document.querySelectorAll('.popup input[type="checkbox"]');
+
     let body = {
         "currency": e.target.getAttribute('data-color'),
         "coins" : []
@@ -152,8 +153,8 @@ function populateBuildingMarket(response) {
                             building.classList.add(key2);
                         }
                     }
-
-                    building.innerHTML = `${value1.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
+                    building.innerHTML = `${value1.cost}<img src="assets/media/${color}.png" alt="${color}"/>`;
+                    building.setAttribute('data-value', value1.cost);
                 }
             }
         }
