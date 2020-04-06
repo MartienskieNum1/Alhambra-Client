@@ -44,6 +44,21 @@ function populateReserve(response) {
     }
 }
 
+function closeNav() {
+    document.getElementById("allPlayers").style.height = "0";
+}
+
+function openNav() {
+    document.getElementById("allPlayers").style.height = "250px";
+}
+
+function loadAllPlayers(response) {
+    let playerList = document.querySelector("#allPlayers");
+    for (let player of response.players) {
+        playerList.innerHTML = playerList.innerHTML + `<a href="#">${player.name}</a>`
+    }
+}
+
 function getAlhambraInfo() {
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
@@ -51,5 +66,6 @@ function getAlhambraInfo() {
             givePlayerMoney(response);
             displayTotalValue();
             populateReserve(response);
+            loadAllPlayers(response);
         });
 }
