@@ -107,6 +107,7 @@
     border: 2px darkgoldenrod groove;
     width: 100px;
     height: 100px;
+    background-size: 100px;
 }
 
 #board .money {
@@ -123,6 +124,7 @@
     border: 2px darkgoldenrod groove;
     width: 100px;
     height: 100px;
+    background-size: 100px;
 }
 
 #board .yellow {
