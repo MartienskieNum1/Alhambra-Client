@@ -2,6 +2,7 @@
 
 let goBack = document.querySelector('.back');
 let reserveUl = document.querySelector('#reserve');
+let scoreboardBody = document.querySelector('#scoreboard tbody');
 
 function init(){
     goBack.addEventListener('click', function () {
@@ -56,12 +57,26 @@ function populateReserve(response) {
     }
 }
 
+function displayScores(response) {
+    scoreboardBody.innerHTML = "";
+    for (let player of response.players) {
+        scoreboardBody.innerHTML += `
+            <tr>
+                <td>${player.name}</td>
+                <td>${player.score}</td>
+                <td>${player["virtual-score"]}</td>
+            </tr>`;
+    }
+}
+
 function getAlhambraInfo() {
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
+            console.log(response);
             givePlayerMoney(response);
             displayTotalValue();
             populateReserve(response);
+            displayScores(response);
         });
 }
