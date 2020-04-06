@@ -67,6 +67,8 @@
 #alhambra #scoreboard th {
     border-bottom: 2px solid black;
     font-size: 2em;
+    text-align: left;
+    padding: 15px;
 }
 
 #alhambra #scoreboard td {
