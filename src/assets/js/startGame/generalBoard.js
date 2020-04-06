@@ -79,14 +79,23 @@ function buyBuilding(e) {
         "coins" : []
     };
 
+    let totalAmount = 0;
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
+            totalAmount += parseInt(checkbox.getAttribute('data-value'));
+        }
+    });
+
+    if (totalAmount >= e.target.getAttribute(totalAmount)) {
+        checkboxes.forEach(checkbox => {
             body.coins.push({
                 "currency": checkbox.getAttribute('data-color'),
                 "amount": checkbox.getAttribute('data-value')
             })
-        }
-    });
+        });
+    } else {
+        alert('You don\'t have enough money');
+    }
 
     console.log(body);
     fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
