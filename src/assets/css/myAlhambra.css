@@ -18,15 +18,8 @@
     min-height: 100%;
 }
 
-#alhambra header{
-    display: flex inline;
-}
-
 #alhambra header h1{
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 #alhambra h1 {
@@ -44,8 +37,8 @@
 }
 
 #alhambra .back {
-    align-self: center;
-    padding-left: 7px;
+    position: absolute;
+    top: 15px;
 }
 
 /*scoreboard*/
@@ -58,7 +51,7 @@
     background-image: url("../../images/desert brick.png");
     background-size: 100px 100px;
     background-repeat: repeat;
-    width: 60%;
+    width: 85%;
     margin: auto;
     border: 5px solid darkgoldenrod;
     border-radius: 15px;
@@ -67,10 +60,12 @@
 #alhambra #scoreboard th {
     border-bottom: 2px solid black;
     font-size: 2em;
+    text-align: left;
+    padding: 15px;
 }
 
 #alhambra #scoreboard td {
-    padding: 10px;
+    padding: 15px;
     font-size: 1.7em;
 }
 
