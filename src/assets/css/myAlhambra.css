@@ -18,15 +18,8 @@
     min-height: 100%;
 }
 
-#alhambra header{
-    display: flex inline;
-}
-
 #alhambra header h1{
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 #alhambra h1 {
@@ -44,8 +37,8 @@
 }
 
 #alhambra .back {
-    align-self: center;
-    padding-left: 7px;
+    position: absolute;
+    top: 15px;
 }
 
 /*scoreboard*/
