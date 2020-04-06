@@ -16,16 +16,16 @@
     <p class="currentPlayer">Currently at play:<br>Player 1</p>
 
     <div class="buildings">
-        <p class="pavilion" data-color="blue">
+        <p class="pavilion" data-color="blue" data-value="">
             <img src="assets/media/blue.png" alt="blue">
         </p>
-        <p class="arcades" data-color="green">
+        <p class="arcades" data-color="green" data-value="">
             <img src="assets/media/green.png" alt="green">
         </p>
-        <p class="chambers" data-color="orange">
+        <p class="chambers" data-color="orange" data-value="">
             <img src="assets/media/orange.png" alt="orange">
         </p>
-        <p class="garden" data-color="yellow">
+        <p class="garden" data-color="yellow" data-value="">
             <img src="assets/media/yellow.png" alt="yellow">
         </p>
     </div>
@@ -59,8 +59,10 @@
 
 <div class="hidden popup popupToPlace">
     <p>What would you like to do?</p>
-    <button class="inReserve">Place in reserve</button>
-    <button class="inAlhambra">Place in Alhambra</button>
+    <div class="flex-container">
+        <button class="inReserve">Place in reserve</button>
+        <button class="inAlhambra">Place in Alhambra</button>
+    </div>
 </div>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/communication.js"></script>
