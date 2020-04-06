@@ -17,6 +17,54 @@ body{
     box-shadow: 0 5px #999;
 }
 
+/*buildings in general board and my alhambra*/
+.garden{
+    background-image: url("../../images/garden-mc.png");
+    background-size: 75px;
+}
+
+.tower{
+    background-image: url("../../images/tower-mc.png");
+    background-size: 100px;
+}
+
+.pavilion {
+    background-image: url("../../images/pavilion-mc.png");
+    background-size: 100px;
+}
+
+.chambers {
+    background-image: url("../../images/chambers-mc.png");
+    background-size: 100px;
+}
+
+.arcades {
+    background-image: url("../../images/arcades-mc.png");
+    background-size: 100px;
+}
+
+.seraglio {
+    background-image: url("../../images/seraglio-mc.png");
+    background-size: 100px;
+}
+
+.north {
+    border-top: 4px ridge gold;
+}
+
+.east {
+    border-right: 4px groove gold;
+}
+
+.south {
+    border-bottom: 4px groove gold;
+}
+
+.west {
+    border-left: 4px ridge gold;
+}
+
+
 /*INDEX CSS*/
 #index{
     background-image: url("../../images/desert background.png");
