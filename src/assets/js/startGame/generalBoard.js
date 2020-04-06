@@ -137,13 +137,7 @@ function placeInReserve() {
     hidePopupToPlace();
 }
 
-function placeInAlhambra() {
-    //eerst locatie fixe
 
-
-    useBuildingInHand(//die locatie
-    );
-}
 
 function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');

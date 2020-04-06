@@ -15,11 +15,12 @@ function init(){
 document.addEventListener("DOMContentLoaded", init);
 
 function makeDivs(){
+    let columns = 11;
     let output = document.querySelector("#yourAlhambra");
     output.innerHTML = "";
-    for (let i = 0;i < 11;i++){
-        for (let j = 0;j < 11;j++){
-            output.innerHTML += `<div class="buildingInAlhambra" data-column="${i}" data-row="${j}">hallo</div>`
+    for (let i = 0;i < columns;i++){
+        for (let j = 0;j < columns;j++){
+            output.innerHTML += `<div class="buildingInAlhambra" data-column="${Math.round(i-columns/2)}" data-row="${Math.round(j-columns/2)}"></div>`;
         }
     }
 }

@@ -14,3 +14,17 @@ function givePlayerMoney(response) {
         }
     }
 }
+
+function placeInAlhambra() {
+    window.location.href = '../src/myAlhambraIndex.html';
+    //get locatie
+    let divElements = document.querySelectorAll('.buildingInAlhambra');
+    let column, row;
+
+    divElements.forEach(div => {
+        div.addEventListener("click", function (e) {
+            console.log(e.target);
+        })
+    });
+    useBuildingInHand();
+}
