@@ -73,38 +73,45 @@ function buyBuilding(e) {
     let username = localStorage.getItem('username');
     let gameId = localStorage.getItem('gameId');
     let checkboxes = document.querySelectorAll('.popup input[type="checkbox"]');
+    let currentPlayer = "";
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function (response) {
+            currentPlayer = response.currentPlayer.valueOf();
+            if (currentPlayer === username) {
+                let body = {
+                    "currency": e.target.getAttribute('data-color'),
+                    "coins" : []
+                };
 
-    let body = {
-        "currency": e.target.getAttribute('data-color'),
-        "coins" : []
-    };
+                let totalAmount = 0;
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        totalAmount += parseInt(checkbox.getAttribute('data-value'));
+                    }
+                });
 
-    let totalAmount = 0;
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            totalAmount += parseInt(checkbox.getAttribute('data-value'));
-        }
-    });
+                if (totalAmount >= e.target.getAttribute('data-value')) {
+                    console.log(totalAmount, e.target.getAttribute(totalAmount));
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            body.coins.push({
+                                "currency": checkbox.getAttribute('data-color'),
+                                "amount": checkbox.getAttribute('data-value')
+                            })
+                        }
+                    });
 
-    if (totalAmount >= e.target.getAttribute('data-value')) {
-        console.log(totalAmount, e.target.getAttribute(totalAmount));
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                body.coins.push({
-                    "currency": checkbox.getAttribute('data-color'),
-                    "amount": checkbox.getAttribute('data-value')
-                })
+                    fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
+                        .then(getStartGameInfo);
+                    hidePopupToBuy();
+                    showPopupToPlace();
+                } else {
+                    alert('You don\'t have enough money');
+                }
+            }else {
+                alert('It\'s not your turn!');
             }
         });
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
-            .then(getStartGameInfo);
-        hidePopupToBuy();
-        showPopupToPlace();
-    } else {
-        alert('You don\'t have enough money');
-    }
-
-
 }
 
 function placeInReserve() {
