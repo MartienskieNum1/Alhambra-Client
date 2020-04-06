@@ -83,52 +83,6 @@
     height: 100px;
 }
 
-#board .garden{
-    background-image: url("../../images/garden-mc.png");
-    background-size: 75px;
-}
-
-#board .tower{
-    background-image: url("../../images/tower-mc.png");
-    background-size: 100px;
-}
-
-#board .pavilion {
-    background-image: url("../../images/pavilion-mc.png");
-    background-size: 100px;
-}
-
-#board .chambers {
-    background-image: url("../../images/chambers-mc.png");
-    background-size: 100px;
-}
-
-#board .arcades {
-    background-image: url("../../images/arcades-mc.png");
-    background-size: 100px;
-}
-
-#board .seraglio {
-    background-image: url("../../images/seraglio-mc.png");
-    background-size: 100px;
-}
-
-#board .north {
-    border-top: 4px ridge gold;
-}
-
-#board .east {
-    border-right: 4px groove gold;
-}
-
-#board .south {
-    border-bottom: 4px groove gold;
-}
-
-#board .west {
-    border-left: 4px ridge gold;
-}
-
 #board img {
     position: absolute;
     top: -11px;
@@ -204,7 +158,6 @@
     padding: 5px;
     font-size: 1.3em;
     background-repeat: no-repeat;
-    background-size: 100px;
 }
 
 #board div{
