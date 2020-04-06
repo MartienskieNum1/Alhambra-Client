@@ -143,16 +143,15 @@
     background-image: url('../../images/sand.jpg');
     border: 5px solid darkgoldenrod;
     border-radius: 15px;
-    grid-template-rows:repeat(5, 1fr);
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows:repeat(11, 1fr);
+    grid-template-columns: repeat(11, 1fr);
     grid-area: 1 / 4 / span 3 / span 3;
     color: tan;
     display: grid;
 }
 
-#alhambra #city {
-    grid-column-start: 3;
-    grid-row-start: 3;
+#alhambra .buildingInAlhambra{
+    border: 5px solid black;
 }
 
 #alhambra .yellow {

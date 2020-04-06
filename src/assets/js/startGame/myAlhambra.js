@@ -8,9 +8,21 @@ function init(){
         window.location.href = "../src/generalBoard.html";
     });
     getAlhambraInfo();
+    makeDivs();
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+function makeDivs(){
+    let output = document.querySelector("#yourAlhambra");
+    output.innerHTML = "";
+    for (let i = 0;i < 11;i++){
+        for (let j = 0;j < 11;j++){
+            output.innerHTML += `<div class="buildingInAlhambra" data-column="${i}" data-row="${j}">hallo</div>`
+        }
+    }
+}
+
 
 function displayTotalValue() {
     let totalValue = document.querySelector(".totalValue");
