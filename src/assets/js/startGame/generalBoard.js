@@ -17,7 +17,9 @@ function init(){
     });
 
     marketBuildings.forEach(building => {
-        building.addEventListener('click', (e) => {showPopupToBuy(e)})
+        building.addEventListener('click', (e) => {
+
+            showPopupToBuy(e)})
     });
 
     closeElement.addEventListener('click', hidePopupToBuy);
@@ -80,35 +82,35 @@ function buyBuilding(e) {
             if (currentPlayer === username) {
                 let body = {
                     "currency": e.target.getAttribute('data-color'),
-                    "coins" : []
+                    "coins": []
                 };
 
-    let totalAmount = 0;
-    checkboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            totalAmount += parseInt(checkbox.getAttribute('data-value'));
-        }
-    });
+                let totalAmount = 0;
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        totalAmount += parseInt(checkbox.getAttribute('data-value'));
+                    }
+                });
 
-    if (totalAmount >= e.target.getAttribute('data-value')) {
-        console.log(totalAmount, e.target.getAttribute(totalAmount));
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                body.coins.push({
-                    "currency": checkbox.getAttribute('data-color'),
-                    "amount": checkbox.getAttribute('data-value')
-                })
+                if (totalAmount >= e.target.getAttribute('data-value')) {
+                    console.log(totalAmount, e.target.getAttribute(totalAmount));
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            body.coins.push({
+                                "currency": checkbox.getAttribute('data-color'),
+                                "amount": checkbox.getAttribute('data-value')
+                            })
+                        }
+                    });
+                    fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
+                        .then(getStartGameInfo);
+                    hidePopupToBuy();
+                    showPopupToPlace();
+                } else {
+                    alert('You don\'t have enough money');
+                }
             }
         });
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
-            .then(getStartGameInfo);
-        hidePopupToBuy();
-        showPopupToPlace();
-    } else {
-        alert('You don\'t have enough money');
-    }
-
-
 }
 
 function placeInReserve() {
@@ -155,17 +157,17 @@ function populateBuildingMarket(response) {
 function giveBankMoney(response) {
     let currentPlayer = response.currentPlayer.valueOf();
     bankMoney.innerHTML = "";
-    for (let i = 0; i < response.bank.length; i ++) {
+    for (let i = 0; i < response.bank.length; i++) {
         bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
     }
 
     let allBankMoney = document.querySelectorAll('.money p');
     let username = localStorage.getItem('username');
     allBankMoney.forEach(money => {
-        money.addEventListener('click', function(e){
+        money.addEventListener('click', function (e) {
             if (username === currentPlayer) {
                 takeMoney(e);
-            }else {
+            } else {
                 alert("It's not your turn!");
             }
         });
@@ -177,7 +179,7 @@ function showActivePlayer(response) {
     activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
     let username = localStorage.getItem('username');
 
-    if (currentPlayer === username){
+    if (currentPlayer === username) {
         activePlayer.innerHTML = `Currently at play:<br>YOU`;
     }
 }
