@@ -83,67 +83,40 @@ function buyBuilding(e) {
                     "coins" : []
                 };
 
-                let totalAmount = 0;
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        totalAmount += parseInt(checkbox.getAttribute('data-value'));
-                    }
-                });
+    let totalAmount = 0;
+    checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            totalAmount += parseInt(checkbox.getAttribute('data-value'));
+        }
+    });
 
-                if (totalAmount >= e.target.getAttribute('data-value')) {
-                    console.log(totalAmount, e.target.getAttribute(totalAmount));
-                    checkboxes.forEach(checkbox => {
-                        if (checkbox.checked) {
-                            body.coins.push({
-                                "currency": checkbox.getAttribute('data-color'),
-                                "amount": checkbox.getAttribute('data-value')
-                            })
-                        }
-                    });
-
-                    fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
-                        .then(getStartGameInfo);
-                    hidePopupToBuy();
-                    showPopupToPlace();
-                } else {
-                    alert('You don\'t have enough money');
-                }
-            }else {
-                alert('It\'s not your turn!');
+    if (totalAmount >= e.target.getAttribute('data-value')) {
+        console.log(totalAmount, e.target.getAttribute(totalAmount));
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                body.coins.push({
+                    "currency": checkbox.getAttribute('data-color'),
+                    "amount": checkbox.getAttribute('data-value')
+                })
             }
         });
+        fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
+            .then(getStartGameInfo);
+        hidePopupToBuy();
+        showPopupToPlace();
+    } else {
+        alert('You don\'t have enough money');
+    }
+
+
 }
 
 function placeInReserve() {
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
-        function (response) {
-            let building;
-            for (let player of response.players) {
-                if (player.name === username) {
-                    building = player["buildings-in-hand"][0];
-                }
-            }
-            let body = {
-                "building": building,
-                "location": null
-            };
-            fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
-                function () {
-                    getStartGameInfo();
-                    hidePopupToPlace();
-                }
-            )
-        });
+    useBuildingInHand(null);
     hidePopupToPlace();
 }
 
-function placeInAlhambra() {
-
-}
-
-function getStartGameInfo(){
+function getStartGameInfo() {
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
