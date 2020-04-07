@@ -20,9 +20,29 @@ function makeDivs(){
     output.innerHTML = "";
     for (let i = 0;i < columns;i++){
         for (let j = 0;j < columns;j++){
-            output.innerHTML += `<div class="buildingInAlhambra" data-column="${Math.round(i-columns/2)}" data-row="${Math.round(j-columns/2)}"></div>`;
+            if (i === Math.floor(columns/2) && j === Math.floor(columns/2)){
+                output.innerHTML += `<div class="fountain buildingInAlhambra" data-row="${Math.round(i-columns/2)}"
+                data-column="${Math.round(j-columns/2)}"><img src="http://localhost:63342/webclient/src/images/Fountain.webp"></div>`;
+            }
+            else{
+                output.innerHTML += `<div class="buildingInAlhambra" data-row="${Math.round(i-columns/2)}"
+                data-column="${Math.round(j-columns/2)}"></div>`;
+            }
+            
         }
     }
+    
+    let divs = document.querySelectorAll(".buildingInAlhambra");
+    let location;
+    divs.forEach(div => {
+        div.addEventListener("click", function (e) {
+            location = {
+                "row" : e.target.getAttribute("data-row"),
+                "col" : e.target.getAttribute("data-column")
+            };
+            useBuildingInHand(location);
+        })
+    });
 }
 
 

@@ -138,13 +138,16 @@
     background-image: url('../../images/sand.jpg');
     border: 5px solid darkgoldenrod;
     border-radius: 15px;
-    grid-template-rows:repeat(11, 1fr);
-    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows:repeat(11, 9%);
+    grid-template-columns: repeat(11, 9%);
     grid-area: 1 / 4 / span 3 / span 3;
     color: tan;
     display: grid;
 }
-
+#alhambra .buildingInAlhambra img{
+    height: 100px;
+    width: 100px;
+}
 #alhambra .buildingInAlhambra{
     border: 1px solid black;
 }
@@ -164,3 +167,4 @@
 #alhambra .orange {
     background-image: url("../../images/Copper ingot.webp");
 }
+
