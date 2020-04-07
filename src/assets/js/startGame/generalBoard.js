@@ -103,20 +103,14 @@ function buyBuilding(e) {
     } else {
         alert('You don\'t have enough money');
     }
-
-
 }
-
 
 function placeInReserve() {
     useBuildingInHand(null);
-
     hidePopupToPlace();
 }
 
-
-
-function getStartGameInfo(){
+function getStartGameInfo() {
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {

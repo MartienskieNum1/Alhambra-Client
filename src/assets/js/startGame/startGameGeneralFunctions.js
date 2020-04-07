@@ -16,13 +16,10 @@ function givePlayerMoney(response) {
 }
 
 function placeInAlhambra() {
-    let column, row;
     window.location.href = '../src/myAlhambraIndex.html';
-    makeDivs();
-
 }
 
-function useBuildingInHand(location){
+function useBuildingInHand(location) {
     let gameId = localStorage.getItem('gameId');
     let username = localStorage.getItem('username');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
@@ -39,7 +36,6 @@ function useBuildingInHand(location){
             };
             fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
                 function () {
-                    getStartGameInfo();
                     hidePopupToPlace();
                 }
             )
