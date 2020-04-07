@@ -103,40 +103,14 @@ function buyBuilding(e) {
     } else {
         alert('You don\'t have enough money');
     }
-
-
 }
 
 function placeInReserve() {
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
-        function (response) {
-            let building;
-            for (let player of response.players) {
-                if (player.name === username) {
-                    building = player["buildings-in-hand"][0];
-                }
-            }
-            let body = {
-                "building": building,
-                "location": null
-            };
-            fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
-                function () {
-                    getStartGameInfo();
-                    hidePopupToPlace();
-                }
-            )
-        });
+    useBuildingInHand(null);
     hidePopupToPlace();
 }
 
-function placeInAlhambra() {
-
-}
-
-function getStartGameInfo(){
+function getStartGameInfo() {
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
