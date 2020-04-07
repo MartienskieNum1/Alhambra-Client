@@ -27,15 +27,16 @@ function makeDivsAndListeners() {
 
     insertBuildings();
     
-    let location;
+    let location1;
     let divs = document.querySelectorAll(".buildingInAlhambra");
     divs.forEach(div => {
         div.addEventListener("click", function (e) {
-            location = {
+            location1 = {
                 "row" : e.target.getAttribute("data-row"),
                 "col" : e.target.getAttribute("data-column")
             };
-            useBuildingInHand(location);
+            useBuildingInHand(location1);
+            setTimeout(() => location.reload(), 500);
         })
     });
 }
