@@ -138,11 +138,14 @@
     display: grid;
 }
 #alhambra .buildingInAlhambra img{
-    height: 100px;
-    width: 100px;
+    height:70px;
+    width: 70px;
 }
 #alhambra .buildingInAlhambra{
-    border: 1px solid black;
+    border: 1px solid darkgoldenrod;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #alhambra .yellow {
