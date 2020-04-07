@@ -21,7 +21,6 @@
 }
 
 #alhambra p {
-    border: 2px darkgoldenrod groove;
     width: 100px;
     height: 100px;
     font-size: 1.3em;
@@ -70,6 +69,10 @@
     grid-column-end: 7;
     grid-row-start: 4;
     grid-row-end: 5;
+}
+
+#alhambra #yourMoney p {
+    border: 2px darkgoldenrod groove;
 }
 
 #alhambra .yourMoney{
@@ -137,10 +140,24 @@
     color: tan;
     display: grid;
 }
-#alhambra .buildingInAlhambra img{
-    height:70px;
-    width: 70px;
+
+#alhambra .buildingInAlhambra p {
+    width: 65px;
+    height: 65px;
+    background-position: center;
+    background-size: 65px;
+    color: black;
+    margin: 0;
 }
+
+#alhambra .buildingInAlhambra .garden {
+    background-size: 45px;
+}
+
+#alhambra .buildingInAlhambra .fountain {
+    background-image: url("../../images/Fountain.webp");
+}
+
 #alhambra .buildingInAlhambra{
     border: 1px solid darkgoldenrod;
     display: flex;
