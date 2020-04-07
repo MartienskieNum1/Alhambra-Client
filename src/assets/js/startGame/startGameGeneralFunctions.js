@@ -36,7 +36,11 @@ function useBuildingInHand(location) {
             };
             fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
                 function () {
-                    hidePopupToPlace();
+                    let pathName = window.location.pathname;
+                    if (pathName === '/webclient/src/generalBoard.html') {
+                        hidePopupToPlace();
+                        getStartGameInfo();
+                    }
                 }
             )
         });
