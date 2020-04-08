@@ -98,7 +98,7 @@ function displayTotalValue() {
     totalValue.innerHTML = `Total value: ${total}`
 }
 
-function populateReserve(response) {
+function populateReserveAndListeners(response) {
     let username = localStorage.getItem('username');
     let myReserve;
     for (let player of response.players) {
@@ -109,12 +109,43 @@ function populateReserve(response) {
 
     reserveUl.innerHTML = "";
     for (let building of myReserve) {
-        reserveUl.innerHTML += `<li class="${building.type}">${building.cost}</li>`;
+        reserveUl.innerHTML += `<li class="${building.type}" data-value="${building.cost}">${building.cost}</li>`;
         for (let [key, value] of Object.entries(building.walls)) {
             if (value) {
                 reserveUl.lastElementChild.classList.add(key);
             }
         }
+    }
+
+    document.querySelectorAll('#reserve li').forEach(building => {
+        building.addEventListener('click', (e) => selectReserve(e));
+    })
+}
+
+function selectReserve(e) {
+    if (e.target.classList.contains('selected')) {
+        localStorage.removeItem('building');
+        e.target.classList.remove('selected')
+    } else {
+        let building = {
+            "type": e.target.classList.item(0),
+            "cost": parseInt(e.target.getAttribute('data-value')),
+            "walls": {
+                "north": false,
+                "east": false,
+                "south": false,
+                "west": false
+            }
+        };
+        for (let i = 1; i < e.target.classList.length; i++) {
+            for (let key in building.walls) {
+                if (e.target.classList.item(i) === key) {
+                    building.walls[key] = true;
+                }
+            }
+        }
+        localStorage.setItem('building', JSON.stringify(building));
+        e.target.classList.add('selected');
     }
 }
 
@@ -137,7 +168,7 @@ function getAlhambraInfo() {
             console.log(response);
             givePlayerMoney(response);
             displayTotalValue();
-            populateReserve(response);
+            populateReserveAndListeners(response);
             displayScores(response);
         });
 }
