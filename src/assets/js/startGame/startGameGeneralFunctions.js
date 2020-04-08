@@ -52,7 +52,8 @@ function useBuildingInHand(location) {
                         }
                     }
                 )
-            });
+            }
+        );
     }
 }
 
