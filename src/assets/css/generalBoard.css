@@ -99,11 +99,11 @@
     border-radius: 12px;
     display: flex inline;
     grid-column-start: 3;
-    position: center;
     margin-right: 250px;
     margin-left: auto;
     width: auto;
     line-height: 50px;
+    background-size: 100px;
 }
 
 #board .title{
