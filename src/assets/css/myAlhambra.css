@@ -182,3 +182,47 @@
     background-image: url("../../images/Copper ingot.webp");
 }
 
+#alhambra p {
+    border: 2px darkgoldenrod groove;
+    width: 100px;
+    height: 100px;
+    font-size:1.3em;
+    background-repeat: no-repeat;
+    background-size: 100px;
+}
+
+#alhambra .showAllPlayers{
+    margin-left: 160px;
+}
+
+#alhambra .sidePanel {
+    height: 0;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-image: url("../../images/desert brick.png");
+    background-size: 100px 100px;
+    background-repeat: repeat;
+    overflow-x: hidden;
+    margin-left: 160px;
+    transition: 0.5s;
+}
+
+#alhambra .sidePanel a{
+    padding: 7px;
+    color: black;
+    margin: 8px 8px 8px 32px;
+    text-decoration: none;
+    display: block;
+    width: min-content;
+    background-color: gainsboro;
+    box-shadow: 0 5px #999;
+    border-radius: 15px;
+}
+
+#alhambra .sidePanel .closebtn{
+    font-size: larger;
+    color: red;
+}

@@ -26,7 +26,7 @@ function makeDivsAndListeners() {
     }
 
     insertBuildings();
-    
+
     let location1;
     let divs = document.querySelectorAll(".buildingInAlhambra");
     divs.forEach(div => {
@@ -118,6 +118,63 @@ function populateReserve(response) {
     }
 }
 
+function closeNav() {
+    document.getElementById("allPlayers").style.height = "0";
+}
+
+function openNav() {
+    document.getElementById("allPlayers").style.height = "250px";
+    let closeBtn = document.querySelector(".closebtn");
+    closeBtn.addEventListener('click', closeNav);
+}
+
+let openBtn = document.querySelector('.showAllPlayers');
+openBtn.addEventListener('click', openNav);
+
+function loadAllPlayers(response) {
+    let playerList = document.querySelector("#allPlayers");
+    for (let player of response.players) {
+        playerList.innerHTML = playerList.innerHTML + `<a href="#" data-username="${player.name}" class="player">${player.name}</a>`
+    }
+    let players = document.querySelectorAll(".player");
+    players.forEach(player => {
+        player.addEventListener('click', (e) => showThisAlhambra(e, response))
+    })
+}
+
+function showThisAlhambra(e, response) {
+    e.preventDefault();
+    let username = e.target.getAttribute("data-username");
+    console.log("tis gelukt");
+    console.log(username);
+    let myReserve;
+    for (let player of response.players) {
+        if (player.name === username) {
+            myReserve = player.reserve;
+        }
+    }
+
+    let totalValue = document.querySelector(".totalValue");
+    let total = 0;
+    let moneys = document.querySelectorAll(".yourMoney p");
+
+    moneys.forEach(money => {
+        total += parseInt(money.textContent);
+    });
+
+    totalValue.innerHTML = `Total value: ${total}`;
+
+    playerMoney.innerHTML = "";
+
+    for (let i = 0; i < response.players.length; i ++) {
+        if(response.players[i].name === username){
+            for (let j = 0; j < response.players[i].coins.length; j ++){
+                playerMoney.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
+            }
+        }
+    }
+}
+
 function displayScores(response) {
     scoreboardBody.innerHTML = "";
     for (let player of response.players) {
@@ -138,6 +195,7 @@ function getAlhambraInfo() {
             givePlayerMoney(response);
             displayTotalValue();
             populateReserve(response);
+            loadAllPlayers(response);
             displayScores(response);
         });
 }
