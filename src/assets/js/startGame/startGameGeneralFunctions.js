@@ -27,7 +27,9 @@ function useBuildingInHand(location) {
             "building": JSON.parse(localStorage.getItem('building')),
             "location": location
         };
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then()
+        fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then(
+            () => {localStorage.removeItem('building')}
+        )
     } else {
         fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
             function (response) {
