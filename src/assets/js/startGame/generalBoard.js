@@ -17,18 +17,7 @@ function init(){
     });
 
     marketBuildings.forEach(building => {
-        building.addEventListener('click', (e) => {
-            let username = localStorage.getItem('username');
-            let gameId = localStorage.getItem('gameId');
-            let currentPlayer = "";
-            fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
-                function (response) {
-                    currentPlayer = response.currentPlayer.valueOf();
-                    if (currentPlayer === username) {
-                        showPopupToBuy(e)
-                    } else { alert("It\'s not your turn!")}
-                })
-        });
+        building.addEventListener('click', (e) => {showPopupToBuy(e)})
     });
 
     closeElement.addEventListener('click', hidePopupToBuy);
@@ -86,41 +75,56 @@ function buyBuilding(e) {
     let checkboxes = document.querySelectorAll('.popup input[type="checkbox"]');
     let body = {
         "currency": e.target.getAttribute('data-color'),
-        "coins": []
+        "coins" : []
     };
 
-    let totalAmount = 0;
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
-            totalAmount += parseInt(checkbox.getAttribute('data-value'));
+            body.coins.push({
+                "currency": checkbox.getAttribute('data-color'),
+                "amount": checkbox.getAttribute('data-value')
+            })
         }
     });
 
-    if (totalAmount >= e.target.getAttribute('data-value')) {
-        console.log(totalAmount, e.target.getAttribute(totalAmount));
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                body.coins.push({
-                    "currency": checkbox.getAttribute('data-color'),
-                    "amount": checkbox.getAttribute('data-value')
-                })
-            }
-        });
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
-            .then(getStartGameInfo);
-        hidePopupToBuy();
-        showPopupToPlace();
-    } else {
-        alert('You don\'t have enough money');
-    }
+    console.log(body);
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
+        .then(getStartGameInfo);
+
+    hidePopupToBuy();
+    showPopupToPlace();
 }
 
 function placeInReserve() {
-    useBuildingInHand(null);
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function (response) {
+            let building;
+            for (let player of response.players) {
+                if (player.name === username) {
+                    building = player["buildings-in-hand"][0];
+                }
+            }
+            let body = {
+                "building": building,
+                "location": null
+            };
+            fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
+                function () {
+                    getStartGameInfo();
+                    hidePopupToPlace();
+                }
+            )
+        });
     hidePopupToPlace();
 }
 
-function getStartGameInfo() {
+function placeInAlhambra() {
+
+}
+
+function getStartGameInfo(){
     let gameId = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
         function (response) {
@@ -148,8 +152,8 @@ function populateBuildingMarket(response) {
                             building.classList.add(key2);
                         }
                     }
-                    building.innerHTML = `${value1.cost}<img src="assets/media/${color}.png" alt="${color}"/>`;
-                    building.setAttribute('data-value', value1.cost);
+
+                    building.innerHTML = `${value1.cost} <img src="assets/media/${color}.png" alt="${color}"/>`;
                 }
             }
         }
@@ -159,17 +163,17 @@ function populateBuildingMarket(response) {
 function giveBankMoney(response) {
     let currentPlayer = response.currentPlayer.valueOf();
     bankMoney.innerHTML = "";
-    for (let i = 0; i < response.bank.length; i++) {
+    for (let i = 0; i < response.bank.length; i ++) {
         bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
     }
 
     let allBankMoney = document.querySelectorAll('.money p');
     let username = localStorage.getItem('username');
     allBankMoney.forEach(money => {
-        money.addEventListener('click', function (e) {
+        money.addEventListener('click', function(e){
             if (username === currentPlayer) {
                 takeMoney(e);
-            } else {
+            }else {
                 alert("It's not your turn!");
             }
         });
@@ -181,7 +185,7 @@ function showActivePlayer(response) {
     activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
     let username = localStorage.getItem('username');
 
-    if (currentPlayer === username) {
+    if (currentPlayer === username){
         activePlayer.innerHTML = `Currently at play:<br>YOU`;
     }
 }
