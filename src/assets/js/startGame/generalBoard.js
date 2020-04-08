@@ -17,7 +17,18 @@ function init(){
     });
 
     marketBuildings.forEach(building => {
-        building.addEventListener('click', (e) => {showPopupToBuy(e)})
+        building.addEventListener('click', (e) => {
+            let username = localStorage.getItem('username');
+            let gameId = localStorage.getItem('gameId');
+            let currentPlayer = "";
+            fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+                function (response) {
+                    currentPlayer = response.currentPlayer.valueOf();
+                    if (currentPlayer === username) {
+                        showPopupToBuy(e)
+                    } else { alert("It\'s not your turn!")}
+                })
+        });
     });
 
     closeElement.addEventListener('click', hidePopupToBuy);
@@ -73,10 +84,9 @@ function buyBuilding(e) {
     let username = localStorage.getItem('username');
     let gameId = localStorage.getItem('gameId');
     let checkboxes = document.querySelectorAll('.popup input[type="checkbox"]');
-
     let body = {
         "currency": e.target.getAttribute('data-color'),
-        "coins" : []
+        "coins": []
     };
 
     let totalAmount = 0;
@@ -149,17 +159,17 @@ function populateBuildingMarket(response) {
 function giveBankMoney(response) {
     let currentPlayer = response.currentPlayer.valueOf();
     bankMoney.innerHTML = "";
-    for (let i = 0; i < response.bank.length; i ++) {
+    for (let i = 0; i < response.bank.length; i++) {
         bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
     }
 
     let allBankMoney = document.querySelectorAll('.money p');
     let username = localStorage.getItem('username');
     allBankMoney.forEach(money => {
-        money.addEventListener('click', function(e){
+        money.addEventListener('click', function (e) {
             if (username === currentPlayer) {
                 takeMoney(e);
-            }else {
+            } else {
                 alert("It's not your turn!");
             }
         });
@@ -171,7 +181,7 @@ function showActivePlayer(response) {
     activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
     let username = localStorage.getItem('username');
 
-    if (currentPlayer === username){
+    if (currentPlayer === username) {
         activePlayer.innerHTML = `Currently at play:<br>YOU`;
     }
 }
