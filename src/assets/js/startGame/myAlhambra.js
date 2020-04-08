@@ -145,22 +145,12 @@ function loadAllPlayers(response) {
 function showThisAlhambra(e, response) {
     e.preventDefault();
     let username = e.target.getAttribute("data-username");
-    console.log("tis gelukt");
-    console.log(username);
     let myReserve;
     for (let player of response.players) {
         if (player.name === username) {
             myReserve = player.reserve;
         }
     }
-
-    let totalValue = document.querySelector(".totalValue");
-    let total = 0;
-    let moneys = document.querySelectorAll(".yourMoney p");
-
-    moneys.forEach(money => {
-        total += parseInt(money.textContent);
-    });
 
     let columns = 11;
     let city = document.querySelector(".city");
@@ -214,7 +204,15 @@ function showThisAlhambra(e, response) {
         }
     });
 
-    totalValue.innerHTML = `Total value: ${total}`;
+    reserveUl.innerHTML = "";
+    for (let building of myReserve) {
+        reserveUl.innerHTML += `<li class="${building.type}">${building.cost}</li>`;
+        for (let [key, value] of Object.entries(building.walls)) {
+            if (value) {
+                reserveUl.lastElementChild.classList.add(key);
+            }
+        }
+    }
 
     playerMoney.innerHTML = "";
 
@@ -225,6 +223,17 @@ function showThisAlhambra(e, response) {
             }
         }
     }
+
+    let totalValue = document.querySelector(".totalValue");
+    let total = 0;
+    let moneys = document.querySelectorAll(".yourMoney p");
+
+    moneys.forEach(money => {
+        total += parseInt(money.textContent);
+    });
+
+    totalValue.innerHTML = `Total value: ${total}`
+
 }
 
 function displayScores(response) {
