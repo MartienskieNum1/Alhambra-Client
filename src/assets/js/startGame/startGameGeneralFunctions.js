@@ -14,3 +14,35 @@ function givePlayerMoney(response) {
         }
     }
 }
+
+function placeInAlhambra() {
+    window.location.href = '../src/myAlhambraIndex.html';
+}
+
+function useBuildingInHand(location) {
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function (response) {
+            let building;
+            for (let player of response.players) {
+                if (player.name === username) {
+                    building = player["buildings-in-hand"][0];
+                }
+            }
+            let body = {
+                "building": building,
+                "location": location
+            };
+            fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
+                function () {
+                    let pathName = window.location.pathname;
+                    if (pathName === '/webclient/src/generalBoard.html') {
+                        hidePopupToPlace();
+                        getStartGameInfo();
+                    }
+                }
+            )
+        });
+}
+

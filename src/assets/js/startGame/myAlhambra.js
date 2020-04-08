@@ -44,6 +44,18 @@ function populateReserve(response) {
     }
 }
 
+function displayScores(response) {
+    scoreboardBody.innerHTML = "";
+    for (let player of response.players) {
+        scoreboardBody.innerHTML += `
+            <tr>
+                <td>${player.name}</td>
+                <td>${player.score}</td>
+                <td>${player["virtual-score"]}</td>
+            </tr>`;
+    }
+}
+
 function closeNav() {
     document.getElementById("allPlayers").style.height = "0";
 }
@@ -109,5 +121,6 @@ function getAlhambraInfo() {
             displayTotalValue();
             populateReserve(response);
             loadAllPlayers(response);
+            displayScores(response);
         });
 }
