@@ -27,18 +27,35 @@ function makeDivsAndListeners() {
 
     insertBuildings();
 
-    let location1;
     let divs = document.querySelectorAll(".buildingInAlhambra");
     divs.forEach(div => {
         div.addEventListener("click", function (e) {
-            location1 = {
-                "row" : e.target.getAttribute("data-row"),
-                "col" : e.target.getAttribute("data-column")
-            };
-            useBuildingInHand(location1);
+            if (e.target.hasChildNodes()) {
+                let location = {
+                    "row" : e.target.closest('div').getAttribute("data-row"),
+                    "col" : e.target.closest('div').getAttribute("data-column")
+                };
+                placeInReserve(location)
+            } else {
+                let location = {
+                    "row" : e.target.getAttribute("data-row"),
+                    "col" : e.target.getAttribute("data-column")
+                };
+                useBuildingInHand(location);
+            }
             setTimeout(() => location.reload(), 500);
         })
     });
+}
+
+function placeInReserve(location) {
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    let body = {
+        "location": location
+    };
+    console.log(body);
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then()
 }
 
 function insertBuildings() {
@@ -71,7 +88,8 @@ function insertBuildings() {
                             if (!building.type) {
                                 div.innerHTML = `<p class="fountain"></p>`;
                             } else {
-                                div.innerHTML = `<p class="${building.type}">${building.cost}</p>`;
+                                div.innerHTML = `
+                                    <p class="${building.type}" data-value="${building.cost}">${building.cost}</p>`;
                                 for (let [key, value] of Object.entries(building.walls)) {
                                     if (value) {
                                         div.firstElementChild.classList.add(key);
@@ -98,7 +116,7 @@ function displayTotalValue() {
     totalValue.innerHTML = `Total value: ${total}`
 }
 
-function populateReserve(response) {
+function populateReserveAndListeners(response) {
     let username = localStorage.getItem('username');
     let myReserve;
     for (let player of response.players) {
@@ -109,12 +127,43 @@ function populateReserve(response) {
 
     reserveUl.innerHTML = "";
     for (let building of myReserve) {
-        reserveUl.innerHTML += `<li class="${building.type}">${building.cost}</li>`;
+        reserveUl.innerHTML += `<li class="${building.type}" data-value="${building.cost}">${building.cost}</li>`;
         for (let [key, value] of Object.entries(building.walls)) {
             if (value) {
                 reserveUl.lastElementChild.classList.add(key);
             }
         }
+    }
+
+    document.querySelectorAll('#reserve li').forEach(building => {
+        building.addEventListener('click', (e) => selectReserve(e));
+    })
+}
+
+function selectReserve(e) {
+    if (e.target.classList.contains('selected')) {
+        localStorage.removeItem('building');
+        e.target.classList.remove('selected')
+    } else {
+        let building = {
+            "type": e.target.classList.item(0),
+            "cost": parseInt(e.target.getAttribute('data-value')),
+            "walls": {
+                "north": false,
+                "east": false,
+                "south": false,
+                "west": false
+            }
+        };
+        for (let i = 1; i < e.target.classList.length; i++) {
+            for (let key in building.walls) {
+                if (e.target.classList.item(i) === key) {
+                    building.walls[key] = true;
+                }
+            }
+        }
+        localStorage.setItem('building', JSON.stringify(building));
+        e.target.classList.add('selected');
     }
 }
 
@@ -273,7 +322,7 @@ function getAlhambraInfo() {
             console.log(response);
             givePlayerMoney(response);
             displayTotalValue();
-            populateReserve(response);
+            populateReserveAndListeners(response);
             loadAllPlayers(response);
             displayScores(response);
             showBuildingInHand(response);
