@@ -7,6 +7,10 @@ body{
     display: none;
 }
 
+.selected {
+    border: 2px solid red;
+}
+
 .back, .navigate, .leave{
     border-radius: 15px;
     cursor: pointer;
