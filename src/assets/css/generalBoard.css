@@ -107,11 +107,10 @@
 }
 
 #board .title{
-    height: 50%;
+    height: 52%;
     display: flex;
     align-items: center;
-    padding-top: 13px;
-    padding-left: 30px;
+    padding: 13px 30px 10px;
     background-image: url("../../images/desert brick.png");
     background-repeat: repeat;
     background-size: 100px;
