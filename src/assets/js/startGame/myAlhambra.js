@@ -29,23 +29,27 @@ function makeDivsAndListeners() {
 
     let divs = document.querySelectorAll(".buildingInAlhambra");
     divs.forEach(div => {
-        div.addEventListener("click", function (e) {
-            if (e.target.hasChildNodes()) {
-                let location = {
-                    "row" : e.target.closest('div').getAttribute("data-row"),
-                    "col" : e.target.closest('div').getAttribute("data-column")
-                };
-                placeInReserve(location)
-            } else {
-                let location = {
-                    "row" : e.target.getAttribute("data-row"),
-                    "col" : e.target.getAttribute("data-column")
-                };
-                useBuildingInHand(location);
-            }
+        div.addEventListener("click", (e) => {
+            getBuildingLocation(e);
             setTimeout(() => location.reload(), 500);
         })
     });
+}
+
+function getBuildingLocation(e) {
+    if (e.target.hasChildNodes()) {
+        let location = {
+            "row" : e.target.closest('div').getAttribute("data-row"),
+            "col" : e.target.closest('div').getAttribute("data-column")
+        };
+        placeInReserve(location)
+    } else {
+        let location = {
+            "row" : e.target.getAttribute("data-row"),
+            "col" : e.target.getAttribute("data-column")
+        };
+        useBuildingInHand(location);
+    }
 }
 
 function placeInReserve(location) {
