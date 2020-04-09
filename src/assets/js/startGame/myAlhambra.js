@@ -199,14 +199,19 @@ function showBuildingInHand(response) {
     let hand = document.querySelector("#buildingInHand");
     let username = localStorage.getItem('username');
     let building;
-    hand.innerHTML = `<p>Building in your hand:</p>`;
+    hand.innerHTML = `<p>Building in your hand:</p>
+                        <p>You have no building in your hand</p>`;
     for (let player of response.players) {
         if (player.name === username) {
             building = player["buildings-in-hand"][0];
-            hand.innerHTML += `<p class="${building.type}">${building.cost}</p>`;
-            for (let [key, value] of Object.entries(building.walls)) {
-                if (value) {
-                    hand.lastElementChild.classList.add(key);
+            if (player["buildings-in-hand"].length > 0){
+                hand.innerHTML = ``;
+                hand.innerHTML += `<p>Building in your hand:</p>`;
+                hand.innerHTML += `<p class="${building.type}">${building.cost}</p>`;
+                for (let [key, value] of Object.entries(building.walls)) {
+                    if (value) {
+                        hand.lastElementChild.classList.add(key);
+                    }
                 }
             }
         }
