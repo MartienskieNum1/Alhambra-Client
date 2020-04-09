@@ -27,18 +27,39 @@ function makeDivsAndListeners() {
 
     insertBuildings();
 
-    let location1;
     let divs = document.querySelectorAll(".buildingInAlhambra");
     divs.forEach(div => {
-        div.addEventListener("click", function (e) {
-            location1 = {
-                "row" : e.target.getAttribute("data-row"),
-                "col" : e.target.getAttribute("data-column")
-            };
-            useBuildingInHand(location1);
+        div.addEventListener("click", (e) => {
+            getBuildingLocation(e);
             setTimeout(() => location.reload(), 500);
         })
     });
+}
+
+function getBuildingLocation(e) {
+    if (e.target.hasChildNodes()) {
+        let location = {
+            "row" : e.target.closest('div').getAttribute("data-row"),
+            "col" : e.target.closest('div').getAttribute("data-column")
+        };
+        placeInReserve(location)
+    } else {
+        let location = {
+            "row" : e.target.getAttribute("data-row"),
+            "col" : e.target.getAttribute("data-column")
+        };
+        useBuildingInHand(location);
+    }
+}
+
+function placeInReserve(location) {
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    let body = {
+        "location": location
+    };
+    console.log(body);
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then()
 }
 
 function insertBuildings() {
@@ -71,7 +92,8 @@ function insertBuildings() {
                             if (!building.type) {
                                 div.innerHTML = `<p class="fountain"></p>`;
                             } else {
-                                div.innerHTML = `<p class="${building.type}">${building.cost}</p>`;
+                                div.innerHTML = `
+                                    <p class="${building.type}" data-value="${building.cost}">${building.cost}</p>`;
                                 for (let [key, value] of Object.entries(building.walls)) {
                                     if (value) {
                                         div.firstElementChild.classList.add(key);
@@ -171,6 +193,24 @@ function loadAllPlayers(response) {
     players.forEach(player => {
         player.addEventListener('click', (e) => showThisAlhambra(e, response))
     })
+}
+
+function showBuildingInHand(response) {
+    let hand = document.querySelector("#buildingInHand");
+    let username = localStorage.getItem('username');
+    let building;
+    hand.innerHTML = `<p>Building in your hand:</p>`;
+    for (let player of response.players) {
+        if (player.name === username) {
+            building = player["buildings-in-hand"][0];
+            hand.innerHTML += `<p class="${building.type}">${building.cost}</p>`;
+            for (let [key, value] of Object.entries(building.walls)) {
+                if (value) {
+                    hand.lastElementChild.classList.add(key);
+                }
+            }
+        }
+    }
 }
 
 function showThisAlhambra(e, response) {
@@ -289,5 +329,6 @@ function getAlhambraInfo() {
             populateReserveAndListeners(response);
             loadAllPlayers(response);
             displayScores(response);
+            showBuildingInHand(response);
         });
 }
