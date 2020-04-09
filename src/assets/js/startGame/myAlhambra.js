@@ -191,6 +191,24 @@ function loadAllPlayers(response) {
     })
 }
 
+function showBuildingInHand(response) {
+    let hand = document.querySelector("#buildingInHand");
+    let username = localStorage.getItem('username');
+    let building;
+    hand.innerHTML = `<p>Building in your hand:</p>`;
+    for (let player of response.players) {
+        if (player.name === username) {
+            building = player["buildings-in-hand"][0];
+            hand.innerHTML += `<p class="${building.type}">${building.cost}</p>`;
+            for (let [key, value] of Object.entries(building.walls)) {
+                if (value) {
+                    hand.lastElementChild.classList.add(key);
+                }
+            }
+        }
+    }
+}
+
 function showThisAlhambra(e, response) {
     e.preventDefault();
     let username = e.target.getAttribute("data-username");
@@ -307,5 +325,6 @@ function getAlhambraInfo() {
             populateReserveAndListeners(response);
             loadAllPlayers(response);
             displayScores(response);
+            showBuildingInHand(response);
         });
 }
