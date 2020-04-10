@@ -187,6 +187,7 @@ function showActivePlayer(response) {
     let username = localStorage.getItem('username');
     if (currentPlayer === username) {
         activePlayer.innerHTML = `Currently at play:<br>YOU`;
+        playAudio();
     }
 }
 
