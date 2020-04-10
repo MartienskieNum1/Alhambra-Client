@@ -7,7 +7,11 @@ body{
     display: none;
 }
 
-.back, .navigate, .leave{
+.selected {
+    border: 2px solid red !important;
+}
+
+.back, .navigate, .leave, .button{
     border-radius: 15px;
     cursor: pointer;
     font-size: 24px;

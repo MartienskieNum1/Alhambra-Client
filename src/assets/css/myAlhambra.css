@@ -33,10 +33,6 @@
     top: 15px;
 }
 
-#alhambra .selected {
-    border: 2px solid red;
-}
-
 /*scoreboard*/
 #alhambra #scoreboard {
     grid-column: 1 / 3;

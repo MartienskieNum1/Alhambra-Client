@@ -6,6 +6,8 @@ let marketBuildings = document.querySelectorAll('.buildings p');
 let popupToBuy = document.querySelector('.popupToBuy');
 let popupToPlace = document.querySelector('.popupToPlace');
 let closeElement = document.querySelector('.close');
+let takeButton = document.querySelector('.money .button');
+let getInfoInterval = null;
 
 function init(){
     goToAlhambra.addEventListener('click', function() {
@@ -33,12 +35,14 @@ function init(){
 
     closeElement.addEventListener('click', hidePopupToBuy);
 
+    takeButton.addEventListener('click', takeMoney);
+
     getStartGameInfo();
-    setInterval(getStartGameInfo, 3000);
+    getInfoInterval = setInterval(getStartGameInfo, 3000);
 }
 document.addEventListener("DOMContentLoaded", init);
 
-let bankMoney = document.querySelector('.money');
+let bankMoney = document.querySelector('.money .flex-container');
 let activePlayer = document.querySelector('.currentPlayer');
 
 function showPopupToBuy(e) {
@@ -168,7 +172,7 @@ function giveBankMoney(response) {
     allBankMoney.forEach(money => {
         money.addEventListener('click', function (e) {
             if (username === currentPlayer) {
-                takeMoney(e);
+                selectMoney(e);
             } else {
                 alert("It's not your turn!");
             }
@@ -186,20 +190,51 @@ function showActivePlayer(response) {
     }
 }
 
-function takeMoney(e) {
-    let currency = e.target.className;
+let body = [];
+let totalTakenMoneyValue = 0;
+function selectMoney(e) {
+    clearInterval(getInfoInterval);
+    getInfoInterval = null;
+    let currency = e.target.classList.item(0);
     let amount = parseInt(e.target.innerHTML);
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
-    let body = [
-        {
+
+    if (e.target.classList.contains('selected')) {
+        for (let moneyI in body) {
+            if (body[moneyI].currency === currency && body[moneyI].amount === amount) {
+                body.splice(moneyI, 1)
+            }
+        }
+        totalTakenMoneyValue -= amount;
+        e.target.classList.remove('selected');
+    } else {
+        body.push({
             "currency": currency,
             "amount": amount
-        }
-    ];
-    console.log(body);
-    fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
-        .then(function () {
-            getStartGameInfo();
-        })
+        });
+        totalTakenMoneyValue += amount;
+        e.target.classList.add('selected');
+    }
+
+    if (body.length === 0) {
+        takeButton.classList.add('hidden');
+    } else {
+        takeButton.classList.remove('hidden');
+    }
+}
+
+function takeMoney() {
+    let gameId = localStorage.getItem('gameId');
+    let username = localStorage.getItem('username');
+    if (totalTakenMoneyValue > 5 && body.length > 1) {
+        alert("You went over the max value of 5 while taking multiple cards!");
+    } else {
+        fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
+            .then(function () {
+                takeButton.classList.add('hidden');
+                body = [];
+                totalTakenMoneyValue = 0;
+                getStartGameInfo();
+                getInfoInterval = setInterval(getStartGameInfo, 3000);
+            })
+    }
 }
