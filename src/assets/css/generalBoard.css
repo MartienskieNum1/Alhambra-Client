@@ -168,12 +168,21 @@
 
 #board .money {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    flex-direction: column;
     grid-row-start: 4;
     grid-row-end: 5;
     grid-column-start:1 ;
     grid-column-end:2;
+}
+
+#board .money .flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#board .money .button {
+    align-self: center;
 }
 
 #board .money p {
