@@ -31,13 +31,14 @@ function makeDivsAndListeners() {
     reserve.addEventListener("click",(e)=>{
         useBuildingInHand(null);
         setTimeout(() => location.reload(), 500);
-    })
+    });
 
     let divs = document.querySelectorAll(".buildingInAlhambra");
     divs.forEach(div => {
         div.addEventListener("click", (e) => {
             getBuildingLocation(e);
             setTimeout(() => location.reload(), 500);
+            beepNeeded = true;
         })
     });
 }
