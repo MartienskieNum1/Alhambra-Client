@@ -26,7 +26,12 @@ function makeDivsAndListeners() {
     }
 
     insertBuildings();
+    let reserve = document.querySelector("#reserve");
 
+    reserve.addEventListener("click",(e)=>{
+        useBuildingInHand(null);
+        setTimeout(() => location.reload(), 500);
+    })
     let divs = document.querySelectorAll(".buildingInAlhambra");
     divs.forEach(div => {
         div.addEventListener("click", (e) => {
