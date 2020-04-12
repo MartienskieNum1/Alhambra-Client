@@ -6,8 +6,10 @@ let marketBuildings = document.querySelectorAll('.buildings p');
 let popupToBuy = document.querySelector('.popupToBuy');
 let popupToPlace = document.querySelector('.popupToPlace');
 let closeElement = document.querySelector('.close');
+let audio  =  document.getElementById("myAudio");
 let takeButton = document.querySelector('.money .button');
 let getInfoInterval = null;
+let beepNeeded = true;
 
 function init(){
     goToAlhambra.addEventListener('click', function() {
@@ -124,6 +126,7 @@ function buyBuilding(e) {
 function placeInReserve() {
     useBuildingInHand(null);
     hidePopupToPlace();
+    beepNeeded = true;
 }
 
 function getStartGameInfo() {
@@ -182,13 +185,20 @@ function giveBankMoney(response) {
     })
 }
 
+function playAudio() {
+    audio.play();
+}
+
 function showActivePlayer(response) {
     let currentPlayer = response.currentPlayer.valueOf();
     activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
     let username = localStorage.getItem('username');
-
     if (currentPlayer === username) {
         activePlayer.innerHTML = `Currently at play:<br>YOU`;
+        if (beepNeeded) {
+            playAudio();
+            beepNeeded = false;
+        }
     }
 }
 
@@ -237,6 +247,7 @@ function takeMoney() {
                 totalTakenMoneyValue = 0;
                 getStartGameInfo();
                 getInfoInterval = setInterval(getStartGameInfo, 3000);
+                beepNeeded = true;
             })
     }
 }
