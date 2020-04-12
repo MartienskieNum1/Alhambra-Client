@@ -29,9 +29,11 @@ function init(){
                 function (response) {
                     currentPlayer = response.currentPlayer.valueOf();
                     if (currentPlayer === username) {
-                        showPopupToBuy(e)
-                    } else { alert("It\'s not your turn!")}
-                })
+                        showPopupToBuy(e);
+                    } else {
+                        alert("It\'s not your turn!");
+                    }
+                });
         });
     });
 
@@ -66,7 +68,7 @@ function showPopupToBuy(e) {
     popupToBuy.classList.remove('hidden');
 
     let buyButton = document.querySelector('.popupToBuy input[type="submit"]');
-    buyButton.addEventListener('click', (e2) => {e2.preventDefault(); buyBuilding(e)})
+    buyButton.addEventListener('click', (e2) => {e2.preventDefault();buyBuilding(e);});
 }
 
 function showPopupToPlace() {
@@ -109,7 +111,7 @@ function buyBuilding(e) {
                 body.coins.push({
                     "currency": checkbox.getAttribute('data-color'),
                     "amount": checkbox.getAttribute('data-value')
-                })
+                });
             }
         });
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
@@ -180,7 +182,7 @@ function giveBankMoney(response) {
                 alert("It's not your turn!");
             }
         });
-    })
+    });
 }
 
 function playAudio() {
@@ -211,7 +213,7 @@ function selectMoney(e) {
     if (e.target.classList.contains('selected')) {
         for (let moneyI in body) {
             if (body[moneyI].currency === currency && body[moneyI].amount === amount) {
-                body.splice(moneyI, 1)
+                body.splice(moneyI, 1);
             }
         }
         totalTakenMoneyValue -= amount;
@@ -246,6 +248,6 @@ function takeMoney() {
                 getStartGameInfo();
                 getInfoInterval = setInterval(getStartGameInfo, 3000);
                 beepNeeded = true;
-            })
+            });
     }
 }

@@ -21,6 +21,6 @@ function fetchFromServer(url, httpVerb, requestBody){
         return response.json();
     })
     .then((jsonresponseyouarelookingfor) => {
-        return jsonresponseyouarelookingfor
-    })
+        return jsonresponseyouarelookingfor;
+    });
 }
