@@ -29,7 +29,7 @@ function useBuildingInHand(location) {
         };
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then(
             () => {localStorage.removeItem('building')}
-        )
+        );
     } else {
         fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
             function (response) {
@@ -47,14 +47,14 @@ function useBuildingInHand(location) {
                     function (response) {
                         let pathName = window.location.pathname;
                         if (response.failed) {
-                            alert(`${response.message}\n${response.cause}`)
+                            alert(`${response.message}\n${response.cause}`);
                         }
                         if (pathName === '/webclient/src/generalBoard.html') {
                             hidePopupToPlace();
                             getStartGameInfo();
                         }
                     }
-                )
+                );
             }
         );
     }

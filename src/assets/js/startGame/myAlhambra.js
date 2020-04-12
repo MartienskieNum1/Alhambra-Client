@@ -44,7 +44,7 @@ function makeDivsAndListeners() {
             getBuildingLocation(e);
             setTimeout(() => location.reload(), 500);
             beepNeeded = true;
-        })
+        });
     });
 }
 
@@ -54,7 +54,7 @@ function getBuildingLocation(e) {
             "row" : e.target.closest('div').getAttribute("data-row"),
             "col" : e.target.closest('div').getAttribute("data-column")
         };
-        placeInReserve(location)
+        placeInReserve(location);
     } else {
         let location = {
             "row" : e.target.getAttribute("data-row"),
@@ -71,7 +71,7 @@ function placeInReserve(location) {
         "location": location
     };
     console.log(body);
-    fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then()
+    fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then();
 }
 
 function insertBuildings() {
@@ -117,7 +117,7 @@ function insertBuildings() {
                 }
             }
         }
-    })
+    });
 }
 
 function displayTotalValue() {
@@ -129,7 +129,7 @@ function displayTotalValue() {
         total += parseInt(money.textContent);
     });
 
-    totalValue.innerHTML = `Total value: ${total}`
+    totalValue.innerHTML = `Total value: ${total}`;
 }
 
 function populateReserveAndListeners(response) {
@@ -153,13 +153,13 @@ function populateReserveAndListeners(response) {
 
     document.querySelectorAll('#reserve li').forEach(building => {
         building.addEventListener('click', (e) => selectReserve(e));
-    })
+    });
 }
 
 function selectReserve(e) {
     if (e.target.classList.contains('selected')) {
         localStorage.removeItem('building');
-        e.target.classList.remove('selected')
+        e.target.classList.remove('selected');
     } else {
         let building = {
             "type": e.target.classList.item(0),
@@ -199,12 +199,12 @@ openBtn.addEventListener('click', openNav);
 function loadAllPlayers(response) {
     let playerList = document.querySelector("#allPlayers");
     for (let player of response.players) {
-        playerList.innerHTML = playerList.innerHTML + `<a href="#" data-username="${player.name}" class="player">${player.name}</a>`
+        playerList.innerHTML = playerList.innerHTML + `<a href="#" data-username="${player.name}" class="player">${player.name}</a>`;
     }
     let players = document.querySelectorAll(".player");
     players.forEach(player => {
-        player.addEventListener('click', (e) => showThisAlhambra(e, response))
-    })
+        player.addEventListener('click', (e) => showThisAlhambra(e, response));
+    });
 }
 
 function showBuildingInHand(response) {
@@ -320,7 +320,7 @@ function showThisAlhambra(e, response) {
         total += parseInt(money.textContent);
     });
 
-    totalValue.innerHTML = `Total value: ${total}`
+    totalValue.innerHTML = `Total value: ${total}`;
 
 }
 

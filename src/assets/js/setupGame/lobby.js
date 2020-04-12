@@ -7,15 +7,15 @@ let init = () => {
     leaveButton.addEventListener('click', leaveGame);
 
     if (localStorage.getItem('ready')) {
-        readyButton.innerHTML = 'Not ready'
+        readyButton.innerHTML = 'Not ready';
     } else {
-        readyButton.innerHTML = 'Ready'
+        readyButton.innerHTML = 'Ready';
     }
 
     checkAllPlayersReady();
-    setInterval(function(){checkAllPlayersReady()},2000);
+    setInterval(function(){checkAllPlayersReady();},2000);
     setUpLobby();
-    setInterval(function(){setUpLobby()},2000);
+    setInterval(function(){setUpLobby();},2000);
 
     readyButton.addEventListener('click', readyUp);
 };
@@ -30,7 +30,7 @@ let leaveGame = () => {
             window.location.href = '../src/index.html';
             window.alert('You left the game!');
         }
-    )
+    );
 };
 
 function checkAllPlayersReady(){
@@ -42,7 +42,7 @@ function checkAllPlayersReady(){
             amountReady.innerHTML = `${response.readyCount}`;
             if(response.started === true){
                 localStorage.removeItem('ready');
-                goToPageInSecond('../src/generalBoard.html')
+                goToPageInSecond('../src/generalBoard.html');
             }
         });
 }
@@ -60,7 +60,7 @@ let setUpLobby = () => {
             for (let player of response.players) {
                 playerList.innerHTML += `<li>${player}</li>`;
             }
-        })
+        });
 };
 
 let readyUp = () => {
