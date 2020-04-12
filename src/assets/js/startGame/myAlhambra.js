@@ -3,13 +3,18 @@
 let goBack = document.querySelector('.back');
 let reserveUl = document.querySelector('#reserve');
 let scoreboardBody = document.querySelector('#scoreboard tbody');
+let audio =  document.getElementById("myAudio");
+let beepNeeded = true;
 
 function init(){
     goBack.addEventListener('click', function () {
         window.location.href = "../src/generalBoard.html";
+        beepNeeded = true;
     });
     getAlhambraInfo();
     makeDivsAndListeners();
+    beepNeeded = true;
+    setInterval(checkCurrentPlayer, 3000);
 }
 
 document.addEventListener("DOMContentLoaded", init);
@@ -342,5 +347,21 @@ function getAlhambraInfo() {
             loadAllPlayers(response);
             displayScores(response);
             showBuildingInHand(response);
+        });
+}
+
+function checkCurrentPlayer() {
+    let gameId = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        function (response) {
+            console.log(response);
+            let currentPlayer = response.currentPlayer.valueOf();
+            let username = localStorage.getItem('username');
+            if (currentPlayer === username) {
+                if (beepNeeded) {
+                    audio.play();
+                    beepNeeded = false;
+                }
+            }
         });
 }
