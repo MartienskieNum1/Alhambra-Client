@@ -2,6 +2,7 @@
 
 let readyButton = document.querySelector('.ready');
 let leaveButton = document.querySelector('.leave');
+let popupLeftGame = document.querySelector('.popupLeftGame');
 
 let init = () => {
     leaveButton.addEventListener('click', leaveGame);
@@ -27,11 +28,17 @@ let leaveGame = () => {
     fetchFromServer(`${config.root}games/${gameId}/players/${username}`, 'DELETE').then(
         function () {
             localStorage.clear();
-            window.location.href = '../src/index.html';
-            window.alert('You left the game!');
+            showPopupLeftGame();
+
         }
-    );
+     );
 };
+
+function showPopupLeftGame() {
+    console.log("test");
+    popupLeftGame.classList.remove('hidden');
+}
+
 
 function checkAllPlayersReady(){
     let amountReady = document.querySelector('.amountReady');
