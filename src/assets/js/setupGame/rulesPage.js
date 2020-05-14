@@ -1,9 +1,9 @@
 "use strict";
 
-let backButton = document.querySelector('.back');
+const BACKBUTTON = document.querySelector('.back');
 
 function init() {
-    backButton.addEventListener('click', function () {
+    BACKBUTTON.addEventListener('click', function () {
         window.history.back();
 });}
 document.addEventListener("DOMContentLoaded", init);
