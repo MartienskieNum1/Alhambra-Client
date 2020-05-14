@@ -1,13 +1,13 @@
 "use strict";
 
-let goBack = document.querySelector('.back');
-let reserveUl = document.querySelector('#reserve');
-let scoreboardBody = document.querySelector('#scoreboard tbody');
-let audio =  document.getElementById("myAudio");
+const GOBACK = document.querySelector('.back');
+const RESERVEUL = document.querySelector('#reserve');
+const SCOREBOARDBODY = document.querySelector('#scoreboard tbody');
+const AUDIO =  document.getElementById("myAudio");
 let beepNeeded = true;
 
 function init(){
-    goBack.addEventListener('click', function () {
+    GOBACK.addEventListener('click', function () {
         window.location.href = "../src/generalBoard.html";
         beepNeeded = true;
     });
@@ -20,26 +20,26 @@ function init(){
 document.addEventListener("DOMContentLoaded", init);
 
 function makeDivsAndListeners() {
-    let columns = 11;
-    let city = document.querySelector(".city");
-    city.innerHTML = "";
-    for (let i = 0;i < columns;i++){
-        for (let j = 0;j < columns;j++){
-            city.innerHTML += `<div class="buildingInAlhambra" data-row="${Math.round(i-columns/2)}"
-            data-column="${Math.round(j-columns/2)}"></div>`;
+    const COLUMNS = 11;
+    const CITY = document.querySelector(".city");
+    CITY.innerHTML = "";
+    for (let i = 0;i < COLUMNS;i++){
+        for (let j = 0;j < COLUMNS;j++){
+            CITY.innerHTML += `<div class="buildingInAlhambra" data-row="${Math.round(i-COLUMNS/2)}"
+            data-column="${Math.round(j-COLUMNS/2)}"></div>`;
         }
     }
 
     insertBuildings();
 
-    let reserve = document.querySelector("#reserve");
-    reserve.addEventListener("click",(e)=>{
+    const RESERVE = document.querySelector("#reserve");
+    RESERVE.addEventListener("click",(e)=>{
         useBuildingInHand(null);
         setTimeout(() => location.reload(), 500);
     });
 
-    let divs = document.querySelectorAll(".buildingInAlhambra");
-    divs.forEach(div => {
+    const DIVS = document.querySelectorAll(".buildingInAlhambra");
+    DIVS.forEach(div => {
         div.addEventListener("click", (e) => {
             getBuildingLocation(e);
             setTimeout(() => location.reload(), 500);
@@ -50,17 +50,17 @@ function makeDivsAndListeners() {
 
 function getBuildingLocation(e) {
     if (e.target.hasChildNodes()) {
-        let location = {
+        const LOCATION = {
             "row" : e.target.closest('div').getAttribute("data-row"),
             "col" : e.target.closest('div').getAttribute("data-column")
         };
-        placeInReserve(location);
+        placeInReserve(LOCATION);
     } else {
-        let location = {
+        const LOCATION = {
             "row" : e.target.getAttribute("data-row"),
             "col" : e.target.getAttribute("data-column")
         };
-        useBuildingInHand(location);
+        useBuildingInHand(LOCATION);
     }
 }
 
@@ -141,12 +141,12 @@ function populateReserveAndListeners(response) {
         }
     }
 
-    reserveUl.innerHTML = "";
+    RESERVEUL.innerHTML = "";
     for (let building of myReserve) {
-        reserveUl.innerHTML += `<li class="${building.type}" data-value="${building.cost}">${building.cost}</li>`;
+        RESERVEUL.innerHTML += `<li class="${building.type}" data-value="${building.cost}">${building.cost}</li>`;
         for (let [key, value] of Object.entries(building.walls)) {
             if (value) {
-                reserveUl.lastElementChild.classList.add(key);
+                RESERVEUL.lastElementChild.classList.add(key);
             }
         }
     }
@@ -292,12 +292,12 @@ function showThisAlhambra(e, response) {
         }
     });
 
-    reserveUl.innerHTML = "";
+    RESERVEUL.innerHTML = "";
     for (let building of myReserve) {
-        reserveUl.innerHTML += `<li class="${building.type}">${building.cost}</li>`;
+        RESERVEUL.innerHTML += `<li class="${building.type}">${building.cost}</li>`;
         for (let [key, value] of Object.entries(building.walls)) {
             if (value) {
-                reserveUl.lastElementChild.classList.add(key);
+                RESERVEUL.lastElementChild.classList.add(key);
             }
         }
     }
@@ -325,9 +325,9 @@ function showThisAlhambra(e, response) {
 }
 
 function displayScores(response) {
-    scoreboardBody.innerHTML = "";
+    SCOREBOARDBODY.innerHTML = "";
     for (let player of response.players) {
-        scoreboardBody.innerHTML += `
+        SCOREBOARDBODY.innerHTML += `
             <tr>
                 <td>${player.name}</td>
                 <td>${player.score}</td>
@@ -359,7 +359,7 @@ function checkCurrentPlayer() {
             let username = localStorage.getItem('username');
             if (currentPlayer === username) {
                 if (beepNeeded) {
-                    audio.play();
+                    AUDIO.play();
                     beepNeeded = false;
                 }
             }
