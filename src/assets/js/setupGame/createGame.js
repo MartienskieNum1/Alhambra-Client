@@ -14,14 +14,14 @@ let init = () => {
 
         const USERNAME = USERNAMEINPUT.value;
 
-        CREATEGAME(USERNAME);
+        createGame(USERNAME);
         goToPageInSecond('../src/lobby.html');
     });
 
 };
 document.addEventListener("DOMContentLoaded", init);
 
-const CREATEGAME = (username) => {
+const createGame = (username) => {
     let gameId = null;
     fetchFromServer(`${config.root}games`, 'POST', {"prefix": "group27"}).then(
         function (response) {
