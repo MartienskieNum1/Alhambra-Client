@@ -10,6 +10,9 @@ let audio =  document.getElementById("myAudio");
 let takeButton = document.querySelector('.money .button');
 let getInfoInterval = null;
 let beepNeeded = true;
+let popupNotYourTurn = document.querySelector('.popupNotYourTurn');
+let popupNotEnoughMoney = document.querySelector('.popupNotEnoughMoney');
+let popupElement = document.querySelector('div .popup');
 
 function init(){
     goToAlhambra.addEventListener('click', function() {
@@ -31,13 +34,20 @@ function init(){
                     if (currentPlayer === username) {
                         showPopupToBuy(e);
                     } else {
-                        alert("It\'s not your turn!");
+                        // alert("It\'s not your turn!");
+                        showPopupNotYourTurn();
                     }
                 });
         });
     });
 
-    closeElement.addEventListener('click', hidePopupToBuy);
+        closeElement.addEventListener('click', () => popupElement.classList.add('hidden'));
+        // closeElement.addEventListener('click', hidePopupToBuy);
+        //
+        // closeElement.addEventListener('click', hidePopupNotYourTurn);
+        //
+        // closeElement.addEventListener('click', hidePopupNotEnoughMoney);
+
 
     takeButton.addEventListener('click', takeMoney);
 
@@ -45,6 +55,10 @@ function init(){
     getInfoInterval = setInterval(getStartGameInfo, 3000);
 }
 document.addEventListener("DOMContentLoaded", init);
+
+function showPopupNotYourTurn(){
+    popupNotYourTurn.classList.remove('hidden');
+}
 
 let bankMoney = document.querySelector('.money .flex-container');
 let activePlayer = document.querySelector('.currentPlayer');
@@ -119,8 +133,13 @@ function buyBuilding(e) {
         hidePopupToBuy();
         showPopupToPlace();
     } else {
-        alert('You don\'t have enough money');
+        // alert('You don\'t have enough money');
+        showPopupNotEnoughMoney();
     }
+}
+
+function showPopupNotEnoughMoney() {
+    popupNotEnoughMoney.classList.remove('hidden');
 }
 
 function placeInReserve() {
