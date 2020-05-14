@@ -12,6 +12,7 @@ let getInfoInterval = null;
 let beepNeeded = true;
 let popupNotYourTurn = document.querySelector('.popupNotYourTurn');
 let popupNotEnoughMoney = document.querySelector('.popupNotEnoughMoney');
+let popupElement = document.querySelector('div .popup');
 
 function init(){
     goToAlhambra.addEventListener('click', function() {
@@ -40,12 +41,12 @@ function init(){
         });
     });
 
-        
-        closeElement.addEventListener('click', hidePopupToBuy);
-
-        closeElement.addEventListener('click', hidePopupNotYourTurn);
-
-        closeElement.addEventListener('click', hidePopupNotEnoughMoney);
+        closeElement.addEventListener('click', () => popupElement.classList.add('hidden'));
+        // closeElement.addEventListener('click', hidePopupToBuy);
+        //
+        // closeElement.addEventListener('click', hidePopupNotYourTurn);
+        //
+        // closeElement.addEventListener('click', hidePopupNotEnoughMoney);
 
 
     takeButton.addEventListener('click', takeMoney);
@@ -93,21 +94,12 @@ function showPopupToPlace() {
     popupToPlace.classList.remove('hidden');
 }
 
-function hidePopupNotYourTurn() {
-    popupNotYourTurn.classList.add('hidden');
-
-}
-
 function hidePopupToBuy() {
     popupToBuy.classList.add('hidden');
 }
 
 function hidePopupToPlace() {
     popupToPlace.classList.add('hidden');
-}
-
-function hidePopupNotEnoughMoney() {
-    popupNotEnoughMoney.classList.add('hidden');
 }
 
 function buyBuilding(e) {
