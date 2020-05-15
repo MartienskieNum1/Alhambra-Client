@@ -5,7 +5,7 @@ const LEAVEBUTTON = document.querySelector('.leave');
 const POPUPLEFTGAME = document.querySelector('.popupLeftGame');
 
 let init = () => {
-    LEAVEBUTTON.addEventListener('click', LEAVEGAME);
+    LEAVEBUTTON.addEventListener('click', leaveGame);
 
     if (localStorage.getItem('ready')) {
         READYBUTTON.innerHTML = 'Not ready';
@@ -15,14 +15,14 @@ let init = () => {
 
     checkAllPlayersReady();
     setInterval(function(){checkAllPlayersReady();},2000);
-    SETUPLOBBY();
-    setInterval(function(){SETUPLOBBY();},2000);
+    setUpLobby();
+    setInterval(function(){setUpLobby();},2000);
 
-    READYBUTTON.addEventListener('click', READYUP);
+    READYBUTTON.addEventListener('click', readyUp);
 };
 document.addEventListener("DOMContentLoaded", init);
 
-const LEAVEGAME = () => {
+const leaveGame = () => {
     const GAMEID = localStorage.getItem('gameId');
     const USERNAME = localStorage.getItem('username');
     fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}`, 'DELETE').then(
@@ -54,7 +54,7 @@ function checkAllPlayersReady(){
         });
 }
 
-const SETUPLOBBY = () => {
+const setUpLobby = () => {
     const GAMEID = localStorage.getItem('gameId');
     const PLAYERLIST = document.querySelector('.players');
     const GAMEIDELEMENT = document.querySelector('.gameID');
@@ -70,7 +70,7 @@ const SETUPLOBBY = () => {
         });
 };
 
-const READYUP = () => {
+const readyUp = () => {
     const GAMEID = localStorage.getItem('gameId');
     const USERNAME = localStorage.getItem('username');
 
