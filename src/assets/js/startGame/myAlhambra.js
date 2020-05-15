@@ -302,12 +302,12 @@ function showThisAlhambra(e, response) {
         }
     }
 
-    playerMoney.innerHTML = "";
+    PLAYERMONEY.innerHTML = "";
 
     for (let i = 0; i < response.players.length; i ++) {
         if(response.players[i].name === USERNAME){
             for (let j = 0; j < response.players[i].coins.length; j ++){
-                playerMoney.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
+                PLAYERMONEY.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
             }
         }
     }

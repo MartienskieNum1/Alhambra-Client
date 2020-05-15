@@ -1,15 +1,15 @@
 "use strict";
 
-let playerMoney = document.querySelector('.yourMoney');
+const PLAYERMONEY = document.querySelector('.yourMoney');
 
 function givePlayerMoney(response) {
-    let username = localStorage.getItem('username');
-    playerMoney.innerHTML = "";
+    const USERNAME = localStorage.getItem('username');
+    PLAYERMONEY.innerHTML = "";
 
     for (let i = 0; i < response.players.length; i ++) {
-        if(response.players[i].name === username){
+        if(response.players[i].name === USERNAME){
             for (let j = 0; j < response.players[i].coins.length; j ++){
-                playerMoney.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
+                PLAYERMONEY.innerHTML += `<p class="${response.players[i].coins[j].currency}">${response.players[i].coins[j].amount}</p>`;
             }
         }
     }
@@ -20,36 +20,36 @@ function placeInAlhambra() {
 }
 
 function useBuildingInHand(location) {
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
+    const GAMEID = localStorage.getItem('gameId');
+    const USERNAME = localStorage.getItem('username');
     if (localStorage.getItem('building')) {
-        let body = {
+        const BODY = {
             "building": JSON.parse(localStorage.getItem('building')),
             "location": location
         };
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then(
-            () => {localStorage.removeItem('building')}
+        fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/city`, 'PATCH', BODY).then(
+            () => {localStorage.removeItem('building');}
         );
     } else {
-        fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+        fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
             function (response) {
                 let building;
-                for (let player of response.players) {
-                    if (player.name === username) {
-                        building = player["buildings-in-hand"][0];
+                for (const PLAYER of response.players) {
+                    if (PLAYER.name === USERNAME) {
+                        building = PLAYER["buildings-in-hand"][0];
                     }
                 }
-                let body = {
+                const BODY = {
                     "building": building,
                     "location": location
                 };
-                fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'POST', body).then(
+                fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/city`, 'POST', BODY).then(
                     function (response) {
-                        let pathName = window.location.pathname;
+                        const PATHNAME = window.location.pathname;
                         if (response.failed) {
                             alert(`${response.message}\n${response.cause}`);
                         }
-                        if (pathName === '/webclient/src/generalBoard.html') {
+                        if (PATHNAME === '/webclient/src/generalBoard.html') {
                             hidePopupToPlace();
                             getStartGameInfo();
                         }
