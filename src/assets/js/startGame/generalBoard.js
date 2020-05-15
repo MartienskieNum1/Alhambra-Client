@@ -274,7 +274,6 @@ function takeMoney() {
     let gameId = localStorage.getItem('gameId');
     let username = localStorage.getItem('username');
     if (totalTakenMoneyValue > 5 && body.length > 1) {
-        // alert("You went over the max value of 5 while taking multiple cards!");
         showPopupMaxValue();
     } else {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
