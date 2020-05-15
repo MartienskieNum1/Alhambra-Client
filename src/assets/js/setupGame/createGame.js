@@ -1,27 +1,27 @@
 "use strict";
 
-let backButton = document.querySelector('.back');
-let createButton = document.querySelector('input[type="submit"]');
-let usernameInput = document.querySelector('input[id="username"]');
+const BACKBUTTON = document.querySelector('.back');
+const CREATEBUTTON = document.querySelector('input[type="submit"]');
+const USERNAMEINPUT = document.querySelector('input[id="username"]');
 
-let init = () => {
-    backButton.addEventListener('click', function () {
+const init = () => {
+    BACKBUTTON.addEventListener('click', function () {
         window.location.href = '../src/index.html';
     });
 
-    createButton.addEventListener('click', function(e) {
+    CREATEBUTTON.addEventListener('click', function(e) {
         e.preventDefault();
 
-        let username = usernameInput.value;
+        const USERNAME = USERNAMEINPUT.value;
 
-        createGame(username);
+        createGame(USERNAME);
         goToPageInSecond('../src/lobby.html');
     });
 
 };
 document.addEventListener("DOMContentLoaded", init);
 
-let createGame = (username) => {
+const createGame = (username) => {
     let gameId = null;
     fetchFromServer(`${config.root}games`, 'POST', {"prefix": "group27"}).then(
         function (response) {

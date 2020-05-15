@@ -1,14 +1,14 @@
 "use strict";
 
-let joinButton = document.querySelector('.join');
-let createButton = document.querySelector('.create');
+const JOINBUTTON = document.querySelector('.join');
+const CREATEBUTTON = document.querySelector('.create');
 
-let init = () => {
-    joinButton.addEventListener("click", function() {
+const init = () => {
+    JOINBUTTON.addEventListener("click", function() {
         window.location.href = '../src/joinGame.html';
     });
 
-    createButton.addEventListener('click', function () {
+    CREATEBUTTON.addEventListener('click', function () {
         window.location.href = '../src/createGame.html';
     });
 };

@@ -1,31 +1,30 @@
 "use strict";
 
-let backButton = document.querySelector('.back');
-let usernameInput = document.querySelector('input[id="username"]');
-let gameIdInput = document.querySelector('select');
-let joinButton = document.querySelector('input[type="submit"]');
+const BACKBUTTON = document.querySelector('.back');
+const USERNAMEINPUT = document.querySelector('input[id="username"]');
+const GAMEIDINPUT = document.querySelector('select');
+const JOINBUTTON = document.querySelector('input[type="submit"]');
 
-let init = () => {
-    backButton.addEventListener('click', function () {
+const init = () => {
+    BACKBUTTON.addEventListener('click', function () {
         window.location.href = '../src/index.html';
     });
 
     fetchFromServer(`${config.root}games?details=false&prefix=group${config.groupnumber}`,'GET').then(function(response){
         console.log(response);
-        gameIdInput.innerHTML = '';
+        GAMEIDINPUT.innerHTML = '';
         response.forEach(game => {
-            gameIdInput.innerHTML += `<option>${game}</option>`;
+            GAMEIDINPUT.innerHTML += `<option>${game}</option>`;
         });
     });
 
-
-    joinButton.addEventListener('click', function (e) {
+    JOINBUTTON.addEventListener('click', function (e) {
         e.preventDefault();
 
-        let gameId = gameIdInput.value;
-        let username = usernameInput.value;
+        const gameId = GAMEIDINPUT.value;
+        const USERNAME = USERNAMEINPUT.value;
 
-        joinGame(username, gameId);
+        joinGame(USERNAME, gameId);
         goToPageInSecond('../src/lobby.html');
     });
 };
