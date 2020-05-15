@@ -3,16 +3,19 @@
 let goToAlhambra = document.querySelector('.navigate');
 let goToGameRules = document.querySelector('.showGameRules');
 let marketBuildings = document.querySelectorAll('.buildings p');
-let popupToBuy = document.querySelector('.popupToBuy');
-let popupToPlace = document.querySelector('.popupToPlace');
-let closeElement = document.querySelector('.close');
-let audio =  document.getElementById("myAudio");
+let audio = document.getElementById("myAudio");
 let takeButton = document.querySelector('.money .button');
 let getInfoInterval = null;
 let beepNeeded = true;
+
 let popupNotYourTurn = document.querySelector('.popupNotYourTurn');
 let popupNotEnoughMoney = document.querySelector('.popupNotEnoughMoney');
-let popupElement = document.querySelector('div .popup');
+let popupToBuy = document.querySelector('.popupToBuy');
+let popupToPlace = document.querySelector('.popupToPlace');
+
+let closeNotYourTurn = document.querySelector('.popupNotYourTurn .close');
+let closeNotEnoughMoney = document.querySelector('.popupNotEnoughMoney .close');
+let closeToBuy = document.querySelector('.popupToBuy .close');
 
 function init(){
     goToAlhambra.addEventListener('click', function() {
@@ -34,20 +37,15 @@ function init(){
                     if (currentPlayer === username) {
                         showPopupToBuy(e);
                     } else {
-                        // alert("It\'s not your turn!");
                         showPopupNotYourTurn();
                     }
                 });
         });
     });
 
-        closeElement.addEventListener('click', () => popupElement.classList.add('hidden'));
-        // closeElement.addEventListener('click', hidePopupToBuy);
-        //
-        // closeElement.addEventListener('click', hidePopupNotYourTurn);
-        //
-        // closeElement.addEventListener('click', hidePopupNotEnoughMoney);
-
+    closeToBuy.addEventListener('click', hidePopupToBuy);
+    closeNotYourTurn.addEventListener('click', hidePopupNotYourTurn);
+    closeNotEnoughMoney.addEventListener('click', hidePopupNotEnoughMoney);
 
     takeButton.addEventListener('click', takeMoney);
 
@@ -56,9 +54,6 @@ function init(){
 }
 document.addEventListener("DOMContentLoaded", init);
 
-function showPopupNotYourTurn(){
-    popupNotYourTurn.classList.remove('hidden');
-}
 
 let bankMoney = document.querySelector('.money .flex-container');
 let activePlayer = document.querySelector('.currentPlayer');
@@ -85,6 +80,10 @@ function showPopupToBuy(e) {
     buyButton.addEventListener('click', (e2) => {e2.preventDefault();buyBuilding(e);});
 }
 
+function hidePopupToBuy() {
+    popupToBuy.classList.add('hidden');
+}
+
 function showPopupToPlace() {
     let inReserveButton = document.querySelector('.popupToPlace .inReserve');
     let inAlhambra = document.querySelector('.popupToPlace .inAlhambra');
@@ -94,12 +93,24 @@ function showPopupToPlace() {
     popupToPlace.classList.remove('hidden');
 }
 
-function hidePopupToBuy() {
-    popupToBuy.classList.add('hidden');
-}
-
 function hidePopupToPlace() {
     popupToPlace.classList.add('hidden');
+}
+
+function showPopupNotEnoughMoney() {
+    popupNotEnoughMoney.classList.remove('hidden');
+}
+
+function hidePopupNotEnoughMoney() {
+    popupNotEnoughMoney.classList.add('hidden');
+}
+
+function showPopupNotYourTurn() {
+    popupNotYourTurn.classList.remove('hidden');
+}
+
+function hidePopupNotYourTurn() {
+    popupNotYourTurn.classList.add('hidden');
 }
 
 function buyBuilding(e) {
@@ -133,13 +144,8 @@ function buyBuilding(e) {
         hidePopupToBuy();
         showPopupToPlace();
     } else {
-        // alert('You don\'t have enough money');
         showPopupNotEnoughMoney();
     }
-}
-
-function showPopupNotEnoughMoney() {
-    popupNotEnoughMoney.classList.remove('hidden');
 }
 
 function placeInReserve() {
