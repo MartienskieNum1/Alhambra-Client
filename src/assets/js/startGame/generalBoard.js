@@ -1,34 +1,34 @@
 "use strict";
 
-let goToAlhambra = document.querySelector('.navigate');
-let goToGameRules = document.querySelector('.showGameRules');
-let marketBuildings = document.querySelectorAll('.buildings p');
-let audio = document.getElementById("myAudio");
-let takeButton = document.querySelector('.money .button');
+const GOTOALHAMBRA = document.querySelector('.navigate');
+const GOTOGAMERULES = document.querySelector('.showGameRules');
+const MARKETBUILDINGS = document.querySelectorAll('.buildings p');
+const AUDIO = document.getElementById("myAudio");
+const TAKEBUTTON = document.querySelector('.money .button');
 let getInfoInterval = null;
 let beepNeeded = true;
 
-let popupNotYourTurn = document.querySelector('.popupNotYourTurn');
-let popupNotEnoughMoney = document.querySelector('.popupNotEnoughMoney');
-let popupToBuy = document.querySelector('.popupToBuy');
-let popupToPlace = document.querySelector('.popupToPlace');
-let popupMaxValue = document.querySelector('.popupMaxValue');
+const POPUPNOTYOURTURN = document.querySelector('.popupNotYourTurn');
+const POPUPNOTENOUGHMONEY = document.querySelector('.popupNotEnoughMoney');
+const POPUPTOBUY = document.querySelector('.popupToBuy');
+const POPUPTOPLACE = document.querySelector('.popupToPlace');
+const POPUPMAXVALUE = document.querySelector('.popupMaxValue');
 
-let closeNotYourTurn = document.querySelector('.popupNotYourTurn .close');
-let closeNotEnoughMoney = document.querySelector('.popupNotEnoughMoney .close');
-let closeToBuy = document.querySelector('.popupToBuy .close');
-let closeMaxValue = document.querySelector('.popupMaxValue .close');
+const CLOSENOTYOURTURN = document.querySelector('.popupNotYourTurn .close');
+const CLOSENOTENOUGHMONEY = document.querySelector('.popupNotEnoughMoney .close');
+const CLOSETOBUY = document.querySelector('.popupToBuy .close');
+const CLOSEMAXVALUE = document.querySelector('.popupMaxValue .close');
 
 function init(){
-    goToAlhambra.addEventListener('click', function() {
+    GOTOALHAMBRA.addEventListener('click', function() {
         window.location.href = "../src/myAlhambraIndex.html";
     });
 
-    goToGameRules.addEventListener('click', function() {
+    GOTOGAMERULES.addEventListener('click', function() {
         window.location.href = '../src/rules.html';
     });
 
-    marketBuildings.forEach(building => {
+    MARKETBUILDINGS.forEach(building => {
         building.addEventListener('click', (e) => {
             let username = localStorage.getItem('username');
             let gameId = localStorage.getItem('gameId');
@@ -45,12 +45,12 @@ function init(){
         });
     });
 
-    closeToBuy.addEventListener('click', hidePopupToBuy);
-    closeNotYourTurn.addEventListener('click', hidePopupNotYourTurn);
-    closeNotEnoughMoney.addEventListener('click', hidePopupNotEnoughMoney);
-    closeMaxValue.addEventListener('click', hidePopupMaxValue);
+    CLOSETOBUY.addEventListener('click', hidePopupToBuy);
+    CLOSENOTYOURTURN.addEventListener('click', hidePopupNotYourTurn);
+    CLOSENOTENOUGHMONEY.addEventListener('click', hidePopupNotEnoughMoney);
+    CLOSEMAXVALUE.addEventListener('click', hidePopupMaxValue);
 
-    takeButton.addEventListener('click', takeMoney);
+    TAKEBUTTON.addEventListener('click', takeMoney);
 
     getStartGameInfo();
     getInfoInterval = setInterval(getStartGameInfo, 3000);
@@ -77,14 +77,14 @@ function showPopupToBuy(e) {
     });
     moneyForm.innerHTML += '<input type="submit" value="Buy"/>';
 
-    popupToBuy.classList.remove('hidden');
+    POPUPTOBUY.classList.remove('hidden');
 
     let buyButton = document.querySelector('.popupToBuy input[type="submit"]');
     buyButton.addEventListener('click', (e2) => {e2.preventDefault();buyBuilding(e);});
 }
 
 function hidePopupToBuy() {
-    popupToBuy.classList.add('hidden');
+    POPUPTOBUY.classList.add('hidden');
 }
 
 function showPopupToPlace() {
@@ -93,35 +93,35 @@ function showPopupToPlace() {
     inReserveButton.addEventListener('click', placeInReserve);
     inAlhambra.addEventListener('click', placeInAlhambra);
 
-    popupToPlace.classList.remove('hidden');
+    POPUPTOPLACE.classList.remove('hidden');
 }
 
 function hidePopupToPlace() {
-    popupToPlace.classList.add('hidden');
+    POPUPTOPLACE.classList.add('hidden');
 }
 
 function showPopupNotEnoughMoney() {
-    popupNotEnoughMoney.classList.remove('hidden');
+    POPUPNOTENOUGHMONEY.classList.remove('hidden');
 }
 
 function hidePopupNotEnoughMoney() {
-    popupNotEnoughMoney.classList.add('hidden');
+    POPUPNOTENOUGHMONEY.classList.add('hidden');
 }
 
 function showPopupNotYourTurn() {
-    popupNotYourTurn.classList.remove('hidden');
+    POPUPNOTYOURTURN.classList.remove('hidden');
 }
 
 function hidePopupNotYourTurn() {
-    popupNotYourTurn.classList.add('hidden');
+    POPUPNOTYOURTURN.classList.add('hidden');
 }
 
 function showPopupMaxValue() {
-    popupMaxValue.classList.remove('hidden');
+    POPUPMAXVALUE.classList.remove('hidden');
 }
 
 function hidePopupMaxValue() {
-    popupMaxValue.classList.add('hidden');
+    POPUPMAXVALUE.classList.add('hidden');
 }
 
 function buyBuilding(e) {
@@ -178,7 +178,7 @@ function getStartGameInfo() {
 }
 
 function populateBuildingMarket(response) {
-    marketBuildings.forEach(building => {
+    MARKETBUILDINGS.forEach(building => {
         let color = building.getAttribute('data-color');
         for (let [key1, value1] of Object.entries(response.market)) {
             if (color === key1) {
@@ -222,7 +222,7 @@ function giveBankMoney(response) {
 }
 
 function playAudio() {
-    audio.play();
+    AUDIO.play();
 }
 
 function showActivePlayer(response) {
@@ -264,9 +264,9 @@ function selectMoney(e) {
     }
 
     if (body.length === 0) {
-        takeButton.classList.add('hidden');
+        TAKEBUTTON.classList.add('hidden');
     } else {
-        takeButton.classList.remove('hidden');
+        TAKEBUTTON.classList.remove('hidden');
     }
 }
 
@@ -278,7 +278,7 @@ function takeMoney() {
     } else {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
             .then(function () {
-                takeButton.classList.add('hidden');
+                TAKEBUTTON.classList.add('hidden');
                 body = [];
                 totalTakenMoneyValue = 0;
                 getStartGameInfo();
