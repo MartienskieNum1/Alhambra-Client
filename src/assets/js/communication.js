@@ -1,7 +1,7 @@
 "use strict";
 
 function fetchFromServer(url, httpVerb, requestBody){
-    let options= {};
+    const options= {};
     options.method = httpVerb;
 
     options.headers = {};

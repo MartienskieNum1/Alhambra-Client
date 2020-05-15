@@ -5,7 +5,7 @@ const USERNAMEINPUT = document.querySelector('input[id="username"]');
 const GAMEIDINPUT = document.querySelector('select');
 const JOINBUTTON = document.querySelector('input[type="submit"]');
 
-let init = () => {
+const init = () => {
     BACKBUTTON.addEventListener('click', function () {
         window.location.href = '../src/index.html';
     });

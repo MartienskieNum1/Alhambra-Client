@@ -3,7 +3,7 @@
 const JOINBUTTON = document.querySelector('.join');
 const CREATEBUTTON = document.querySelector('.create');
 
-let init = () => {
+const init = () => {
     JOINBUTTON.addEventListener("click", function() {
         window.location.href = '../src/joinGame.html';
     });

@@ -4,7 +4,7 @@ const BACKBUTTON = document.querySelector('.back');
 const CREATEBUTTON = document.querySelector('input[type="submit"]');
 const USERNAMEINPUT = document.querySelector('input[id="username"]');
 
-let init = () => {
+const init = () => {
     BACKBUTTON.addEventListener('click', function () {
         window.location.href = '../src/index.html';
     });

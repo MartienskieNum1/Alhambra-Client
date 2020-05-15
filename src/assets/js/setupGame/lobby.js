@@ -4,7 +4,7 @@ const READYBUTTON = document.querySelector('.ready');
 const LEAVEBUTTON = document.querySelector('.leave');
 const POPUPLEFTGAME = document.querySelector('.popupLeftGame');
 
-let init = () => {
+const init = () => {
     LEAVEBUTTON.addEventListener('click', leaveGame);
 
     if (localStorage.getItem('ready')) {
