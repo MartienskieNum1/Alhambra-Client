@@ -12,10 +12,12 @@ let popupNotYourTurn = document.querySelector('.popupNotYourTurn');
 let popupNotEnoughMoney = document.querySelector('.popupNotEnoughMoney');
 let popupToBuy = document.querySelector('.popupToBuy');
 let popupToPlace = document.querySelector('.popupToPlace');
+let popupMaxValue = document.querySelector('.popupMaxValue');
 
 let closeNotYourTurn = document.querySelector('.popupNotYourTurn .close');
 let closeNotEnoughMoney = document.querySelector('.popupNotEnoughMoney .close');
 let closeToBuy = document.querySelector('.popupToBuy .close');
+let closeMaxValue = document.querySelector('.popupMaxValue .close');
 
 function init(){
     goToAlhambra.addEventListener('click', function() {
@@ -46,6 +48,7 @@ function init(){
     closeToBuy.addEventListener('click', hidePopupToBuy);
     closeNotYourTurn.addEventListener('click', hidePopupNotYourTurn);
     closeNotEnoughMoney.addEventListener('click', hidePopupNotEnoughMoney);
+    closeMaxValue.addEventListener('click', hidePopupMaxValue);
 
     takeButton.addEventListener('click', takeMoney);
 
@@ -111,6 +114,14 @@ function showPopupNotYourTurn() {
 
 function hidePopupNotYourTurn() {
     popupNotYourTurn.classList.add('hidden');
+}
+
+function showPopupMaxValue() {
+    popupMaxValue.classList.remove('hidden');
+}
+
+function hidePopupMaxValue() {
+    popupMaxValue.classList.add('hidden');
 }
 
 function buyBuilding(e) {
@@ -204,7 +215,7 @@ function giveBankMoney(response) {
             if (username === currentPlayer) {
                 selectMoney(e);
             } else {
-                alert("It's not your turn!");
+                showPopupNotYourTurn();
             }
         });
     });
@@ -263,7 +274,7 @@ function takeMoney() {
     let gameId = localStorage.getItem('gameId');
     let username = localStorage.getItem('username');
     if (totalTakenMoneyValue > 5 && body.length > 1) {
-        alert("You went over the max value of 5 while taking multiple cards!");
+        showPopupMaxValue();
     } else {
         fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
             .then(function () {
