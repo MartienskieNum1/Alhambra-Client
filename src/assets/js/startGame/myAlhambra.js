@@ -65,25 +65,25 @@ function getBuildingLocation(e) {
 }
 
 function placeInReserve(location) {
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
-    let body = {
+    const GAMEID = localStorage.getItem('gameId');
+    const USERNAME = localStorage.getItem('username');
+    const BODY = {
         "location": location
     };
-    console.log(body);
-    fetchFromServer(`${config.root}games/${gameId}/players/${username}/city`, 'PATCH', body).then();
+    console.log(BODY);
+    fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/city`, 'PATCH', BODY).then();
 }
 
 function insertBuildings() {
-    let username = localStorage.getItem('username');
-    let gameId = localStorage.getItem('gameId');
-    let divs = document.querySelectorAll(".buildingInAlhambra");
+    const USERNAME = localStorage.getItem('username');
+    const GAMEID = localStorage.getItem('gameId');
+    const DIVS = document.querySelectorAll(".buildingInAlhambra");
     let totalRows = 0;
     let myCity;
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then((response) => {
-        for (let player of response.players) {
-            if (player.name === username) {
-                    myCity = player.city;
+    fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then((response) => {
+        for (const PLAYER of response.players) {
+            if (PLAYER.name === USERNAME) {
+                    myCity = PLAYER.city;
                 }
             }
 
@@ -91,22 +91,22 @@ function insertBuildings() {
             totalRows++;
         }
 
-        for (let rowIn in myCity) {
-            for (let colIn in myCity[rowIn]) {
-                if (myCity[rowIn][colIn]) {
-                    let building = myCity[rowIn][colIn];
-                    divs.forEach(div => {
-                        let divRow = parseInt(div.getAttribute('data-row'));
-                        let divCol = parseInt(div.getAttribute('data-column'));
-                        let buildingRow = Math.round(rowIn - totalRows / 2);
-                        let buildingCol = Math.round(colIn - totalRows / 2);
-                        if (divRow === buildingRow && divCol === buildingCol) {
-                            if (!building.type) {
+        for (const ROWIN in myCity) {
+            for (const COLIN in myCity[ROWIN]) {
+                if (myCity[ROWIN][COLIN]) {
+                    const BUILDING = myCity[ROWIN][COLIN];
+                    DIVS.forEach(div => {
+                        const DIVROW = parseInt(div.getAttribute('data-row'));
+                        const DIVCOL = parseInt(div.getAttribute('data-column'));
+                        const BUILDINGROW = Math.round(ROWIN - totalRows / 2);
+                        const BUILDINGCOL = Math.round(COLIN - totalRows / 2);
+                        if (DIVROW === BUILDINGROW && DIVCOL === BUILDINGCOL) {
+                            if (!BUILDING.type) {
                                 div.innerHTML = `<p class="fountain"></p>`;
                             } else {
                                 div.innerHTML = `
-                                    <p class="${building.type}" data-value="${building.cost}">${building.cost}</p>`;
-                                for (let [key, value] of Object.entries(building.walls)) {
+                                    <p class="${BUILDING.type}" data-value="${BUILDING.cost}">${BUILDING.cost}</p>`;
+                                for (let [key, value] of Object.entries(BUILDING.walls)) {
                                     if (value) {
                                         div.firstElementChild.classList.add(key);
                                     }
