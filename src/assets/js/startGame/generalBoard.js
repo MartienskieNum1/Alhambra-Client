@@ -204,7 +204,6 @@ function giveBankMoney(response) {
             if (username === currentPlayer) {
                 selectMoney(e);
             } else {
-                // alert("It's not your turn!");
                 showPopupNotYourTurn();
             }
         });
