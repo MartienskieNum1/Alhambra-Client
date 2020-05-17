@@ -34,8 +34,10 @@ function makeDivsAndListeners() {
 
     const RESERVE = document.querySelector("#reserve");
     RESERVE.addEventListener("click",(e)=>{
-        useBuildingInHand(null);
-        setTimeout(() => location.reload(), 500);
+        if (e.target.id === "reserve") {
+            useBuildingInHand(null);
+            setTimeout(() => location.reload(), 500);
+        }
     });
 
     const DIVS = document.querySelectorAll(".buildingInAlhambra");
