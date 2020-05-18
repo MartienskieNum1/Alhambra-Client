@@ -1,5 +1,5 @@
 const NEXTBUTTON = document.querySelector('.back');
-const SCOREBOARDBODY = document.querySelector('#victory h1');
+const VICTORYBOARDBODY = document.querySelector('#victory h1');
 
 const init = () => {
     NEXTBUTTON.addEventListener('click', function () {
@@ -18,9 +18,14 @@ function getVictoryInfo() {
 }
 
 function displayScores(response) {
-    SCOREBOARDBODY.innerHTML = "";
+    VICTORYBOARDBODY.innerHTML = "";
+    let high = 0;
+    let name = "";
     for (const PLAYER of response.players) {
-        //if()
-        SCOREBOARDBODY.innerHTML += `<h1>${PLAYER.name} is the winner!</h1>`;
+        if(PLAYER.score > high){
+            high = PLAYER.score;
+            name = PLAYER.name;
+        }
     }
+    VICTORYBOARDBODY.innerHTML += `<h1>${name} is the winner!</h1>`;
 }
