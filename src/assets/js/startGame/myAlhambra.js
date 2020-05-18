@@ -323,7 +323,6 @@ function showThisAlhambra(e, response) {
     });
 
     TOTALVALUE.innerHTML = `Total value: ${total}`;
-
 }
 
 function displayScores(response) {
