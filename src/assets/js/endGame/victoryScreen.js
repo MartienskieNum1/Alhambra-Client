@@ -1,8 +1,7 @@
-const BACKBUTTON = document.querySelector('.back');
-
+const NEXTBUTTON = document.querySelector('.back');
 
 const init = () => {
-    BACKBUTTON.addEventListener('click', function () {
+    NEXTBUTTON.addEventListener('click', function () {
         window.location.href = '../src/score.html';
     });
 
