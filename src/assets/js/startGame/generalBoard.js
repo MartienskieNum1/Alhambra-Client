@@ -2,6 +2,7 @@
 
 const GOTOALHAMBRA = document.querySelector('.navigate');
 const GOTOGAMERULES = document.querySelector('.showGameRules');
+const GOTOVICTORYSCREEN = document.querySelector('.back');
 const MARKETBUILDINGS = document.querySelectorAll('.buildings p');
 const AUDIO = document.getElementById("myAudio");
 const TAKEBUTTON = document.querySelector('.money .button');
@@ -26,6 +27,10 @@ function init(){
 
     GOTOGAMERULES.addEventListener('click', function() {
         window.location.href = '../src/rules.html';
+    });
+
+    GOTOVICTORYSCREEN.addEventListener('click', function() {
+        window.location.href = '../src/victory.html';
     });
 
     MARKETBUILDINGS.forEach(building => {
@@ -56,7 +61,6 @@ function init(){
     getInfoInterval = setInterval(getStartGameInfo, 3000);
 }
 document.addEventListener("DOMContentLoaded", init);
-
 
 const BANKMONEY = document.querySelector('.money .flex-container');
 const ACTIVEPLAYER = document.querySelector('.currentPlayer');
