@@ -1,104 +1,144 @@
 "use strict";
 
-let goToAlhambra = document.querySelector('.navigate');
-let goToGameRules = document.querySelector('.showGameRules');
-let marketBuildings = document.querySelectorAll('.buildings p');
-let popupToBuy = document.querySelector('.popupToBuy');
-let popupToPlace = document.querySelector('.popupToPlace');
-let closeElement = document.querySelector('.close');
-let audio =  document.getElementById("myAudio");
-let takeButton = document.querySelector('.money .button');
+const GOTOALHAMBRA = document.querySelector('.navigate');
+const GOTOGAMERULES = document.querySelector('.showGameRules');
+const GOTOVICTORYSCREEN = document.querySelector('.back');
+const MARKETBUILDINGS = document.querySelectorAll('.buildings p');
+const AUDIO = document.getElementById("myAudio");
+const TAKEBUTTON = document.querySelector('.money .button');
 let getInfoInterval = null;
 let beepNeeded = true;
 
+const POPUPNOTYOURTURN = document.querySelector('.popupNotYourTurn');
+const POPUPNOTENOUGHMONEY = document.querySelector('.popupNotEnoughMoney');
+const POPUPTOBUY = document.querySelector('.popupToBuy');
+const POPUPTOPLACE = document.querySelector('.popupToPlace');
+const POPUPMAXVALUE = document.querySelector('.popupMaxValue');
+
+const CLOSENOTYOURTURN = document.querySelector('.popupNotYourTurn .close');
+const CLOSENOTENOUGHMONEY = document.querySelector('.popupNotEnoughMoney .close');
+const CLOSETOBUY = document.querySelector('.popupToBuy .close');
+const CLOSEMAXVALUE = document.querySelector('.popupMaxValue .close');
+
 function init(){
-    goToAlhambra.addEventListener('click', function() {
+    GOTOALHAMBRA.addEventListener('click', function() {
         window.location.href = "../src/myAlhambraIndex.html";
     });
 
-    goToGameRules.addEventListener('click', function() {
+    GOTOGAMERULES.addEventListener('click', function() {
         window.location.href = '../src/rules.html';
     });
 
-    marketBuildings.forEach(building => {
+    GOTOVICTORYSCREEN.addEventListener('click', function() {
+        window.location.href = '../src/victory.html';
+    });
+
+    MARKETBUILDINGS.forEach(building => {
         building.addEventListener('click', (e) => {
-            let username = localStorage.getItem('username');
-            let gameId = localStorage.getItem('gameId');
+            const USERNAME = localStorage.getItem('username');
+            const GAMEID = localStorage.getItem('gameId');
             let currentPlayer = "";
-            fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+            fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
                 function (response) {
                     currentPlayer = response.currentPlayer.valueOf();
-                    if (currentPlayer === username) {
+                    if (currentPlayer === USERNAME) {
                         showPopupToBuy(e);
                     } else {
-                        alert("It\'s not your turn!");
+                        showPopupNotYourTurn();
                     }
                 });
         });
     });
 
-    closeElement.addEventListener('click', hidePopupToBuy);
+    CLOSETOBUY.addEventListener('click', hidePopupToBuy);
+    CLOSENOTYOURTURN.addEventListener('click', hidePopupNotYourTurn);
+    CLOSENOTENOUGHMONEY.addEventListener('click', hidePopupNotEnoughMoney);
+    CLOSEMAXVALUE.addEventListener('click', hidePopupMaxValue);
 
-    takeButton.addEventListener('click', takeMoney);
+    TAKEBUTTON.addEventListener('click', takeMoney);
 
     getStartGameInfo();
     getInfoInterval = setInterval(getStartGameInfo, 3000);
 }
 document.addEventListener("DOMContentLoaded", init);
 
-let bankMoney = document.querySelector('.money .flex-container');
-let activePlayer = document.querySelector('.currentPlayer');
+const BANKMONEY = document.querySelector('.money .flex-container');
+const ACTIVEPLAYER = document.querySelector('.currentPlayer');
 
 function showPopupToBuy(e) {
     console.log(e.target);
-    let yourMoneys = document.querySelectorAll('.yourMoney p');
-    let moneyForm = document.querySelector('.popupToBuy form');
+    const YOURMONEYS = document.querySelectorAll('.yourMoney p');
+    const MONEYFORM = document.querySelector('.popupToBuy form');
 
-    moneyForm.innerHTML = "";
-    yourMoneys.forEach(money => {
+    MONEYFORM.innerHTML = "";
+    YOURMONEYS.forEach(money => {
         if (money.className === e.target.getAttribute('data-color')) {
-            moneyForm.innerHTML += `
+            MONEYFORM.innerHTML += `
             <label>
                 <input type="checkbox" data-color="${money.className}" data-value="${money.innerHTML}"/>
             ${money.className} (${money.innerHTML})</label>`;
         }
     });
-    moneyForm.innerHTML += '<input type="submit" value="Buy"/>';
+    MONEYFORM.innerHTML += '<input type="submit" value="Buy"/>';
 
-    popupToBuy.classList.remove('hidden');
+    POPUPTOBUY.classList.remove('hidden');
 
-    let buyButton = document.querySelector('.popupToBuy input[type="submit"]');
-    buyButton.addEventListener('click', (e2) => {e2.preventDefault();buyBuilding(e);});
-}
-
-function showPopupToPlace() {
-    let inReserveButton = document.querySelector('.popupToPlace .inReserve');
-    let inAlhambra = document.querySelector('.popupToPlace .inAlhambra');
-    inReserveButton.addEventListener('click', placeInReserve);
-    inAlhambra.addEventListener('click', placeInAlhambra);
-
-    popupToPlace.classList.remove('hidden');
+    const BUYBUTTON = document.querySelector('.popupToBuy input[type="submit"]');
+    BUYBUTTON.addEventListener('click', (e2) => {e2.preventDefault();buyBuilding(e);});
 }
 
 function hidePopupToBuy() {
-    popupToBuy.classList.add('hidden');
+    POPUPTOBUY.classList.add('hidden');
+}
+
+function showPopupToPlace() {
+    const INRESERVEBUTTON = document.querySelector('.popupToPlace .inReserve');
+    const INALHAMBRA = document.querySelector('.popupToPlace .inAlhambra');
+    INRESERVEBUTTON.addEventListener('click', placeInReserve);
+    INALHAMBRA.addEventListener('click', placeInAlhambra);
+
+    POPUPTOPLACE.classList.remove('hidden');
 }
 
 function hidePopupToPlace() {
-    popupToPlace.classList.add('hidden');
+    POPUPTOPLACE.classList.add('hidden');
+}
+
+function showPopupNotEnoughMoney() {
+    POPUPNOTENOUGHMONEY.classList.remove('hidden');
+}
+
+function hidePopupNotEnoughMoney() {
+    POPUPNOTENOUGHMONEY.classList.add('hidden');
+}
+
+function showPopupNotYourTurn() {
+    POPUPNOTYOURTURN.classList.remove('hidden');
+}
+
+function hidePopupNotYourTurn() {
+    POPUPNOTYOURTURN.classList.add('hidden');
+}
+
+function showPopupMaxValue() {
+    POPUPMAXVALUE.classList.remove('hidden');
+}
+
+function hidePopupMaxValue() {
+    POPUPMAXVALUE.classList.add('hidden');
 }
 
 function buyBuilding(e) {
-    let username = localStorage.getItem('username');
-    let gameId = localStorage.getItem('gameId');
-    let checkboxes = document.querySelectorAll('.popup input[type="checkbox"]');
-    let body = {
+    const USERNAME = localStorage.getItem('username');
+    const GAMEID = localStorage.getItem('gameId');
+    const CHECKBOXES = document.querySelectorAll('.popup input[type="checkbox"]');
+    const BODY = {
         "currency": e.target.getAttribute('data-color'),
         "coins": []
     };
 
     let totalAmount = 0;
-    checkboxes.forEach(checkbox => {
+    CHECKBOXES.forEach(checkbox => {
         if (checkbox.checked) {
             totalAmount += parseInt(checkbox.getAttribute('data-value'));
         }
@@ -106,20 +146,20 @@ function buyBuilding(e) {
 
     if (totalAmount >= e.target.getAttribute('data-value')) {
         console.log(totalAmount, e.target.getAttribute(totalAmount));
-        checkboxes.forEach(checkbox => {
+        CHECKBOXES.forEach(checkbox => {
             if (checkbox.checked) {
-                body.coins.push({
+                BODY.coins.push({
                     "currency": checkbox.getAttribute('data-color'),
                     "amount": checkbox.getAttribute('data-value')
                 });
             }
         });
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/buildings-in-hand`, 'POST', body)
+        fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/buildings-in-hand`, 'POST', BODY)
             .then(getStartGameInfo);
         hidePopupToBuy();
         showPopupToPlace();
     } else {
-        alert('You don\'t have enough money');
+        showPopupNotEnoughMoney();
     }
 }
 
@@ -130,8 +170,8 @@ function placeInReserve() {
 }
 
 function getStartGameInfo() {
-    let gameId = localStorage.getItem('gameId');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+    const GAMEID = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
         function (response) {
             console.log(response);
             populateBuildingMarket(response);
@@ -142,13 +182,13 @@ function getStartGameInfo() {
 }
 
 function populateBuildingMarket(response) {
-    marketBuildings.forEach(building => {
-        let color = building.getAttribute('data-color');
+    MARKETBUILDINGS.forEach(building => {
+        const COLOR = building.getAttribute('data-color');
         for (let [key1, value1] of Object.entries(response.market)) {
-            if (color === key1) {
+            if (COLOR === key1) {
                 if (value1 === null) {
                     building.className = "";
-                    building.innerHTML = `Taken <img src="assets/media/${color}.png" alt="${color}"/>`;
+                    building.innerHTML = `Taken <img src="assets/media/${COLOR}.png" alt="${COLOR}"/>`;
                 } else {
                     building.className = `${value1.type}`;
 
@@ -157,7 +197,7 @@ function populateBuildingMarket(response) {
                             building.classList.add(key2);
                         }
                     }
-                    building.innerHTML = `${value1.cost}<img src="assets/media/${color}.png" alt="${color}"/>`;
+                    building.innerHTML = `${value1.cost}<img src="assets/media/${COLOR}.png" alt="${COLOR}"/>`;
                     building.setAttribute('data-value', value1.cost);
                 }
             }
@@ -166,35 +206,35 @@ function populateBuildingMarket(response) {
 }
 
 function giveBankMoney(response) {
-    let currentPlayer = response.currentPlayer.valueOf();
-    bankMoney.innerHTML = "";
+    const CURRENTPLAYER = response.currentPlayer.valueOf();
+    BANKMONEY.innerHTML = "";
     for (let i = 0; i < response.bank.length; i++) {
-        bankMoney.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
+        BANKMONEY.innerHTML += `<p class="${response.bank[i].currency}">${response.bank[i].amount}</p>`;
     }
 
-    let allBankMoney = document.querySelectorAll('.money p');
-    let username = localStorage.getItem('username');
-    allBankMoney.forEach(money => {
+    const ALLBANKMONEY = document.querySelectorAll('.money p');
+    const USERNAME = localStorage.getItem('username');
+    ALLBANKMONEY.forEach(money => {
         money.addEventListener('click', function (e) {
-            if (username === currentPlayer) {
+            if (USERNAME === CURRENTPLAYER) {
                 selectMoney(e);
             } else {
-                alert("It's not your turn!");
+                showPopupNotYourTurn();
             }
         });
     });
 }
 
 function playAudio() {
-    audio.play();
+    AUDIO.play();
 }
 
 function showActivePlayer(response) {
-    let currentPlayer = response.currentPlayer.valueOf();
-    activePlayer.innerHTML = `Currently at play:<br>${currentPlayer}`;
-    let username = localStorage.getItem('username');
-    if (currentPlayer === username) {
-        activePlayer.innerHTML = `Currently at play:<br>YOU`;
+    const CURRENTPLAYER = response.currentPlayer.valueOf();
+    ACTIVEPLAYER.innerHTML = `Currently at play:<br>${CURRENTPLAYER}`;
+    const USERNAME = localStorage.getItem('username');
+    if (CURRENTPLAYER === USERNAME) {
+        ACTIVEPLAYER.innerHTML = `Currently at play:<br>YOU`;
         if (beepNeeded) {
             playAudio();
             beepNeeded = false;
@@ -207,42 +247,42 @@ let totalTakenMoneyValue = 0;
 function selectMoney(e) {
     clearInterval(getInfoInterval);
     getInfoInterval = null;
-    let currency = e.target.classList.item(0);
-    let amount = parseInt(e.target.innerHTML);
+    const CURRENCY = e.target.classList.item(0);
+    const AMOUNT = parseInt(e.target.innerHTML);
 
     if (e.target.classList.contains('selected')) {
-        for (let moneyI in body) {
-            if (body[moneyI].currency === currency && body[moneyI].amount === amount) {
-                body.splice(moneyI, 1);
+        for (const MONEYI in body) {
+            if (body[MONEYI].currency === CURRENCY && body[MONEYI].amount === AMOUNT) {
+                body.splice(MONEYI, 1);
             }
         }
-        totalTakenMoneyValue -= amount;
+        totalTakenMoneyValue -= AMOUNT;
         e.target.classList.remove('selected');
     } else {
         body.push({
-            "currency": currency,
-            "amount": amount
+            "currency": CURRENCY,
+            "amount": AMOUNT
         });
-        totalTakenMoneyValue += amount;
+        totalTakenMoneyValue += AMOUNT;
         e.target.classList.add('selected');
     }
 
     if (body.length === 0) {
-        takeButton.classList.add('hidden');
+        TAKEBUTTON.classList.add('hidden');
     } else {
-        takeButton.classList.remove('hidden');
+        TAKEBUTTON.classList.remove('hidden');
     }
 }
 
 function takeMoney() {
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
+    const GAMEID = localStorage.getItem('gameId');
+    const USERNAME = localStorage.getItem('username');
     if (totalTakenMoneyValue > 5 && body.length > 1) {
-        alert("You went over the max value of 5 while taking multiple cards!");
+        showPopupMaxValue();
     } else {
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/money`, 'POST', body)
+        fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/money`, 'POST', body)
             .then(function () {
-                takeButton.classList.add('hidden');
+                TAKEBUTTON.classList.add('hidden');
                 body = [];
                 totalTakenMoneyValue = 0;
                 getStartGameInfo();

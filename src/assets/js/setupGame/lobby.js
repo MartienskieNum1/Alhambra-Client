@@ -1,15 +1,16 @@
 "use strict";
 
-let readyButton = document.querySelector('.ready');
-let leaveButton = document.querySelector('.leave');
+const READYBUTTON = document.querySelector('.ready');
+const LEAVEBUTTON = document.querySelector('.leave');
+const POPUPLEFTGAME = document.querySelector('.popupLeftGame');
 
-let init = () => {
-    leaveButton.addEventListener('click', leaveGame);
+const init = () => {
+    LEAVEBUTTON.addEventListener('click', leaveGame);
 
     if (localStorage.getItem('ready')) {
-        readyButton.innerHTML = 'Not ready';
+        READYBUTTON.innerHTML = 'Not ready';
     } else {
-        readyButton.innerHTML = 'Ready';
+        READYBUTTON.innerHTML = 'Ready';
     }
 
     checkAllPlayersReady();
@@ -17,29 +18,35 @@ let init = () => {
     setUpLobby();
     setInterval(function(){setUpLobby();},2000);
 
-    readyButton.addEventListener('click', readyUp);
+    READYBUTTON.addEventListener('click', readyUp);
 };
 document.addEventListener("DOMContentLoaded", init);
 
-let leaveGame = () => {
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
-    fetchFromServer(`${config.root}games/${gameId}/players/${username}`, 'DELETE').then(
+const leaveGame = () => {
+    const GAMEID = localStorage.getItem('gameId');
+    const USERNAME = localStorage.getItem('username');
+    fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}`, 'DELETE').then(
         function () {
             localStorage.clear();
-            window.location.href = '../src/index.html';
-            window.alert('You left the game!');
+            showPopupLeftGame();
+
         }
-    );
+     );
 };
 
+function showPopupLeftGame() {
+    console.log("test");
+    POPUPLEFTGAME.classList.remove('hidden');
+}
+
+
 function checkAllPlayersReady(){
-    let amountReady = document.querySelector('.amountReady');
-    let gameId = localStorage.getItem('gameId');
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+    const AMOUNTREADY = document.querySelector('.amountReady');
+    const GAMEID = localStorage.getItem('gameId');
+    fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
         function (response) {
             console.log(response);
-            amountReady.innerHTML = `${response.readyCount}`;
+            AMOUNTREADY.innerHTML = `${response.readyCount}`;
             if(response.started === true){
                 localStorage.removeItem('ready');
                 goToPageInSecond('../src/generalBoard.html');
@@ -47,40 +54,40 @@ function checkAllPlayersReady(){
         });
 }
 
-let setUpLobby = () => {
-    let gameId = localStorage.getItem('gameId');
-    let playerList = document.querySelector('.players');
-    let gameIdElement = document.querySelector('.gameID');
+const setUpLobby = () => {
+    const GAMEID = localStorage.getItem('gameId');
+    const PLAYERLIST = document.querySelector('.players');
+    const GAMEIDELEMENT = document.querySelector('.gameID');
 
-    gameIdElement.innerHTML = gameId;
+    GAMEIDELEMENT.innerHTML = GAMEID;
 
-    fetchFromServer(`${config.root}games/${gameId}`, 'GET').then(
+    fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
         function (response) {
-            playerList.innerHTML = "";
-            for (let player of response.players) {
-                playerList.innerHTML += `<li>${player}</li>`;
+            PLAYERLIST.innerHTML = "";
+            for (const PLAYER of response.players) {
+                PLAYERLIST.innerHTML += `<li>${PLAYER}</li>`;
             }
         });
 };
 
-let readyUp = () => {
-    let gameId = localStorage.getItem('gameId');
-    let username = localStorage.getItem('username');
+const readyUp = () => {
+    const GAMEID = localStorage.getItem('gameId');
+    const USERNAME = localStorage.getItem('username');
 
     if (!localStorage.getItem('ready')) {
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'PUT').then(
+        fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/ready`, 'PUT').then(
             function (response) {
                 localStorage.setItem('ready', `${response}`);
-                readyButton.innerHTML = 'Not ready';
+                READYBUTTON.innerHTML = 'Not ready';
             }
         );
     }
 
     if (localStorage.getItem('ready')) {
-        fetchFromServer(`${config.root}games/${gameId}/players/${username}/ready`, 'DELETE').then(
+        fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/ready`, 'DELETE').then(
             function () {
                 localStorage.removeItem('ready');
-                readyButton.innerHTML = 'Ready';
+                READYBUTTON.innerHTML = 'Ready';
             }
         );
     }
