@@ -245,7 +245,7 @@ function showActivePlayer(response) {
 }
 
 function getAmountOfRemainingBuildings(response){
-    const AMOUNTOFBUILDINGS = response.amountOfRemainingBuilding;
+    const AMOUNTOFBUILDINGS = response.amountOfRemainingBuildings;
     AMOUNTOFREMAININGBUILDINGS.innerHTML = `There are ${AMOUNTOFBUILDINGS} buildings remaining`;
 }
 
