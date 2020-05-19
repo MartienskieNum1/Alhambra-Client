@@ -135,8 +135,9 @@
     grid-column-start:1 ;
     grid-column-end:2;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    padding-left: 30px;
 }
 
 #board .buildings p {
@@ -150,6 +151,7 @@
     top: -11px;
     right: -35px;
     height: 60px;
+    padding-right: 20px;
 }
 
 /*money*/
