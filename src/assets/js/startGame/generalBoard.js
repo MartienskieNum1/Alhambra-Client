@@ -2,7 +2,6 @@
 
 const GOTOALHAMBRA = document.querySelector('.navigate');
 const GOTOGAMERULES = document.querySelector('.showGameRules');
-//const GOTOVICTORYSCREEN = document.querySelector('.back');
 const MARKETBUILDINGS = document.querySelectorAll('.buildings p');
 const AUDIO = document.getElementById("myAudio");
 const TAKEBUTTON = document.querySelector('.money .button');
@@ -30,10 +29,6 @@ function init(){
         window.location.href = '../src/rules.html';
     });
 
-    /*GOTOVICTORYSCREEN.addEventListener('click', function() {
-        window.location.href = '../src/victory.html';
-    });
-*/
     MARKETBUILDINGS.forEach(building => {
         building.addEventListener('click', (e) => {
             const USERNAME = localStorage.getItem('username');
@@ -60,8 +55,6 @@ function init(){
 
     getStartGameInfo();
     getInfoInterval = setInterval(getStartGameInfo, 3000);
-
-    lastScoreRound();
 }
 document.addEventListener("DOMContentLoaded", init);
 
@@ -176,13 +169,13 @@ function getStartGameInfo() {
     const GAMEID = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
         function (response) {
+            checkGameEnded(response);
             console.log(response);
             populateBuildingMarket(response);
             giveBankMoney(response);
             givePlayerMoney(response);
             showActivePlayer(response);
             getAmountOfRemainingBuildings(response);
-            lastScoreRound(response);
         });
 }
 
@@ -250,7 +243,6 @@ function showActivePlayer(response) {
 function getAmountOfRemainingBuildings(response){
     const AMOUNTOFBUILDINGS = response.remainingBuildings.valueOf();
     AMOUNTOFREMAININGBUILDINGS.innerHTML = `There are ${AMOUNTOFBUILDINGS} buildings remaining`;
-
 }
 
 let body = [];
@@ -302,20 +294,9 @@ function takeMoney() {
             });
     }
 }
-//
-// function lastScoreRound() {
-//     const ROUND = localStorage.getItem('round');
-//     fetchFromServer(`${config.root}scoring/${ROUND}`, 'GET').then(
-//         function () {
-//             if(parseInt(ROUND) === 3) {
-//                 window.location.href = '../src/victory.html';
-//             }
-//         });
-// }
 
-function lastScoreRound(response) {
-    const AMOUNTOFBUILDINGS = response.remainingBuildings.valueOf();
-    if (AMOUNTOFBUILDINGS === null) {
+function checkGameEnded(response) {
+    if(response.ended === true) {
         window.location.href = '../src/victory.html';
     }
 }

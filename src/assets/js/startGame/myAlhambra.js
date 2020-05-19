@@ -6,7 +6,7 @@ const SCOREBOARDBODY = document.querySelector('#scoreboard tbody');
 const AUDIO =  document.getElementById("myAudio");
 let beepNeeded = true;
 
-function init(){
+function init() {
     GOBACK.addEventListener('click', function () {
         window.location.href = "../src/generalBoard.html";
         beepNeeded = true;
