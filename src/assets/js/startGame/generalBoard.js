@@ -6,6 +6,7 @@ const GOTOVICTORYSCREEN = document.querySelector('.back');
 const MARKETBUILDINGS = document.querySelectorAll('.buildings p');
 const AUDIO = document.getElementById("myAudio");
 const TAKEBUTTON = document.querySelector('.money .button');
+const AMOUNTOFREMAININGBUILDINGS = document.querySelector('.buildings .amountOfRemainingBuildings');
 let getInfoInterval = null;
 let beepNeeded = true;
 
@@ -178,6 +179,7 @@ function getStartGameInfo() {
             giveBankMoney(response);
             givePlayerMoney(response);
             showActivePlayer(response);
+            getAmountOfRemainingBuildings(response);
         });
 }
 
@@ -240,6 +242,11 @@ function showActivePlayer(response) {
             beepNeeded = false;
         }
     }
+}
+
+function getAmountOfRemainingBuildings(response){
+    const AMOUNTOFBUILDINGS = response.remainingBuildings.valueOf();
+    AMOUNTOFREMAININGBUILDINGS.innerHTML = `There are ${AMOUNTOFBUILDINGS} buildings remaining`;
 }
 
 let body = [];
