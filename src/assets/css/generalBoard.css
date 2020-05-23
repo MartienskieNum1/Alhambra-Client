@@ -9,6 +9,16 @@
     grid-template-rows: 150px 250px 250px;
 }
 
+#board .grid-container .buildings{
+    display: flex;
+    flex-direction: column;
+}
+
+#board .grid-container .buildings .buildingsPTags{
+    display: flex;
+    flex-direction: row;
+}
+
 #board .showGameRules {
     position: static;
 }
