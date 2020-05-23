@@ -7,7 +7,7 @@ const AUDIO =  document.getElementById("myAudio");
 const ALERTPOPUP = document.querySelector('.alertPopup');
 let beepNeeded = true;
 
-function init(){
+function init() {
     GOBACK.addEventListener('click', function () {
         window.location.href = "../src/generalBoard.html";
         beepNeeded = true;

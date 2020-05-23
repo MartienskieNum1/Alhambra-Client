@@ -9,6 +9,16 @@
     grid-template-rows: 150px 250px 250px;
 }
 
+#board .grid-container .buildings{
+    display: flex;
+    flex-direction: column;
+}
+
+#board .grid-container .buildings .buildingsPTags{
+    display: flex;
+    flex-direction: row;
+}
+
 #board .showGameRules {
     position: static;
 }
@@ -59,8 +69,9 @@
     grid-column-start:1 ;
     grid-column-end:2;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    padding-left: 30px;
 }
 
 #board .buildings p {
@@ -74,6 +85,7 @@
     top: -11px;
     right: -35px;
     height: 60px;
+    padding-right: 20px;
 }
 
 /*money*/
