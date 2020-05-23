@@ -28,7 +28,11 @@ function useBuildingInHand(location) {
             "location": location
         };
         fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/city`, 'PATCH', BODY).then(
-            () => {localStorage.removeItem('building');}
+            () => {
+                localStorage.removeItem('building');
+                getAlhambraInfo();
+                makeDivsAndListeners();
+            }
         );
     } else {
         fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
@@ -47,11 +51,14 @@ function useBuildingInHand(location) {
                     function (response) {
                         const PATHNAME = window.location.pathname;
                         if (response.failed) {
-                            alert(`${response.message}\n${response.cause}`);
+                            showAlertPopup(response);
                         }
                         if (PATHNAME === '/webclient/src/generalBoard.html') {
                             hidePopupToPlace();
                             getStartGameInfo();
+                        } else {
+                            getAlhambraInfo();
+                            makeDivsAndListeners();
                         }
                     }
                 );

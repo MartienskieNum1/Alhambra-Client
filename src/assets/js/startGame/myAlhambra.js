@@ -4,6 +4,7 @@ const GOBACK = document.querySelector('.back');
 const RESERVEUL = document.querySelector('#reserve');
 const SCOREBOARDBODY = document.querySelector('#scoreboard tbody');
 const AUDIO =  document.getElementById("myAudio");
+const ALERTPOPUP = document.querySelector('.alertPopup');
 let beepNeeded = true;
 
 function init(){
@@ -14,10 +15,22 @@ function init(){
     getAlhambraInfo();
     makeDivsAndListeners();
     beepNeeded = true;
+
+    ALERTPOPUP.addEventListener('click', (e) => {
+        if (e.target.className === 'close') {
+            e.target.parentElement.classList.add('hidden');
+        }
+    });
+
     setInterval(checkCurrentPlayer, 3000);
 }
 
 document.addEventListener("DOMContentLoaded", init);
+
+function showAlertPopup(response) {
+    ALERTPOPUP.innerHTML += `<p>${response.message}\n${response.cause}</p>`;
+    ALERTPOPUP.classList.remove('hidden');
+}
 
 function makeDivsAndListeners() {
     const COLUMNS = 11;
@@ -36,7 +49,6 @@ function makeDivsAndListeners() {
     RESERVE.addEventListener("click",(e)=>{
         if (e.target.id === "reserve") {
             useBuildingInHand(null);
-            setTimeout(() => location.reload(), 500);
         }
     });
 
@@ -44,7 +56,6 @@ function makeDivsAndListeners() {
     DIVS.forEach(div => {
         div.addEventListener("click", (e) => {
             getBuildingLocation(e);
-            setTimeout(() => location.reload(), 500);
             beepNeeded = true;
         });
     });
@@ -72,8 +83,10 @@ function placeInReserve(location) {
     const BODY = {
         "location": location
     };
-    console.log(BODY);
-    fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/city`, 'PATCH', BODY).then();
+    fetchFromServer(`${config.root}games/${GAMEID}/players/${USERNAME}/city`, 'PATCH', BODY).then(() => {
+        getAlhambraInfo();
+        makeDivsAndListeners();
+    });
 }
 
 function insertBuildings() {
@@ -341,7 +354,6 @@ function getAlhambraInfo() {
     const GAMEID = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
         function (response) {
-            console.log(response);
             givePlayerMoney(response);
             displayTotalValue();
             populateReserveAndListeners(response);
@@ -355,7 +367,6 @@ function checkCurrentPlayer() {
     const GAMEID = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
         function (response) {
-            console.log(response);
             const CURRENTPLAYER = response.currentPlayer.valueOf();
             const USERNAME = localStorage.getItem('username');
             if (CURRENTPLAYER === USERNAME) {
