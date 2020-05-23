@@ -20,14 +20,6 @@
     padding-right: 10px;
 }
 
-#alhambra p {
-    width: 100px;
-    height: 100px;
-    font-size: 1.3em;
-    background-repeat: no-repeat;
-    background-size: 100px;
-}
-
 #alhambra .back {
     position: absolute;
     top: 15px;
@@ -72,6 +64,11 @@
 }
 
 #alhambra #yourMoney p {
+    width: 100px;
+    height: 100px;
+    font-size: 1.3em;
+    background-repeat: no-repeat;
+    background-size: 100px;
     border: 2px darkgoldenrod groove;
 }
 
@@ -160,6 +157,7 @@
     height: 65px;
     background-position: center;
     background-size: 65px;
+    background-repeat: no-repeat;
     color: black;
     font-size: 0.8em;
     margin: 0;
