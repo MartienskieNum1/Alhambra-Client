@@ -102,8 +102,8 @@ function insertBuildings() {
                 }
             }
 
-        for (let row in myCity) {
-            if (myCity.hasOwnProperty(row)) {
+        for (const ROW in myCity) {
+            if (myCity.hasOwnProperty(ROW)) {
                 totalRows++;
             }
         }
@@ -280,8 +280,8 @@ function showThisAlhambra(e, response) {
             }
         }
 
-        for (let row in myCity) {
-            if (myCity.hasOwnProperty(row)) {
+        for (const ROW in myCity) {
+            if (myCity.hasOwnProperty(ROW)) {
                 totalRows++;
             }
         }
