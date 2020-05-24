@@ -173,6 +173,14 @@
     border-radius: 15px;
 }
 
+#alhambra #buildingInHand p {
+    width: 100px;
+    height: 100px;
+    font-size: 1.3em;
+    background-repeat: no-repeat;
+    background-size: 100px;
+}
+
 #alhambra .buildingInAlhambra .garden {
     background-size: 45px;
 }
