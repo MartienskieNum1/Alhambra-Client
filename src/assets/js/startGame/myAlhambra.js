@@ -103,32 +103,36 @@ function insertBuildings() {
             }
 
         for (let row in myCity) {
-            totalRows++;
+            if (myCity.hasOwnProperty(row)) {
+                totalRows++;
+            }
         }
 
         for (const ROWIN in myCity) {
-            for (const COLIN in myCity[ROWIN]) {
-                if (myCity[ROWIN][COLIN]) {
-                    const BUILDING = myCity[ROWIN][COLIN];
-                    DIVS.forEach(div => {
-                        const DIVROW = parseInt(div.getAttribute('data-row'));
-                        const DIVCOL = parseInt(div.getAttribute('data-column'));
-                        const BUILDINGROW = Math.round(ROWIN - totalRows / 2);
-                        const BUILDINGCOL = Math.round(COLIN - totalRows / 2);
-                        if (DIVROW === BUILDINGROW && DIVCOL === BUILDINGCOL) {
-                            if (!BUILDING.type) {
-                                div.innerHTML = `<p class="fountain"></p>`;
-                            } else {
-                                div.innerHTML = `
+            if (myCity.hasOwnProperty(ROWIN)) {
+                for (const COLIN in myCity[ROWIN]) {
+                    if (myCity[ROWIN][COLIN]) {
+                        const BUILDING = myCity[ROWIN][COLIN];
+                        DIVS.forEach(div => {
+                            const DIVROW = parseInt(div.getAttribute('data-row'));
+                            const DIVCOL = parseInt(div.getAttribute('data-column'));
+                            const BUILDINGROW = Math.round(ROWIN - totalRows / 2);
+                            const BUILDINGCOL = Math.round(COLIN - totalRows / 2);
+                            if (DIVROW === BUILDINGROW && DIVCOL === BUILDINGCOL) {
+                                if (!BUILDING.type) {
+                                    div.innerHTML = `<p class="fountain"></p>`;
+                                } else {
+                                    div.innerHTML = `
                                     <p class="${BUILDING.type}" data-value="${BUILDING.cost}">${BUILDING.cost}</p>`;
-                                for (let [key, value] of Object.entries(BUILDING.walls)) {
-                                    if (value) {
-                                        div.firstElementChild.classList.add(key);
+                                    for (let [key, value] of Object.entries(BUILDING.walls)) {
+                                        if (value) {
+                                            div.firstElementChild.classList.add(key);
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         }
@@ -149,7 +153,7 @@ function displayTotalValue() {
 
 function populateReserveAndListeners(response) {
     const USERNAME = localStorage.getItem('username');
-    let myReserve;
+    let myReserve = "";
     for (const PLAYER of response.players) {
         if (PLAYER.name === USERNAME) {
             myReserve = PLAYER.reserve;
@@ -248,7 +252,7 @@ function showBuildingInHand(response) {
 function showThisAlhambra(e, response) {
     e.preventDefault();
     const USERNAME = e.target.getAttribute("data-username");
-    let myReserve;
+    let myReserve = "";
     for (const PLAYER of response.players) {
         if (PLAYER.name === USERNAME) {
             myReserve = PLAYER.reserve;
@@ -277,31 +281,35 @@ function showThisAlhambra(e, response) {
         }
 
         for (let row in myCity) {
-            totalRows++;
+            if (myCity.hasOwnProperty(row)) {
+                totalRows++;
+            }
         }
 
         for (const ROWIN in myCity) {
-            for (const COLIN in myCity[ROWIN]) {
-                if (myCity[ROWIN][COLIN]) {
-                    const BUILDING = myCity[ROWIN][COLIN];
-                    DIVS.forEach(div => {
-                        const DIVROW = parseInt(div.getAttribute('data-row'));
-                        const DIVCOL = parseInt(div.getAttribute('data-column'));
-                        const BUILDINGROW = Math.round(ROWIN - totalRows / 2);
-                        const BUILDINGCOL = Math.round(COLIN - totalRows / 2);
-                        if (DIVROW === BUILDINGROW && DIVCOL === BUILDINGCOL) {
-                            if (!BUILDING.type) {
-                                div.innerHTML = `<p class="fountain"></p>`;
-                            } else {
-                                div.innerHTML = `<p class="${BUILDING.type}">${BUILDING.cost}</p>`;
-                                for (let [key, value] of Object.entries(BUILDING.walls)) {
-                                    if (value) {
-                                        div.firstElementChild.classList.add(key);
+            if (myCity.hasOwnProperty(ROWIN)) {
+                for (const COLIN in myCity[ROWIN]) {
+                    if (myCity[ROWIN][COLIN]) {
+                        const BUILDING = myCity[ROWIN][COLIN];
+                        DIVS.forEach(div => {
+                            const DIVROW = parseInt(div.getAttribute('data-row'));
+                            const DIVCOL = parseInt(div.getAttribute('data-column'));
+                            const BUILDINGROW = Math.round(ROWIN - totalRows / 2);
+                            const BUILDINGCOL = Math.round(COLIN - totalRows / 2);
+                            if (DIVROW === BUILDINGROW && DIVCOL === BUILDINGCOL) {
+                                if (!BUILDING.type) {
+                                    div.innerHTML = `<p class="fountain"></p>`;
+                                } else {
+                                    div.innerHTML = `<p class="${BUILDING.type}">${BUILDING.cost}</p>`;
+                                    for (let [key, value] of Object.entries(BUILDING.walls)) {
+                                        if (value) {
+                                            div.firstElementChild.classList.add(key);
+                                        }
                                     }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         }
