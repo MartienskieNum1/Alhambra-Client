@@ -9,11 +9,11 @@ let goToPageInSecond = (page) => {
 };
 
 let joinGame = (username, gameId) => {
-    username = username.toLowerCase();
-    fetchFromServer(`${config.root}games/${gameId}/players`, 'POST', {playerName: `${username}`}).then(
+    let lowerUsername = username.toLowerCase();
+    fetchFromServer(`${config.root}games/${gameId}/players`, 'POST', {playerName: `${lowerUsername}`}).then(
         function (response) {
             localStorage.setItem('playerToken', `${response}`);
-            localStorage.setItem('username', username);
+            localStorage.setItem('username', lowerUsername);
             localStorage.setItem('gameId', gameId);
         });
 };
