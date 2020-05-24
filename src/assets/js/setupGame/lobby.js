@@ -35,7 +35,6 @@ const leaveGame = () => {
 };
 
 function showPopupLeftGame() {
-    console.log("test");
     POPUPLEFTGAME.classList.remove('hidden');
 }
 
@@ -45,7 +44,6 @@ function checkAllPlayersReady(){
     const GAMEID = localStorage.getItem('gameId');
     fetchFromServer(`${config.root}games/${GAMEID}`, 'GET').then(
         function (response) {
-            console.log(response);
             AMOUNTREADY.innerHTML = `${response.readyCount}`;
             if(response.started === true){
                 localStorage.removeItem('ready');

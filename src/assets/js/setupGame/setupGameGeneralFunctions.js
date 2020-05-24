@@ -12,7 +12,6 @@ let joinGame = (username, gameId) => {
     username = username.toLowerCase();
     fetchFromServer(`${config.root}games/${gameId}/players`, 'POST', {playerName: `${username}`}).then(
         function (response) {
-            console.log(response);
             localStorage.setItem('playerToken', `${response}`);
             localStorage.setItem('username', username);
             localStorage.setItem('gameId', gameId);

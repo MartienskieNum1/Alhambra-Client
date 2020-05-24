@@ -11,7 +11,6 @@ const init = () => {
     });
 
     fetchFromServer(`${config.root}games?details=false&prefix=group${config.groupnumber}`,'GET').then(function(response){
-        console.log(response);
         GAMEIDINPUT.innerHTML = '';
         response.forEach(game => {
             GAMEIDINPUT.innerHTML += `<option>${game}</option>`;
