@@ -9,7 +9,7 @@ let goToPageInSecond = (page) => {
 };
 
 let joinGame = (username, gameId) => {
-    let lowerUsername = username.toLowerCase();
+    const lowerUsername = username.toLowerCase();
     fetchFromServer(`${config.root}games/${gameId}/players`, 'POST', {playerName: `${lowerUsername}`}).then(
         function (response) {
             localStorage.setItem('playerToken', `${response}`);
