@@ -15,10 +15,7 @@ const POPUPTOBUY = document.querySelector('.popupToBuy');
 const POPUPTOPLACE = document.querySelector('.popupToPlace');
 const POPUPMAXVALUE = document.querySelector('.popupMaxValue');
 
-const CLOSENOTYOURTURN = document.querySelector('.popupNotYourTurn .close');
-const CLOSENOTENOUGHMONEY = document.querySelector('.popupNotEnoughMoney .close');
-const CLOSETOBUY = document.querySelector('.popupToBuy .close');
-const CLOSEMAXVALUE = document.querySelector('.popupMaxValue .close');
+const CLOSE = document.querySelectorAll('.close');
 
 function init(){
     GOTOALHAMBRA.addEventListener('click', function() {
@@ -46,10 +43,9 @@ function init(){
         });
     });
 
-    CLOSETOBUY.addEventListener('click', hidePopupToBuy);
-    CLOSENOTYOURTURN.addEventListener('click', hidePopupNotYourTurn);
-    CLOSENOTENOUGHMONEY.addEventListener('click', hidePopupNotEnoughMoney);
-    CLOSEMAXVALUE.addEventListener('click', hidePopupMaxValue);
+    CLOSE.forEach(close => {
+        close.addEventListener('click', (e) => e.target.parentElement.classList.add('hidden'));
+    });
 
     TAKEBUTTON.addEventListener('click', takeMoney);
 
@@ -104,24 +100,12 @@ function showPopupNotEnoughMoney() {
     POPUPNOTENOUGHMONEY.classList.remove('hidden');
 }
 
-function hidePopupNotEnoughMoney() {
-    POPUPNOTENOUGHMONEY.classList.add('hidden');
-}
-
 function showPopupNotYourTurn() {
     POPUPNOTYOURTURN.classList.remove('hidden');
 }
 
-function hidePopupNotYourTurn() {
-    POPUPNOTYOURTURN.classList.add('hidden');
-}
-
 function showPopupMaxValue() {
     POPUPMAXVALUE.classList.remove('hidden');
-}
-
-function hidePopupMaxValue() {
-    POPUPMAXVALUE.classList.add('hidden');
 }
 
 function buyBuilding(e) {
