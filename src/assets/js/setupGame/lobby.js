@@ -47,7 +47,7 @@ function checkAllPlayersReady(){
             AMOUNTREADY.innerHTML = `${response.readyCount}`;
             if(response.started === true){
                 localStorage.removeItem('ready');
-                goToPageInSecond('../src/generalBoard.html');
+                window.location.href = '../src/generalBoard.html';
             }
         });
 }
